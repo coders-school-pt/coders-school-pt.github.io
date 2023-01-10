@@ -1,0 +1,78 @@
+body {
+    background-color: #111111;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+h1 {
+    color: #6bc4a1;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+h4 {
+    color: #dfe3e8;
+}
+
+.coders-text {
+    padding-right: 3em;
+    padding-bottom: 3em;
+}
+
+.coders-image {
+    align-content: center;
+    min-height: 50%;
+    max-height: 70%;
+}
+
+.nav-link {
+    color: #6bc4a1;
+}
+
+.main-header {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+
+footer{
+    color: #6bc4a1;
+}
+
+a {
+    color: #dfe3e8;
+}
+
+.brand-name {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 30em;
+    animation: type 3s steps(60, end); 
+}
+
+@keyframes type{ 
+    from { width: 0; } 
+} 
+
+footer {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+hr {
+    display: block; 
+    height: 2px;
+    border: 0; 
+    border-top: 4px dashed #dfe3e8;
+    margin: 1em 0; 
+    padding: 0;
+}
+
+.main-content {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+  
