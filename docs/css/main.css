@@ -153,6 +153,7 @@ img {
     -webkit-text-decoration: #F5C57B solid underline;
     text-decoration: #F5C57B solid underline;
     -webkit-text-underline-position: under;
+    -webkit-text-decoration-thickness: 2px !important; 
     text-underline-position: under;
     text-decoration-thickness: 20%;
 }
@@ -257,21 +258,4 @@ hr {
     padding-top: 13em;
 }
 
-.blink {
-    animation: blink-animation 1s steps(5, start);
-    -webkit-animation: blink-animation 1s steps(5, start);
-    animation-iteration-count: 5;
-}
-
-@keyframes blink-animation {
-    to {
-        visibility: hidden;
-    }
-}
-
-@-webkit-keyframes blink-animation {
-    to {
-        visibility: hidden;
-    }
-}
 
