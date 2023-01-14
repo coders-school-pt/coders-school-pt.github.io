@@ -3,8 +3,6 @@ body {
     font-family: 'JetBrains Mono', monospace;
 }
 
-
-
 header {
     background-color: #111111;
     position: fixed;
@@ -39,25 +37,33 @@ header {
     color: #dfe3e8;
 }
 
-.show {
-    white-space: nowrap;
-    overflow: hidden;
-    width: 15em;
-    color: #dfe3e8;
-    animation: type 3s steps(60, end);
+.missao-sentence {
+    color:#9982d0;
 }
 
+.faixas {
+    color:#F5C57B;
+}
 
+#missao img {
+    margin-top: -10%;
+    margin-right: 30%;
+}
 
 .main-page {
     padding-bottom: 3em;
 }
 
-.main-content h1 {
+#landing-page h1 {
     color: #6bc4a1;
     margin-top: 1.5em;
     margin-bottom: 3em;
 }
+
+#missao h1 {
+    color: #6bc4a1;
+}
+
 
 h4 {
     display: table-cell;
@@ -72,8 +78,6 @@ h4,
 p {
     color: #dfe3e8;
 }
-
-
 
 .joinus {
     margin-top: 1.5em;
@@ -147,15 +151,11 @@ img {
     background-color: #6bc4a1;
 }
 
-
-
 .highlight {
     -webkit-text-decoration: #F5C57B solid underline;
-    text-decoration: #F5C57B solid underline;
+    text-decoration: #F5C57B solid underline 20%;
     -webkit-text-underline-position: under;
-    -webkit-text-decoration-thickness: 2px !important; 
     text-underline-position: under;
-    text-decoration-thickness: 20%;
 }
 
 .main-header {
@@ -175,6 +175,20 @@ footer {
 
 footer a:hover {
     color: #6bc4a1;
+    text-decoration: none;
+}
+
+#missao a {
+    color: #6bc4a1;
+}
+
+#missao {
+    padding-bottom: 5em;
+}
+
+
+#missao a:hover {
+    color: #9982d0;
     text-decoration: none;
 }
 
@@ -207,7 +221,8 @@ body>header>div>nav>span {
     color: #6bc4a1;
 }
 
-.brand-name {
+
+body > header > div > nav > span {
     white-space: nowrap;
     overflow: hidden;
     width: 15em;
@@ -254,8 +269,10 @@ hr {
     padding: 0;
 }
 
-.main-content {
+#landing-page {
     padding-top: 13em;
 }
 
-
+#missao {
+    padding-top: 13em;
+}
