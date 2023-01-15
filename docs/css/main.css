@@ -1,6 +1,60 @@
+html{ scroll-behavior: smooth; scroll-padding-top: 13em;}
+
+
 body {
     background-color: #111111;
     font-family: 'JetBrains Mono', monospace;
+}
+
+h6 {
+    color:#dfe3e8;
+}
+
+h6 strong {
+    font-size: 20px;
+} 
+
+h6 {
+    margin-bottom: auto;
+}
+
+
+.source {
+    margin-top: 0.5%;
+}
+
+.citation {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    font-size: 30px;
+}
+
+.subtlitles-list {
+    margin-top: 50px;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin-left: 5%;
+}
+
+#adultos, #resumo {
+    margin-top: 75px;
+}
+
+#duvidas {
+    margin-top: 50px;
+}
+
+.author {
+    color: #929292;
+    font-size: 20px;
+}
+
+.quote {
+    color: #9982d0;
 }
 
 header {
@@ -26,6 +80,10 @@ header {
 
 }
 
+.content {
+    margin-top: 3%;
+}
+
 .shell a:hover {
     text-decoration: none;
     color: #F5C57B;
@@ -41,26 +99,84 @@ header {
     color:#9982d0;
 }
 
+.bullet-points{
+    color: #dfe3e8;
+    padding-left: 4%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.blog-sentence {
+    color:#dfe3e8;
+    font-size: 28px;
+    margin-bottom: auto;
+}
+
+.blog-date {
+    color:#929292;
+    margin-bottom: 2.5em;
+}
+
+#blog {
+    padding-bottom: 5em;
+}
+
 .faixas {
     color:#F5C57B;
 }
 
+.experience {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.rose {
+    color: #9982d0;
+}
+
+.green {
+    color: #6bc4a1;
+}
+
+.white {
+    color:#dfe3e8;
+}
+
+
 #missao img {
-    margin-top: -10%;
+    margin-top: -5%;
     margin-right: 30%;
 }
 
+.topicos-list {
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.sabias-que {
+    margin-top: 4%;
+    margin-bottom: 3%;
+}
+
+@media only screen and (max-width: 1026px) {
+    #missao img {
+        margin: auto;
+        margin-bottom: 5%;
+        margin-top: 5%;
+    }
+}
+
 .main-page {
-    padding-bottom: 3em;
+    margin-bottom: 3em;
 }
 
 #landing-page h1 {
     color: #6bc4a1;
     margin-top: 1.5em;
-    margin-bottom: 3em;
 }
 
-#missao h1 {
+#missao h1, 
+#blog h1 {
     color: #6bc4a1;
 }
 
@@ -158,6 +274,13 @@ img {
     text-underline-position: under;
 }
 
+.small-highlight {
+    -webkit-text-decoration: #F5C57B solid underline;
+    text-decoration: #F5C57B solid underline;
+    -webkit-text-underline-position: under;
+    text-underline-position: under;
+}
+
 .main-header {
     padding-top: 2em;
     padding-bottom: 1em;
@@ -178,18 +301,19 @@ footer a:hover {
     text-decoration: none;
 }
 
-#missao a {
+#missao a,
+#blog a {
     color: #6bc4a1;
+}
+
+#blog a:hover,
+#missao a:hover {
+    color: #9982d0;
+    text-decoration: none;
 }
 
 #missao {
     padding-bottom: 5em;
-}
-
-
-#missao a:hover {
-    color: #9982d0;
-    text-decoration: none;
 }
 
 footer a {
@@ -260,19 +384,6 @@ footer {
     }
 }
 
-hr {
-    display: block;
-    height: 2px;
-    border: 0;
-    border-top: 3px dashed #383838;
-    margin: 1em 0;
-    padding: 0;
-}
-
-#landing-page {
-    padding-top: 13em;
-}
-
-#missao {
+#landing-page, #missao, #blog {
     padding-top: 13em;
 }
