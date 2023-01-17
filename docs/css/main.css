@@ -26,8 +26,8 @@ h6 {
 .citation {
     margin-left: 5%;
     margin-right: 5%;
-    margin-bottom: 40px;
-    margin-top: 40px;
+    margin-top: 5%;
+    margin-bottom: 5%;
     font-size: 30px;
 }
 
@@ -46,11 +46,6 @@ h6 {
 
 #duvidas {
     margin-top: 50px;
-}
-
-.author {
-    color: #929292;
-    font-size: 20px;
 }
 
 .quote {
@@ -99,11 +94,21 @@ header {
     color:#9982d0;
 }
 
+.marker {
+    font-size: 25px;
+    color:#9982d0;
+    margin-top: -10%;
+}
+
+.footnote {
+    font-size: 12px;
+}
+
 .bullet-points{
     color: #dfe3e8;
     padding-left: 4%;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .blog-sentence {
@@ -130,6 +135,16 @@ header {
     margin-right: 5%;
 }
 
+.special-bullet-point {
+    margin-top: -4%;
+    margin-left: 10%;
+}
+
+.plus {
+    color: #9982d0;
+    font-size: 35px;
+}
+
 .rose {
     color: #9982d0;
 }
@@ -148,7 +163,12 @@ header {
     margin-right: 30%;
 }
 
+.info-section {
+    margin-top: 5%;
+}
+
 .topicos-list {
+    color:#dfe3e8;
     margin-top: 5%;
     margin-bottom: 10%;
 }
@@ -172,6 +192,7 @@ header {
 
 #landing-page h1 {
     color: #6bc4a1;
+    font-size: 50px;
     margin-top: 1.5em;
 }
 
