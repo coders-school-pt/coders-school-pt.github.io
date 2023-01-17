@@ -95,9 +95,8 @@ header {
 }
 
 .marker {
-    font-size: 25px;
+    font-size: 20px;
     color:#9982d0;
-    margin-top: -10%;
 }
 
 .footnote {
@@ -157,15 +156,29 @@ header {
     color:#dfe3e8;
 }
 
+#separator {
+    margin-top: 3%;
+}
 
-#missao img {
+.slack {
+    margin-top: 15px;
+    margin-bottom: 5%;
+}
+
+.age {
+    max-height: 150px;
+    max-width: 150px;
+}
+
+.adults {
+    margin-top: 30px;
+}
+
+#missao-img {
     margin-top: -5%;
     margin-right: 30%;
 }
 
-.info-section {
-    margin-top: 5%;
-}
 
 .topicos-list {
     color:#dfe3e8;
@@ -179,12 +192,17 @@ header {
 }
 
 @media only screen and (max-width: 1026px) {
-    #missao img {
+    #missao-img {
         margin: auto;
         margin-bottom: 5%;
         margin-top: 5%;
     }
+
+    .age {
+        height: auto;
+    }
 }
+
 
 .main-page {
     margin-bottom: 3em;
