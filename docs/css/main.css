@@ -23,12 +23,18 @@ h6 {
     margin-top: 0.5%;
 }
 
+.calendar {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    max-width: 90%;
+}
+
 .citation {
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 5%;
+    margin-top: 10%;
     margin-bottom: 5%;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .subtlitles-list {
@@ -50,6 +56,10 @@ h6 {
 
 .quote {
     color: #9982d0;
+}
+
+.teens {
+    padding-bottom: 80px;
 }
 
 header {
@@ -141,15 +151,50 @@ header {
 
 .plus {
     color: #9982d0;
-    font-size: 35px;
+    font-size: 30px;
+}
+
+.aulas-section {
+    margin-top: 80px;
+}
+
+.price {
+    padding-top: 20px;
+}
+
+.plus-light {
+    margin-top: -15px;
+}
+
+.btn-info {
+    background-color: #9982d0;
+    border-color: #9982d0;
+}
+
+.btn-info:hover {
+    background-color: #fec46f;
+    border-color: #fec46f;
+    color: #161616;
 }
 
 .rose {
     color: #9982d0;
 }
 
+.yellow {
+    color: #fec46f;
+}
+
 .green {
     color: #6bc4a1;
+}
+
+.rose-light {
+    color: #df98bc;
+}
+
+.blue {
+    color: #6995b9;
 }
 
 .white {
