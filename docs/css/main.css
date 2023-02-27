@@ -23,10 +23,10 @@ h6 {
     margin-top: 0.5%;
 }
 
-.calendar {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    max-width: 90%;
+#aulas-info {
+    display: flex;
+    align-items: center;  
+    max-width: 80%;
 }
 
 .citation {
@@ -155,7 +155,7 @@ header {
 }
 
 .aulas-section {
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .price {
@@ -246,6 +246,11 @@ header {
     .age {
         height: auto;
         margin-bottom: 5%;
+    }
+
+    .calendar {
+        margin-top: 5%;
+
     }
 }
 
