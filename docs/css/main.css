@@ -162,6 +162,12 @@ header {
     padding-top: 20px;
 }
 
+.calendar {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    width: 80%;
+}
+
 .plus-light {
     margin-top: -15px;
 }
@@ -249,8 +255,7 @@ header {
     }
 
     .calendar {
-        margin-top: 5%;
-
+        width: 100%;
     }
 }
 
@@ -472,6 +477,8 @@ footer {
         right: 10px !important;
         top: 14px !important;
     }
+
+
 }
 
 #landing-page, #missao, #blog {
