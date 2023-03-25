@@ -242,6 +242,11 @@ header {
     margin-bottom: 3%;
 }
 
+#reclamacoes {
+    width: 100px;
+    display: inherit;
+}
+
 @media only screen and (max-width: 1026px) {
     #missao-img {
         margin: auto;
