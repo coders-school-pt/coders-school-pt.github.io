@@ -71,6 +71,36 @@ header {
     width: 100%;
 }
 
+#formButton, #contact-submit {
+    margin-bottom: 80px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+#formButton:hover, #contact-submit:hover {
+    transform:scale(1.05,1.05);
+    -webkit-transform:scale(1.05,1.05);
+    -moz-transform:scale(1.05,1.05);
+    background-color: #9982d0;
+    border-color: #9982d0;
+    color: #dfe3e8;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #9982d0;
+}
+
+form {
+    display: none;
+}
+
+#gratis {
+    color: #F5C57B;
+}
+
 .info h1 {
     margin-top: 5em;
     color: #6bc4a1;
@@ -259,6 +289,27 @@ header {
         margin-bottom: 5%;
     }
 }
+
+
+.btn {
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.btn-inscrições {
+    background-color: #f5c57b;
+    border-color: #f5c57b;
+}
+
+.btn-aula-experimental {
+    margin-left: 50px;
+    background-color: #b196f0;
+    border-color: #b196f0;
+    color: #ffffff;
+}
+
+
+
 
 
 .main-page {
@@ -482,6 +533,34 @@ footer {
 
 }
 
+.grey {
+    color: #5a5d69;
+}
+
 #landing-page, #missao, #blog {
     padding-top: 13em;
+}
+
+input[type=text], input[type=email], input[type=number], input[type=tel] {
+    background-color: #161616;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+}
+
+input[type=checkbox] {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+input, select, textarea{
+    color: #dfe3e8;
+}
+
+label {
+    color: white;
+}
+
+label > a {
+    color:#f5c57b;
 }
