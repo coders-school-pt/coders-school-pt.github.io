@@ -35,7 +35,7 @@ h6 {
 .citation {
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 5%;
     font-size: 25px;
 }
@@ -59,7 +59,7 @@ h6 {
 }
 
 .quote {
-    color: #9982d0;
+    color: #6bc4a1;
 }
 
 .teens {
@@ -246,6 +246,34 @@ form {
     color: #dfe3e8;
 }
 
+.grey {
+    color:#5a5d69;
+}
+
+.problem {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.coders {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.author {
+    margin-top: 5%;
+}
+
+.author img {
+    width: 150px;
+    border-radius: 50%;
+    float: left;
+}
+
+.author p {
+    padding-top: 3%;
+}
+
 #separator {
     margin-top: 3%;
 }
@@ -277,14 +305,15 @@ form {
 }
 
 .sabias-que {
-    margin-top: 4%;
-    margin-bottom: 3%;
+    margin-bottom: 5%;
 }
 
 #reclamacoes {
     width: 100px;
     display: inherit;
 }
+
+
 
 @media only screen and (max-width: 1026px) {
     #missao-img {
@@ -298,6 +327,18 @@ form {
         margin-bottom: 5%;
     }
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1026px) {
+
+    .author img{
+        margin-left: 10%;
+    }
+
+    .author-name{
+        margin-left: 15%;
+    }
+}
+
 
 
 .btn {
@@ -321,10 +362,12 @@ form {
     margin-bottom: 5em;
 }
 
-#landing-page h1 {
+#main-title {
     color: #6bc4a1;
     font-size: 50px;
 }
+
+
 
 #missao h1,
 #blog h1 {
@@ -359,7 +402,16 @@ p {
     border-radius: 15px;
     margin-left: 40px;
     margin-right: 40px;
+    margin-top: 40px;
     position: relative;
+}
+
+.importance {
+    margin-top: 100px;
+}
+
+#importance {
+    color:#f5c57b;
 }
 
 .steve {
