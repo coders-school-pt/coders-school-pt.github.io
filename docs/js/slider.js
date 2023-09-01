@@ -1,7 +1,11 @@
 $(document).ready(function() {
  
     $("#owl-demo").owlCarousel({
-      navigation : true
+      navigation: false,
+      pagination: false,
+      reponsive: true,
+      autoPlay: true,
+      slideSpeed: 250
     });
    
   });
