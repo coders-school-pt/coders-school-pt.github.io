@@ -337,9 +337,46 @@ form {
     .author-name{
         margin-left: 15%;
     }
+
 }
 
+@media only screen and (max-width: 768px) {
+    .look {
+        display: none;
+    }
+}
 
+.oferta-formativa {
+    margin-top: 10%;
+}
+
+.oferta-formativa p {
+    font-size: 16px;
+    color:#5a5d69
+}
+
+.look {
+    margin-left: -4%;
+    margin-top: 30%;
+    width: 250px;
+}
+
+.marker {
+    padding-top: 12%;
+}
+
+.importance li {
+    color: #9fa2aa;
+    font-size: 20px;
+    margin-bottom: 2%;
+}
+
+.importance a {
+    -webkit-text-decoration: #b196f0 solid underline;
+    text-decoration: #b196f0 solid underline 20%;
+    -webkit-text-underline-position: under;
+    text-underline-position: under;
+}
 
 .btn {
     margin-right: 10px;
@@ -398,7 +435,7 @@ p {
 .shell {
     background-color: black;
     padding: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
     border-radius: 15px;
     margin-left: 40px;
     margin-right: 40px;
@@ -637,7 +674,7 @@ label>a {
     -moz-border-radius: 3px;
     border-radius: 3px;
     text-align: center;
-  }
+}
 
   #owl-demo .item img {
     border-radius: 10%;
