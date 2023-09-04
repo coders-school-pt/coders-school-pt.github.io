@@ -395,6 +395,23 @@ form {
     color: #ffffff;
 }
 
+.btn-aula-experimental-main {
+    margin-top: 40px;
+    margin-left: 20px;
+    background-color: #b196f0;
+    border-color: #b196f0;
+    color: #ffffff;
+    display: none;
+}
+
+.btn-inscrições-main {
+    margin-top: 40px;
+    background-color: #f5c57b;
+    border-color: #f5c57b;
+    display: none;
+}
+
+
 .main-page {
     margin-bottom: 5em;
 }
@@ -625,6 +642,16 @@ footer {
 
 }
 
+@media (max-width: 991px) {
+    .btn-aula-experimental, .btn-inscrições {
+        display: none;
+    }
+
+    .btn-aula-experimental-main, .btn-inscrições-main {
+        display: inline;
+    }
+}
+
 .grey {
     color: #5a5d69;
 }
@@ -678,6 +705,7 @@ label>a {
 
   #owl-demo .item img {
     border-radius: 10%;
+    border: 5px solid #b196f0;
   }
 
 .marquee {
