@@ -404,8 +404,13 @@ form {
     display: none;
 }
 
+.aulas-regulares img {
+    margin-bottom: 10%;
+}
+
 .btn-inscrições-main {
     margin-top: 40px;
+    margin-left: 20px;
     background-color: #f5c57b;
     border-color: #f5c57b;
     display: none;
