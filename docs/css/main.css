@@ -5,8 +5,15 @@ html {
 
 
 body {
-    background-color: #111111;
     font-family: 'JetBrains Mono', monospace;
+}
+
+.body-feedback {
+    background-color: #948ACA;
+}
+
+.body {
+    background-color: #111111;
 }
 
 h6 {
@@ -75,6 +82,11 @@ header {
     width: 100%;
 }
 
+.main-header-feedback {
+    background-color:#948ACA;
+
+}
+
 #formButton,
 #contact-submit {
     margin-bottom: 80px;
@@ -110,9 +122,74 @@ form {
     color: #F5C57B;
 }
 
+#feedback {
+    color: #161616;
+}
+
+.navbar {
+    padding: .5rem 0rem !important;
+}
+
+.btn-feedback {
+    color: white;
+    background-color: #161616;
+    border-color: #161616;
+    width:100%; 
+    max-width:100%; 
+    margin-top: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 15px;
+}
+
+.btn-feedback:hover {
+    background-color: #948ACA;
+    border-color: #161616;
+}
+
+.social-media-icon {
+    height: 30px;
+    width: auto;
+    display: inline;
+}
+
+.whatsapp-icon {
+    height: 20px;
+    margin-right: 10px;
+    width: auto;
+    display: inline;
+}
+
+.contact-icon {
+    height: 15px;
+    margin-right: 10px;
+    width: auto;
+    display: inline;
+}
+
+.robot {
+    height:40px;
+    width: auto;
+    display: inline;
+    margin-top: 2.5em;
+    margin-right: 1em;
+}
+
+#logo-exp {
+    font-size: 14px;
+}
+
 .info h1 {
     margin-top: 5em;
     color: #6bc4a1;
+}
+
+#img-feedback {
+    margin-top: 10em;
+    margin-left: 0em;
+    margin-right: 0em;
+    padding-bottom: 1em;
+    width: 50%;
 }
 
 .shell-user {
@@ -563,12 +640,12 @@ ul {
 }
 
 footer {
-    color: #929292;
+    color: white;
 }
 
 
 footer a:hover {
-    color: #6bc4a1;
+    color: #948ACA;
     text-decoration: none;
 }
 
@@ -587,16 +664,34 @@ footer a:hover {
     padding-bottom: 5em;
 }
 
-footer a {
-    color: #929292;
+footer a, p {
+    color: white;
 }
 
-footer p {
-    color: #929292;
+
+.infos a {
+    font-size: 13px;
 }
 
 a {
     color: #dfe3e8;
+}
+.feedback-page {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.feedback-page a {
+    color: white;
+}
+
+.feedback-page a:hover {
+    color: #161616;
+}
+
+body > header > div > nav > span > a
+feedback a:hover {
+    color: #161616;
 }
 
 body>header>div>nav>span {
@@ -644,7 +739,8 @@ footer {
 }
 
 .direitos {
-    color: #6bc4a1;
+    color: #948ACA;
+    font-size: 20px;
 }
 
 @media (max-width: 575px) {
@@ -748,3 +844,31 @@ label>a {
         transform: translate(-100%, 0);
     }
 }
+
+
+
+
+.wave-container {  
+    height: 20vh;
+    background-color: #948aca;
+    position: relative;
+  }
+  
+  .wave-container::before {   
+    content: "";
+    width: 100%;
+    height: 86px;
+    position: absolute;
+    bottom: -0.3%;
+    left: 0;
+    background-size: auto;
+    background-repeat: repeat no-repeat;
+    background-position: 32vw bottom;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1200 123' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M0 20L33 17C82 12 133 13 200 27C267 41 333 61 400 65C467 68 533 54 600 37C667 20 733 0 800 0C867 0 933 20 1000 27C1067 34 1133 27 1167 23L1200 20V123H1167C1133 123 1067 123 1000 123C933 123 867 123 800 123C733 123 667 123 600 123C533 123 467 123 400 123C333 123 267 123 200 123C133 123 67 123 33 123H0V22.332Z' fill='%23161616'/></svg>");
+  }
+  
+  @media(max-width:850px) {
+    .wave-container::before {    
+      height: 43px
+    }  
+  }
