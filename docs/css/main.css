@@ -872,3 +872,7 @@ label>a {
       height: 43px
     }  
 }
+
+#presentation, #oferta-formativa {
+    background-color: #948ACA;
+}
