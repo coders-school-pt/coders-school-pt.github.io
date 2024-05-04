@@ -860,8 +860,8 @@ label>a {
     height: 86px;
     position: absolute;
     bottom: -0.3%;
-    left: 0;
-    background-size: auto;
+    /* left: 0;
+    background-size: auto; */
     background-repeat: repeat no-repeat;
     background-position: 32vw bottom;
     background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1200 123' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M0 20L33 17C82 12 133 13 200 27C267 41 333 61 400 65C467 68 533 54 600 37C667 20 733 0 800 0C867 0 933 20 1000 27C1067 34 1133 27 1167 23L1200 20V123H1167C1133 123 1067 123 1000 123C933 123 867 123 800 123C733 123 667 123 600 123C533 123 467 123 400 123C333 123 267 123 200 123C133 123 67 123 33 123H0V22.332Z' fill='%23161616'/></svg>");
