@@ -193,7 +193,7 @@ form {
 }
 
 .shell-user {
-    color: #6bc4a1;
+    color: #9982d0;
 }
 
 .shell a {
@@ -425,11 +425,13 @@ form {
 
 .oferta-formativa {
     margin-top: 10%;
+    padding-top: 4em;
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
 .oferta-formativa p {
     font-size: 16px;
-    color:#5a5d69
 }
 
 .look {
@@ -689,9 +691,17 @@ a {
     color: #161616;
 }
 
+.main-page a:hover {
+    color: #948ACA;
+}
+
 body > header > div > nav > span > a
 feedback a:hover {
     color: #161616;
+}
+
+#oferta-formativa {
+    background-color: #948ACA;
 }
 
 body>header>div>nav>span {
@@ -873,6 +883,292 @@ label>a {
     }  
 }
 
-#presentation, #oferta-formativa {
-    background-color: #948ACA;
+.content-slider {
+    width: 80%;
+    height: auto;
+    align-items: center;
+  }
+  
+  .slider {
+    height: 320px;
+    width: auto;
+    overflow: visible;
+    position: relative;
+  }
+  
+  .mask {
+    overflow: hidden;
+    height: 320px;
+  }
+  
+  .slider ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  
+  .slider li {
+    width: auto;
+    height: 320px;
+    position: absolute;
+    top: -325px;
+    list-style: none;
+  }
+  
+  .slider .quote2 {
+    font-size: 20px;
+    font-style: italic;
+    color: white;
+  }
+  
+  .slider .source {
+    font-size: 20px;
+    text-align: right;
+    padding-top: 2em;
+    color: white;
+  }
+  
+  .slider li.anim1 {
+    animation: cycle 15s linear infinite;
+  }
+  
+  .slider li.anim2 {
+    animation: cycle2 15s linear infinite;
+  }
+  
+  .slider li.anim3 {
+    animation: cycle3 15s linear infinite;
+  }
+  
+  .slider li.anim4 {
+    animation: cycle4 15s linear infinite;
+  }
+  
+  .slider li.anim5 {
+    animation: cycle5 15s linear infinite;
+  }
+
+  .slider li.anim6 {
+    animation: cycle6 5s linear infinite;
+  }
+  
+  .slider:hover li {
+    animation-play-state: paused;
+  }
+  
+  @keyframes cycle {
+    0% {
+      top: 0px;
+    }
+    4% {
+      top: 0px;
+    }
+    16% {
+      top: 0px;
+      opacity: 1;
+      z-index: 0;
+    }
+    20% {
+      top: 325px;
+      opacity: 0;
+      z-index: 0;
+    }
+    21% {
+      top: -325px;
+      opacity: 0;
+      z-index: -1;
+    }
+    50% {
+      top: -325px;
+      opacity: 0;
+      z-index: -1;
+    }
+    92% {
+      top: -325px;
+      opacity: 0;
+      z-index: 0;
+    }
+    96% {
+      top: -325px;
+      opacity: 0;
+    }
+    100% {
+      top: 0px;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes cycle2 {
+    0% {
+      top: -325px;
+      opacity: 0;
+    }
+    16% {
+      top: -325px;
+      opacity: 0;
+    }
+    20% {
+      top: 0px;
+      opacity: 1;
+    }
+    24% {
+      top: 0px;
+      opacity: 1;
+    }
+    36% {
+      top: 0px;
+      opacity: 1;
+      z-index: 0;
+    }
+    40% {
+      top: 325px;
+      opacity: 0;
+      z-index: 0;
+    }
+    41% {
+      top: -325px;
+      opacity: 0;
+      z-index: -1;
+    }
+    100% {
+      top: -325px;
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+  
+  @keyframes cycle3 {
+    0% {
+      top: -325px;
+      opacity: 0;
+    }
+    36% {
+      top: -325px;
+      opacity: 0;
+    }
+    40% {
+      top: 0px;
+      opacity: 1;
+    }
+    44% {
+      top: 0px;
+      opacity: 1;
+    }
+    56% {
+      top: 0px;
+      opacity: 1;
+      z-index: 0;
+    }
+    60% {
+      top: 325px;
+      opacity: 0;
+      z-index: 0;
+    }
+    61% {
+      top: -325px;
+      opacity: 0;
+      z-index: -1;
+    }
+    100% {
+      top: -325px;
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+  
+  @keyframes cycle4 {
+    0% {
+      top: -325px;
+      opacity: 0;
+    }
+    56% {
+      top: -325px;
+      opacity: 0;
+    }
+    60% {
+      top: 0px;
+      opacity: 1;
+    }
+    64% {
+      top: 0px;
+      opacity: 1;
+    }
+    76% {
+      top: 0px;
+      opacity: 1;
+      z-index: 0;
+    }
+    80% {
+      top: 325px;
+      opacity: 0;
+      z-index: 0;
+    }
+    81% {
+      top: -325px;
+      opacity: 0;
+      z-index: -1;
+    }
+    100% {
+      top: -325px;
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+  
+  @keyframes cycle5 {
+    0% {
+      top: -325px;
+      opacity: 0;
+    }
+    76% {
+      top: -325px;
+      opacity: 0;
+    }
+    80% {
+      top: 0px;
+      opacity: 1;
+    }
+    84% {
+      top: 0px;
+      opacity: 1;
+    }
+    96% {
+      top: 0px;
+      opacity: 1;
+      z-index: 0;
+    }
+    100% {
+      top: 325px;
+      opacity: 0;
+      z-index: 0;
+    }
+  }
+
+  @keyframes cycle6 {
+    0% {
+      top: -325px;
+      opacity: 0;
+    }
+    76% {
+      top: -325px;
+      opacity: 0;
+    }
+    80% {
+      top: 0px;
+      opacity: 1;
+    }
+    84% {
+      top: 0px;
+      opacity: 1;
+    }
+    96% {
+      top: 0px;
+      opacity: 1;
+      z-index: 0;
+    }
+    100% {
+      top: 325px;
+      opacity: 0;
+      z-index: 0;
+    }
 }
