@@ -1,33 +1,67 @@
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 13em;
+    scroll-padding-top: 15em;
 }
-
 
 body {
     font-family: 'JetBrains Mono', monospace;
+    background-color: #111111;
+}
+
+.summer-coders a,
+.summer-landing-page #navbarTogglerDemo02 > ul > li > a {
+    color: #161616;
+}
+
+.summer-coders a:hover,
+.summer-landing-page #navbarTogglerDemo02 > ul > li > a:hover {
+    color: white;
+}
+
+.aulas-coders a,
+.aulas #navbarTogglerDemo02 > ul > li > a {
+  color: white;
+}
+
+.aulas-coders a:hover,
+.aulas #navbarTogglerDemo02 > ul > li > a:hover {
+  color: #948ACA;
+}
+
+.main-header-summer {
+    background-color: #f3bf72;
+    font-weight: 500;
+}
+
+.main-header-aulas {
+  background-color: #111111;
+  font-weight: 500;
+}
+
+
+
+.summer-info {
+    background-image: url(../assets/summer-webpage.png);
+    margin-top: 3em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 56.64%;
 }
 
 .body-feedback {
     background-color: #948ACA;
 }
 
-.body {
-    background-color: #111111;
-}
-
 h6 {
     color: #dfe3e8;
+    margin-bottom: auto;
 }
 
 h6 strong {
     font-size: 20px;
 }
-
-h6 {
-    margin-bottom: auto;
-}
-
 
 .source {
     margin-top: 0.5%;
@@ -84,7 +118,6 @@ header {
 
 .main-header-feedback {
     background-color:#948ACA;
-
 }
 
 #formButton,
@@ -390,8 +423,6 @@ form {
     display: inherit;
 }
 
-
-
 @media only screen and (max-width: 1026px) {
     #missao-img {
         margin: auto;
@@ -406,7 +437,6 @@ form {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1026px) {
-
     .author img{
         margin-left: 10%;
     }
@@ -493,6 +523,60 @@ form {
     display: none;
 }
 
+.btn-aula-pre-inscricao {
+    background-color: #1e182d;
+    border-color: #1e182d;
+    color: #ffffff;
+}
+
+.btn-aula-pre-inscricao:hover {
+    background-color: #483a6d;
+    border-color: #483a6d;
+    color: #ffffff;
+}
+
+.summer-title-card {
+  font-family: "Rubik", sans-serif;
+  color: white;
+  font-weight: 600;
+}
+
+.summer-card h4 {
+  padding: 0;
+  color: white;
+}
+
+.whatsapp {
+  max-height: 20px;
+  width: auto;
+  display: inline-block;
+}
+
+.mail {
+  font-weight: 1000;
+}
+
+.points-img {
+  max-height: 50px;
+  width: auto;
+  margin: 0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+  display: inline-block;
+}
+
+.btn-aula-pre-inscricao {
+  margin-top: 1rem;
+  margin-bottom: -2rem;
+}
+
+.inscreve {
+    text-align: center;
+    padding-bottom: 5rem;
+    color: white;
+}
+
 .aulas-regulares img {
     margin-bottom: 10%;
 }
@@ -505,7 +589,6 @@ form {
     display: none;
 }
 
-
 .main-page {
     margin-bottom: 5em;
 }
@@ -515,13 +598,10 @@ form {
     font-size: 50px;
 }
 
-
-
 #missao h1,
 #blog h1 {
     color: #6bc4a1;
 }
-
 
 h4 {
     display: table-cell;
@@ -601,9 +681,32 @@ img {
 }
 
 .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(107, 196, 161, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(22, 22, 22, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
 }
 
+.aulas .navbar-toggler {
+  border-color: #161616;
+  background-color: #f3bf72;
+  border-radius: .5rem;
+  border: 2px solid;
+  padding: 0em 0.25em;
+}
+
+.summer-landing-page .navbar-toggler {
+    border-color: #161616;
+    background-color: #f3bf72;
+    border-radius: .5rem;
+    border: 2px solid;
+    padding: 0em 0.25em;
+}
+
+.atividades-extra {
+  color:#1e182d;
+}
+
+.atividades-extra:hover {
+  color:white;
+}
 
 .navbar-toggler {
     border-color: #6bc4a1;
@@ -632,8 +735,13 @@ img {
 }
 
 .main-header {
-    padding-top: 2em;
+    padding-top: 1em;
     padding-bottom: 1em;
+}
+
+.main-header-mini {
+  padding-top: .5em;
+  padding-bottom: .5em;
 }
 
 ul {
@@ -760,7 +868,9 @@ footer {
         top: 14px !important;
     }
 
-
+    .summer-subjects {
+        font-size: 40%;
+    }
 }
 
 @media (max-width: 991px) {
@@ -771,6 +881,8 @@ footer {
     .btn-aula-experimental-main, .btn-inscrições-main {
         display: inline;
     }
+
+    
 }
 
 .grey {
@@ -855,9 +967,6 @@ label>a {
     }
 }
 
-
-
-
 .wave-container {  
     height: 20vh;
     background-color: #948aca;
@@ -880,7 +989,11 @@ label>a {
 @media(max-width:850px) {
     .wave-container::before {    
       height: 43px
-    }  
+    } 
+    
+    .summer-subjects {
+        font-size: 60%;
+    }
 }
 
 .content-slider {
@@ -1172,3 +1285,371 @@ label>a {
       z-index: 0;
     }
 }
+
+.tabs-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -1.5em;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabs-container > input[type=radio] {
+    display: none;
+}
+
+.tabs-container > input[type=radio]:checked + .tab-label {
+    background-color: #948ACA;
+}
+
+.tabs-container > input[type=radio]:first-child + .tab-label {
+    border-radius: 50px 0 0 50px;
+    border: 3px solid #161616;
+}
+
+.tabs-container > input[type=radio]:last-of-type + .tab-label {
+    border-radius: 0 50px 50px 0;
+    border: 3px solid #161616;
+}
+
+.tabs-container .tab-label {
+    padding: 5px 15px;
+    color: white;
+    background-color: #161616;
+}
+
+.tabs-container > input[type=radio]:not(:checked) + .tab-label + .tab-content {
+    display: none;
+}
+
+.tabs-container .tab-content {
+    order: 99;
+    width: 100%;
+    margin-top: 15px;
+    display: block;
+}
+
+/* MIUDOS */
+.tabs-container-miudos {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -1.5em;
+}
+
+.tabs-container-miudos > input[type=radio] {
+    display: none;
+}
+
+.tabs-container-miudos > input[type=radio]:checked:first-child + .tab-label-miudos {
+    background-color: #df98bc;
+}
+
+.tabs-container-miudos > input[type=radio]:checked:last-of-type + .tab-label-miudos {
+    background-color: #6995b9;
+}
+
+.tabs-container-miudos > input[type=radio]:checked:nth-of-type(2) + .tab-label-miudos {
+    background-color: #fec46f;
+}
+
+
+.tabs-container-miudos > input[type=radio]:not(:checked) + .tab-label-miudos {
+    background-color: #948ACA;
+}
+
+.tabs-container-miudos > input[type=radio] + .tab-label-miudos {
+    border-radius: 20px 20px 20px 20px;
+}
+
+.tabs-container-miudos .tab-label-miudos {
+    padding: 5px 15px;
+    color: white;
+    background-color: #161616;
+    margin-right: 1rem;
+}
+
+.tabs-container-miudos > input[type=radio]:not(:checked) + .tab-label-miudos + .tab-content-miudos {
+    display: none;
+}
+
+.tabs-container-miudos .tab-content-miudos {
+    order: 99;
+    width: 100%;
+    margin-top: 15px;
+    display: block;
+}
+
+.summer-subjects {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    color: rgba(255,255,255, 1);
+}
+
+
+
+.ag-format-container {
+    width: 1142px;
+    margin: 0 auto;
+  }
+  
+  .ag-courses_box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  
+    padding: 50px 0;
+  }
+  .ag-courses_item {
+    -ms-flex-preferred-size: calc(33.33333% - 30px);
+    flex-basis: calc(33.33333% - 30px);
+  
+    margin: 0 20px 20px 0;
+  
+    overflow: hidden;
+  
+    border-radius: 28px;
+  }
+  .ag-courses-item_link {
+    display: block;
+    padding: 30px 20px;
+    background-color: #121212;
+  
+    overflow: hidden;
+  
+    position: relative;
+  }
+  .ag-courses-item_link:hover,
+  .ag-courses-item_link:hover .ag-courses-item_date,
+  .ag-courses-item_link:hover .ag-courses-item_date_pre,
+  .ag-courses-item_link:hover .ag-courses-item_date_k,
+  .ag-courses-item_link:hover .ag-courses-item_date_t {
+    text-decoration: none;
+    color: #FFF;
+  }
+  .ag-courses-item_link:hover .ag-courses-item_bg,
+  .ag-courses-item_link:hover .ag-courses-item_k,
+  .ag-courses-item_link:hover .ag-courses-item_t {
+    -webkit-transform: scale(10);
+    -ms-transform: scale(10);
+    transform: scale(10);
+  }
+  .ag-courses-item_title {
+    min-height: 87px;
+    margin: 0 0 25px;
+  
+    overflow: hidden;
+  
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFF;
+  
+    z-index: 2;
+    position: relative;
+  }
+  .ag-courses-item_date-box {
+    font-size: 18px;
+    color: #FFF;
+  
+    z-index: 2;
+    position: relative;
+  }
+
+  .ag-courses-item_date_pre {
+    font-weight: bold;
+    color: #df98bc;
+  
+    -webkit-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    transition: color .5s ease
+  }
+
+  .ag-courses-item_date_k {
+    font-weight: bold;
+    color: #fec46f;
+  
+    -webkit-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    transition: color .5s ease
+  }
+
+  .ag-courses-item_date_t {
+    font-weight: bold;
+    color: #6995b9;
+  
+    -webkit-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    transition: color .5s ease
+  }
+
+
+  .ag-courses-item_bg {
+    height: 128px;
+    width: 128px;
+    background-color: #df98bc;
+  
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+  
+    border-radius: 50%;
+  
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+
+  .ag-courses-item_k {
+    height: 128px;
+    width: 128px;
+    background-color: #fec46f;
+  
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+  
+    border-radius: 50%;
+  
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+
+  .ag-courses-item_t {
+    height: 128px;
+    width: 128px;
+    background-color: #6995b9;
+  
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+  
+    border-radius: 50%;
+  
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+  
+  .ag-courses_item .ag-courses-item_bg {
+    background-color: #df98bc;
+  }
+
+  .ag-courses_item .ag-courses-item_k {
+    background-color: #fec46f;
+  }
+  
+  .ag-courses_item .ag-courses-item_t {
+    background-color: #6995b9;
+  }
+  
+  
+  
+  
+  @media only screen and (max-width: 979px) {
+    .ag-courses_item {
+      -ms-flex-preferred-size: calc(50% - 30px);
+      flex-basis: calc(50% - 30px);
+    }
+    .ag-courses-item_title {
+      font-size: 24px;
+    }
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .ag-format-container {
+      width: 96%;
+    }
+  
+  }
+  @media only screen and (max-width: 639px) {
+    .ag-courses_item {
+      -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+    }
+    .ag-courses-item_title {
+      min-height: 72px;
+      line-height: 1;
+  
+      font-size: 24px;
+    }
+    .ag-courses-item_link {
+      padding: 22px 40px;
+    }
+    .ag-courses-item_date-box {
+      font-size: 16px;
+    }
+  }
+
+#activity-subtitle {
+    font-size: 23px;
+    font-weight: 200;
+}
+
+.atl {
+    background-color: #948ACA;
+    max-width: 100%;
+    font-family: "Rubik", sans-serif;
+    padding-top: 4rem;
+    color: white;
+}
+
+.summer-title {
+    margin: 0;
+    padding-top: 3rem;
+}
+
+hr {
+    height: 10px;
+    border: none;
+    position: relative;
+  }
+  
+  hr::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 10px;
+    background-image: radial-gradient(#161616 0%, #161616 50%, transparent 50%, transparent 100%);
+    background-size: 10px 10px;
+  }
+
+  .summer-card {
+    padding-top: 1rem;
+  }
+
+  .enfase {
+    font-weight: 200%;
+  }
+
+  .summer-card {
+    background-image: url(../assets/summer-fundo.png);
+    background-size: 100% auto;
+  }
+
+  .atl-image {
+    margin-top: 3rem;
+    padding-right: 1rem;
+  }
+
+  .extra {
+    margin-top: 4rem;
+  }
+
+  .atividades-title {
+    color: #1e182d;
+  }
