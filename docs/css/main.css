@@ -1433,13 +1433,16 @@ label>a {
   .ag-courses-item_link:hover .ag-courses-item_date,
   .ag-courses-item_link:hover .ag-courses-item_date_pre,
   .ag-courses-item_link:hover .ag-courses-item_date_k,
-  .ag-courses-item_link:hover .ag-courses-item_date_t {
+  .ag-courses-item_link:hover .ag-courses-item_date_t,
+  .ag-courses-item_link:hover .ag-courses-item_date_ninjas
+  {
     text-decoration: none;
     color: #FFF;
   }
   .ag-courses-item_link:hover .ag-courses-item_bg,
   .ag-courses-item_link:hover .ag-courses-item_k,
-  .ag-courses-item_link:hover .ag-courses-item_t {
+  .ag-courses-item_link:hover .ag-courses-item_t,
+  .ag-courses-item_link:hover .ag-courses-item_ninjas {
     -webkit-transform: scale(10);
     -ms-transform: scale(10);
     transform: scale(10);
@@ -1474,6 +1477,15 @@ label>a {
     transition: color .5s ease
   }
 
+  .ag-courses-item_date_ninjas {
+    font-weight: bold;
+    color: #948ACA;
+  
+    -webkit-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    transition: color .5s ease
+  }
+
   .ag-courses-item_date_k {
     font-weight: bold;
     color: #fec46f;
@@ -1497,6 +1509,23 @@ label>a {
     height: 128px;
     width: 128px;
     background-color: #df98bc;
+  
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+  
+    border-radius: 50%;
+  
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+
+  .ag-courses-item_ninjas {
+    height: 128px;
+    width: 128px;
+    background-color: #948ACA;
   
     z-index: 1;
     position: absolute;
@@ -1595,7 +1624,7 @@ label>a {
   }
 
 #activity-subtitle {
-    font-size: 23px;
+    font-size: 20px;
     font-weight: 200;
 }
 
