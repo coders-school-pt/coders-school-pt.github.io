@@ -10,12 +10,12 @@ body {
 
 .summer-coders a,
 .summer-landing-page #navbarTogglerDemo02 > ul > li > a {
-    color: #161616;
+    color: #ffffff;
 }
 
 .summer-coders a:hover,
 .summer-landing-page #navbarTogglerDemo02 > ul > li > a:hover {
-    color: white;
+    color: #f3bf72;
 }
 
 .aulas-coders a,
@@ -25,11 +25,11 @@ body {
 
 .aulas-coders a:hover,
 .aulas #navbarTogglerDemo02 > ul > li > a:hover {
-  color: #948ACA;
+  color: #f3bf72;
 }
 
 .main-header-summer {
-    background-color: #f3bf72;
+    background-color: #111111;
     font-weight: 500;
 }
 
@@ -1287,6 +1287,8 @@ label>a {
     }
 }
 
+/* Botão Miúdos <> Graúdos */
+
 .tabs-container {
     display: flex;
     flex-wrap: wrap;
@@ -1300,17 +1302,17 @@ label>a {
 }
 
 .tabs-container > input[type=radio]:checked + .tab-label {
-    background-color: #948ACA;
+    background-color: #483a6d;
 }
 
 .tabs-container > input[type=radio]:first-child + .tab-label {
     border-radius: 50px 0 0 50px;
-    border: 3px solid #161616;
+    border: 4px solid #161616;
 }
 
 .tabs-container > input[type=radio]:last-of-type + .tab-label {
     border-radius: 0 50px 50px 0;
-    border: 3px solid #161616;
+    border: 4px solid #161616;
 }
 
 .tabs-container .tab-label {
@@ -1330,7 +1332,7 @@ label>a {
     display: block;
 }
 
-/* MIUDOS */
+/* Miúdos */
 .tabs-container-miudos {
     display: flex;
     flex-wrap: wrap;
@@ -1341,18 +1343,9 @@ label>a {
     display: none;
 }
 
-.tabs-container-miudos > input[type=radio]:checked:first-child + .tab-label-miudos {
-    background-color: #df98bc;
+.tabs-container-miudos > input[type=radio]:checked+ .tab-label-miudos {
+    background-color: #483a6d;
 }
-
-.tabs-container-miudos > input[type=radio]:checked:last-of-type + .tab-label-miudos {
-    background-color: #6995b9;
-}
-
-.tabs-container-miudos > input[type=radio]:checked:nth-of-type(2) + .tab-label-miudos {
-    background-color: #fec46f;
-}
-
 
 .tabs-container-miudos > input[type=radio]:not(:checked) + .tab-label-miudos {
     background-color: #948ACA;
@@ -1391,14 +1384,12 @@ label>a {
     color: rgba(255,255,255, 1);
 }
 
-
-
 .ag-format-container {
     width: 1142px;
     margin: 0 auto;
-  }
+}
   
-  .ag-courses_box {
+.ag-courses_box {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1407,41 +1398,47 @@ label>a {
     align-items: flex-start;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-  
     padding: 50px 0;
-  }
-  .ag-courses_item {
+}
+
+.modal-content {
+  background-color: #483a6d;
+}
+
+#videoModal h2, #videoModal ul, #criptoModal h2, #criptoModal ul, #roboticaModal h2, #roboticaModal ul {
+  color: white;
+}
+
+.close {
+  color: white;
+}
+
+.ag-courses_item {
     -ms-flex-preferred-size: calc(33.33333% - 30px);
     flex-basis: calc(33.33333% - 30px);
   
     margin: 0 20px 20px 0;
-  
+    background-color: #5e4c90;
     overflow: hidden;
-  
     border-radius: 28px;
-  }
-  .ag-courses-item_link {
+}
+
+.ag-courses-item_link {
     display: block;
     padding: 30px 20px;
-    background-color: #121212;
   
     overflow: hidden;
   
     position: relative;
   }
+  
   .ag-courses-item_link:hover,
   .ag-courses-item_link:hover .ag-courses-item_date,
-  .ag-courses-item_link:hover .ag-courses-item_date_pre,
-  .ag-courses-item_link:hover .ag-courses-item_date_k,
-  .ag-courses-item_link:hover .ag-courses-item_date_t,
   .ag-courses-item_link:hover .ag-courses-item_date_ninjas
   {
     text-decoration: none;
-    color: #FFF;
   }
   .ag-courses-item_link:hover .ag-courses-item_bg,
-  .ag-courses-item_link:hover .ag-courses-item_k,
-  .ag-courses-item_link:hover .ag-courses-item_t,
   .ag-courses-item_link:hover .ag-courses-item_ninjas {
     -webkit-transform: scale(10);
     -ms-transform: scale(10);
@@ -1468,65 +1465,18 @@ label>a {
     position: relative;
   }
 
-  .ag-courses-item_date_pre {
-    font-weight: bold;
-    color: #df98bc;
-  
-    -webkit-transition: color .5s ease;
-    -o-transition: color .5s ease;
-    transition: color .5s ease
-  }
-
   .ag-courses-item_date_ninjas {
     font-weight: bold;
-    color: #948ACA;
-  
+    /* color: white; */
     -webkit-transition: color .5s ease;
     -o-transition: color .5s ease;
     transition: color .5s ease
-  }
-
-  .ag-courses-item_date_k {
-    font-weight: bold;
-    color: #fec46f;
-  
-    -webkit-transition: color .5s ease;
-    -o-transition: color .5s ease;
-    transition: color .5s ease
-  }
-
-  .ag-courses-item_date_t {
-    font-weight: bold;
-    color: #6995b9;
-  
-    -webkit-transition: color .5s ease;
-    -o-transition: color .5s ease;
-    transition: color .5s ease
-  }
-
-
-  .ag-courses-item_bg {
-    height: 128px;
-    width: 128px;
-    background-color: #df98bc;
-  
-    z-index: 1;
-    position: absolute;
-    top: -75px;
-    right: -75px;
-  
-    border-radius: 50%;
-  
-    -webkit-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    transition: all .5s ease;
   }
 
   .ag-courses-item_ninjas {
     height: 128px;
     width: 128px;
-    background-color: #948ACA;
-  
+    background-color: #6bc4a1;
     z-index: 1;
     position: absolute;
     top: -75px;
@@ -1539,60 +1489,6 @@ label>a {
     transition: all .5s ease;
   }
 
-  .ag-courses-item_k {
-    height: 128px;
-    width: 128px;
-    background-color: #fec46f;
-  
-    z-index: 1;
-    position: absolute;
-    top: -75px;
-    right: -75px;
-  
-    border-radius: 50%;
-  
-    -webkit-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    transition: all .5s ease;
-  }
-
-  .ag-courses-item_t {
-    height: 128px;
-    width: 128px;
-    background-color: #6995b9;
-  
-    z-index: 1;
-    position: absolute;
-    top: -75px;
-    right: -75px;
-  
-    border-radius: 50%;
-  
-    -webkit-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    transition: all .5s ease;
-  }
-  
-  .ag-courses_item .ag-courses-item_bg {
-    background-color: #df98bc;
-  }
-
-  .ag-courses_item .ag-courses-item_k {
-    background-color: #fec46f;
-  }
-  
-  .ag-courses_item .ag-courses-item_t {
-    background-color: #6995b9;
-  }
-
-  .ag-courses_item .ag-courses-item_ninjas {
-    background-color: #948ACA;
-  }
-  
-  
-  
-  
-  
   @media only screen and (max-width: 979px) {
     .ag-courses_item {
       -ms-flex-preferred-size: calc(50% - 30px);
@@ -1631,6 +1527,10 @@ label>a {
 #activity-subtitle {
     font-size: 20px;
     font-weight: 200;
+}
+
+.legenda {
+  margin-bottom: 2rem;
 }
 
 .atl {
