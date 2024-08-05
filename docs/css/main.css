@@ -524,13 +524,13 @@ form {
     display: none;
 }
 
-.btn-aula-pre-inscricao {
+.btn-aula-pre-inscricao, .btn-contacto {
     background-color: #1e182d;
     border-color: #1e182d;
     color: #ffffff;
 }
 
-.btn-aula-pre-inscricao:hover {
+.btn-aula-pre-inscricao:hover, .btn-contacto:hover {
     background-color: #483a6d;
     border-color: #483a6d;
     color: #ffffff;
