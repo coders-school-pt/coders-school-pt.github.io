@@ -6,7 +6,7 @@ function postToRegular() {
     var field5 = $("#Privacidade").val();
     if (field5 == 'on')
         field5 = 'Sim';
-
+    console.log("All good!")
 
     $.ajax({
         
@@ -21,11 +21,11 @@ function postToRegular() {
       },
       type: "POST",
       dataType: "xml",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Origin': 'http:localhost:3000',
-        'Access-Control-Request-Method': 'POST'
+      success: function (d) {
+        $('#contact').trigger('reset');
+      },
+      error: function (x, y, z) {
+        $('#contact').trigger('reset');
       }
     });
 
