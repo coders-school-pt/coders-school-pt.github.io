@@ -19,7 +19,7 @@
     rel="stylesheet">
 
   <!-- coders metadata -->
-  <title>/Summer</title>
+  <title>/Summer-Camp</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <meta name="keywords"
     content="programação, coding, coders, escola, school, escola de programação, peso da régua, régua, portugal, summer, verão, verao">
@@ -64,12 +64,12 @@
     <div class="summer-info">
     </div>
     <div class="tabs-container">
-      <input type="radio" id="tab-1" name="my-tabs" checked>
-      <label for="tab-1" class="tab-label">Miúdos</label>
+      <!-- <input type="radio" id="tab-1" name="my-tabs" checked>
+      <label for="tab-1" class="tab-label">Miúdos</label> -->
       <div class="tab-content">
         <div class="container">
-          <p class="summer-subjects">ROBÓTICA . JOGOS . APLICAÇÕES . INTELIGÊNCIA ARTIFICIAL . ARTE DIGITAL .
-            CIBER-SEGURANÇA</p>
+          <p class="summer-subjects">ROBÓTICA . INTELIGÊNCIA ARTIFICIAL . CIBER-SEGURANÇA . JOGOS . APLICAÇÕES .  ARTE DIGITAL 
+            </p>
           <div class="tabs-container-miudos">
             <input type="radio" id="tab-2-miudos" name="miudos-tabs" checked>
             <label for="tab-2-miudos" class="tab-label-miudos"><strong>MINI-CURSOS (6H+)</strong></label>
@@ -712,7 +712,7 @@
               </div>
             </div>
 
-            <input type="radio" id="tab-1-miudos" name="miudos-tabs">
+            <input type="radio" id="tab-1-miudos" name="miudos-tabs" checked>
             <label for="tab-1-miudos" class="tab-label-miudos"><strong>WORKSHOPS (1.5H+)</strong></label>
             <div class="tab-content-miudos">
               <div class="ag-format-container">
@@ -912,17 +912,59 @@
               <div class="col-12 col-sm-12 col-md-6 col-xxl-12 offset-xxl-1">
                 <img class="summer-title" src="assets/summer-title.png">
                 <br>
-                <p>A { CODERS } vai ter dias inteiros de quebra-cabeças para o seu filho/a! 🤩 Invista no futuro dos
-                  seus
-                  pequenos/as com o Summer Tech ATL. O STA vai ter atividades com e sem ecrã destinadas
-                  a desenvolver o pensamento lógico e computacional, criatividade, pensamento crítico,
-                  resiliência, persistência e literacia digital dos nossos pre-coders e kids!</p>
-                <p><strong>Tecnologias/Atividades:</strong> Lego, Código Binário, Arte Digital, Atividades de
-                  Programação (Microbit), Ciber-Segurança, Inteligência Artificial, Robótica, Pokémon Go</p>
-                <p><strong>22, 23 e 30 de Agosto + 6 de Setembro (5-13 ANOS)</strong></p>
+                <p>A <strong>{ CODERS }</strong> preparou dias repletos de aventuras tecnológicas para o seu filho/a! 🚀 
+                  Invista no futuro dos seus pequenos/as com o <strong>Summer Tech ATL</strong>, um programa único que combina 
+                  diversão e aprendizagem através de atividades desenhadas para estimular o pensamento 
+                  lógico-computacional, criatividade, pensamento crítico, resiliência e literacia digital dos nossos 
+                  futuros programadores!</p>
+                <p><strong>O que os espera:</strong> Programação com Microbit e Robôs reais, Ciber-Segurança, 
+                  Inteligência Artificial, Codificação e descodificação em Código Binário, 
+                  Criptografia, Pokémon Go, construções de LEGO inovadoras, Arte Digital e muito mais! 🎮✨</p>    
+                <p><strong>Calendário:</strong></p>
+                <div class="calendar-dropdown">
+                  <select id="monthSelector" class="form-control" style="width: 250px; margin-bottom: 15px;">
+                    <option value="">Camada</option>
+                    <option value="precode">/Pre-Code (5-8 anos)</option>
+                    <option value="kids">/Kids (9-11 anos)</option>
+                    <option value="teens">/Teens (12-17 anos)</option>
+                  </select>
+                  
+                  <div id="calendarContent" style="display: none;">
+                    <!-- Pre-Code Content -->
+                    <div id="precode-content" class="month-content" style="display: none;">
+                      <div style="background-color: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                        <h6 style="margin-bottom: 10px; color: #df98bc;"><strong>/Pre-Code (5-8 anos)</strong></h6>
+                        <p style="margin: 0; color: #424242;"><strong>Julho:</strong> 4, 11, 14 (Sextas-feiras)</p>
+                        <p style="margin: 0; color: #424242;"><strong>Agosto:</strong> 1, 6, 13, 22, 29</p>
+                        <p style="margin: 0; color: #424242;"><strong>Setembro:</strong> 5 (Sexta-feira)</p>
+                      </div>
+                    </div>
+                    
+                    <!-- Kids Content -->
+                    <div id="kids-content" class="month-content" style="display: none;">
+                      <div style="background-color: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                        <h6 style="margin-bottom: 10px; color: #1976d2;"><strong>/Kids (9-11 anos)</strong></h6>
+                        <p style="margin: 0; color: #424242;"><strong>Julho:</strong> 4, 11, 14 (Sextas-feiras)</p>
+                        <p style="margin: 0; color: #424242;"><strong>Agosto:</strong> 1, 6, 13, 22, 29</p>
+                        <p style="margin: 0; color: #424242;"><strong>Setembro:</strong> 5 (Sexta-feira)</p>
+                      </div>
+                    </div>
+                    
+                    <!-- Teens Content -->
+                    <div id="teens-content" class="month-content" style="display: none;">
+                      <div style="background-color: #fff3e0; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                        <h6 style="margin-bottom: 10px; color: #f57c00;"><strong>/Teens (12-17 anos)</strong></h6>
+                        <p style="margin: 0; color: #424242;"><strong>Julho:</strong> 4, 11, 14 (Sextas-feiras)</p>
+                        <p style="margin: 0; color: #424242;"><strong>Agosto:</strong> 31/Jul, 5, 12, 21, 28</p>
+                        <p style="margin: 0; color: #424242;"><strong>Setembro:</strong> 4 (Quinta-feira)</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
                 <p><i class="fa-regular fa-clock"></i> &nbsp;9:30-12:30 // 14:30-17:30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
                     class="fa-solid fa-coins"></i> 20 EUR/dia ou 12 EUR/meio dia</p>
-                <p><a href="https://api.whatsapp.com/send?phone=351931638749" target=”_blank”><button type="button"
+                <p><a href="https://api.whatsapp.com/send?phone=351931638749" target="_blank"><button type="button"
                       class="btn btn-aula-pre-inscricao"><strong>CONTACTE-NOS</strong></button></a></p>
                 <img class="robot" src="assets/robot.png"><img class="robot" src="assets/robot.png"><img class="robot"
                   src="assets/robot.png">
@@ -937,7 +979,7 @@
                 <h1 class="summer-title-card">UM VERÃO CHEIO DE CONHECIMENTO E DESAFIOS 🚀</h1>
                 <br>
                 <br>
-                <h4>ACUMULA <i class="fa-solid fa-stamp"></i> POR CADA ATIVIDADE</h>
+                <h4>ACUMULA <i class="fa-solid fa-stamp"></i> POR CADA ATIVIDADE
                   <p>E GANHA PRÉMIOS FANTÁSTICOS!</p>
                   <p style="font-size:15px">Recolha já o seu cartão</p>
                   <br>
@@ -951,111 +993,95 @@
             </div>
           </div>
         </div>
-        <div class="atl">
+        <div class="atividades">
           <div class="container">
             <div class="row">
-              <div class="col-12 col-sm-12 col-md-12 col-xxl-12">
-                <h2 class="atividades-title">Mais atividades?</h1>
-                  <p><strong><span class="atividades-title">Robótica em família.</span></strong> Venha explorar o mundo
-                    da Robótica em família! 6 robots disponíveis para montar e programar. <a class="atividades-extra"
-                      href="https://www.instagram.com/p/C6R10dOqM6b" target=”_blank”>[+ info]</a></p>
-                  <p><strong><span class="atividades-title">Atividades ao domicílio.</span></strong> Fazemos atividades
-                    ao domicílio em centros de estudo e instituições de ensino. Interessado/a? Fale connosco! <a
-                      class="atividades-extra" href="mailto:coders.pt.aulas@gmail.com" target=”_blank”>[e-mail]</a></p>
-                  <p><strong><span class="atividades-title">Aulas regulares.</span></strong> Aulas de programação e
-                    tecnologia o ano todo. Pré-inscrições abertas para o ano lectivo 24/25. <a class="atividades-extra"
-                      href="https://coders-school.pt/aulas-regulares" target=”_blank”>[pré-inscrição]</a></p>
-                  <p><strong><span class="atividades-title">Ainda não sabes o que fazemos?</span></strong> Marca uma
-                    aula experimental para ti ou para o teu filho/a! <a class="atividades-extra"
-                      href="https://coders-school.pt/aula-experimental" target=”_blank”>[marcar]</a></p>
-              </div>
-            </div>
-          </div>
-        </div> 
-      </div>
-
-      <input type="radio" id="tab-2" name="my-tabs">
-      <label for="tab-2" class="tab-label">Graúdos</label>
-      <div class="tab-content">
-        <div class="graudos container">
-          <p class="summer-subjects">ENSINO PERSONALIZADO . WORKSHOPS</p>
-
-          <div class="ag-format-container">
-            <div class="ag-courses_box">
-              <div class="ag-courses_item">
-                <a href="https://www.instagram.com/p/Cq6LADkKN19" class="ag-courses-item_link">
-                  <div class="ag-courses-item_ninjas"></div>
-
-                  <div class="ag-courses-item_title">
-                    Ensino Personalizado <br><span id="activity-subtitle">Vem aprender a programar!</span>
+              <div class="col-12">
+                <h2 class="atividades-title" style="text-align: center; margin-bottom: 30px;">Mais atividades?</h2>
+                
+                <div class="activities-grid">
+                  <!-- Robótica em família Card -->
+                  <div class="activity-card-wrapper">
+                    <div class="activity-card activity-card-purple">
+                      <div class="activity-card-content">
+                        <div class="activity-icon-header">
+                          <i class="fa-solid fa-robot activity-icon"></i>
+                          <h5 class="activity-title">Robótica em Família</h5>
+                        </div>
+                        <p class="activity-description">
+                          Venha explorar o mundo da Robótica em família! 6 robots disponíveis para montar e programar.
+                        </p>
+                      </div>
+                      <div class="activity-cta">
+                        <a href="https://www.instagram.com/p/C6R10dOqM6b" target="_blank" class="activity-btn btn-outline">
+                          <i class="fa-solid fa-info-circle btn-icon"></i>
+                          MAIS INFO
+                        </a>
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="ag-courses-item_date-box">
-                    <p>AULAS REGULARES <i class="fa-solid fa-mountain"></i><br>18+ ANOS</p>
-
-                    <span class="ag-courses-item_date_ninjas">
-                      <i class="fa-regular fa-clock"></i> 1:30-2H/Semana
-                    </span>
-                  </div>
-                </a>
-              </div>
-
-              <div class="ag-courses_item">
-                <a href="mailto:coders.pt.aulas@gmail.com" class="ag-courses-item_link">
-                  <div class="ag-courses-item_ninjas"></div>
-
-                  <div class="ag-courses-item_title">
-                    Tutoring<br><span id="activity-subtitle">Precisas de ajuda?</span>
-                  </div>
-
-                  <div class="ag-courses-item_date-box">
-                    <p>AULAS INDIVIDUAIS <i class="fa-solid fa-bullseye"></i><br>18+ ANOS</p>
-
-                    <span class="ag-courses-item_date_ninjas">
-                      Por Marcação<br>
-                      <i class="fa-regular fa-clock"></i> 1:00H
-                    </span>
-                  </div>
-                </a>
-              </div>
-
-              <div class="ag-courses_item">
-                <a href="mailto:coders.pt.aulas@gmail.com" class="ag-courses-item_link">
-                  <div class="ag-courses-item_ninjas"></div>
-
-                  <div class="ag-courses-item_title">
-                    Debugging<br><span id="activity-subtitle">Perdes muito tempo a fazer debug? Nós ajudamos!</span>
+                  <!-- Atividades ao domicílio Card -->
+                  <div class="activity-card-wrapper">
+                    <div class="activity-card activity-card-purple">
+                      <div class="activity-card-content">
+                        <div class="activity-icon-header">
+                          <i class="fa-solid fa-home activity-icon"></i>
+                          <h5 class="activity-title">Atividades ao Domicílio</h5>
+                        </div>
+                        <p class="activity-description">
+                          Fazemos atividades ao domicílio em centros de estudo e instituições de ensino. Interessado/a?
+                        </p>
+                      </div>
+                      <div class="activity-cta">
+                        <a href="mailto:coders.pt.aulas@gmail.com" target="_blank" class="activity-btn btn-ghost">
+                          <i class="fa-solid fa-envelope btn-icon"></i>
+                          E-MAIL
+                        </a>
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="ag-courses-item_date-box">
-                    <p>WORKSHOP <i class="fa-solid fa-certificate"></i><br>18+ ANOS</p>
-
-                    <span class="ag-courses-item_date_ninjas">
-                      AGOSTO<br>
-                      <i class="fa-regular fa-clock"></i> 3:00H
-                    </span>
+                  <!-- Aulas regulares Card -->
+                  <div class="activity-card-wrapper">
+                    <div class="activity-card activity-card-purple">
+                      <div class="activity-card-content">
+                        <div class="activity-icon-header">
+                          <i class="fa-solid fa-calendar-days activity-icon"></i>
+                          <h5 class="activity-title">Aulas Regulares</h5>
+                        </div>
+                        <p class="activity-description">
+                          Aulas de programação e tecnologia o ano todo. Pré-inscrições abertas para o ano lectivo 24/25.
+                        </p>
+                      </div>
+                      <div class="activity-cta">
+                        <a href="https://coders-school.pt/aulas-regulares" target="_blank" class="activity-btn btn-solid">
+                          PRÉ-INSCRIÇÃO
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                </a>
-              </div>
 
-              <div class="ag-courses_item">
-                <a href="mailto:coders.pt.aulas@gmail.com" class="ag-courses-item_link">
-                  <div class="ag-courses-item_ninjas"></div>
-
-                  <div class="ag-courses-item_title">
-                    Code Quality<br><span id="activity-subtitle">Sabias que podes produzir código de melhor qualidade
-                      com a ajuda de ferramentas?</span>
+                  <!-- Aula experimental Card -->
+                  <div class="activity-card-wrapper">
+                    <div class="activity-card activity-card-purple">
+                      <div class="activity-card-content">
+                        <div class="activity-icon-header">
+                          <i class="fa-solid fa-lightbulb activity-icon"></i>
+                          <h5 class="activity-title">Aula Experimental</h5>
+                        </div>
+                        <p class="activity-description">
+                          Queres experimentar antes de decidir? Marca já a tua aula gratuita!
+                        </p>
+                      </div>
+                      <div class="activity-cta">
+                        <a href="https://coders-school.pt/aula-experimental" target="_blank" class="activity-btn btn-solid">
+                          MARCAR
+                        </a>
+                      </div>
+                    </div>
                   </div>
-
-                  <div class="ag-courses-item_date-box">
-                    <p>WORKSHOP <i class="fa-solid fa-certificate"></i><br>18+ ANOS</p>
-
-                    <span class="ag-courses-item_date_ninjas">
-                      AGOSTO<br>
-                      <i class="fa-regular fa-clock"></i> 3:00H
-                    </span>
-                  </div>
-                </a>
+                </div>
               </div>
             </div>
           </div>
@@ -1156,6 +1182,44 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="js/forms.js"></script>
+
+  <script>
+    // Header color change on scroll for summer page
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.main-header-summer');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Calendar dropdown functionality
+    document.getElementById('monthSelector').addEventListener('change', function() {
+      const selectedMonth = this.value;
+      const calendarContent = document.getElementById('calendarContent');
+      const monthContents = document.querySelectorAll('.month-content');
+      
+      // Hide all month contents first
+      monthContents.forEach(content => {
+        content.style.display = 'none';
+      });
+      
+      if (selectedMonth) {
+        // Show the calendar container
+        calendarContent.style.display = 'block';
+        
+        // Show the selected month content
+        const selectedContent = document.getElementById(selectedMonth + '-content');
+        if (selectedContent) {
+          selectedContent.style.display = 'block';
+        }
+      } else {
+        // Hide the calendar container if no month selected
+        calendarContent.style.display = 'none';
+      }
+    });
+  </script>
 
 </body>
 
