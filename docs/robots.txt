@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://coders-school.pt/sitemap.xml
+
+# Block unwanted crawling
+Disallow: /css/
+Disallow: /js/
+Disallow: /owl-carousel/
+Disallow: /.DS_Store
+Disallow: /f7c803a0-c7c6-429c-a6a7-fc449a45c3cb.html
+
+# Allow important assets for SEO
+Allow: /assets/
+Allow: /css/main.css 
