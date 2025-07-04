@@ -157,7 +157,7 @@ header {
 
 #formButton,
 #contact-submit {
-    margin-bottom: 80px;
+    margin-bottom: 30px;
     padding-left: 120px;
     padding-right: 120px;
     padding-bottom: 10px;
@@ -193,6 +193,14 @@ form {
 #feedback {
     color: #8A7ACC;
     background: #f8f9fa;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 4rem;
+}
+
+#feedback-page {
+    color: #f8f9fa;
     padding: 4rem 0;
     position: relative;
     overflow: hidden;
@@ -3343,5 +3351,110 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     /* Reduce padding-top for .atl on mobile */
     .atl {
         padding-top: 3rem;
+    }
+}
+
+/* FORM MESSAGE STYLING */
+.form-message {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    font-family: 'Rubik', sans-serif;
+}
+
+.form-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.message-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.message-icon {
+    font-size: 1.25rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.message-text {
+    flex: 1;
+}
+
+/* Success state */
+.form-message.success .message-content {
+    background: linear-gradient(135deg, #6bc4a1, #5db396);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-message.success .message-icon::before {
+    content: "✓";
+    color: white;
+}
+
+/* Error state */
+.form-message.error .message-content {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-message.error .message-icon::before {
+    content: "✗";
+    color: white;
+}
+
+/* Loading state */
+.form-message.loading .message-content {
+    background: linear-gradient(135deg, #8A7ACC, #6B5B95);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-message.loading .message-icon::before {
+    content: "⟳";
+    color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Auto-hide animation */
+.form-message.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.5s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-message {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+    }
+    
+    .message-content {
+        padding: 14px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .message-icon {
+        font-size: 1.1rem;
     }
 }
