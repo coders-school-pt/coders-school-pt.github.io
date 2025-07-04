@@ -930,7 +930,8 @@ form {
 
 .inscreve {
     text-align: center;
-    padding-bottom: 5rem;
+    margin-bottom: 5rem;
+    margin-top: 2rem;
     color: #483a6d;
 }
 
@@ -1617,7 +1618,6 @@ label>a {
 .tabs-container-miudos .tab-content-miudos {
     order: 99;
     width: 100%;
-    margin-top: 15px;
     display: block;
 }
 
@@ -1638,14 +1638,14 @@ label>a {
 
 .ag-format-container {
     width: 1142px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
   
 .ag-courses_box {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    padding: 50px 0;
+    padding: 1rem 0;
     gap: 20px;
 }
 
@@ -1705,6 +1705,7 @@ label>a {
     justify-content: space-between;
     height: 100%;
     padding: 24px 18px;
+    padding-bottom: 5rem;
     color: #ffffff;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1803,8 +1804,7 @@ label>a {
     .ag-courses_item {
         -ms-flex-preferred-size: calc(50% - 6px);
         flex-basis: calc(50% - 6px);
-        margin: 0 0 18px 0;
-        height: 200px;
+        margin: 0 0 0 0;
     }
     .ag-courses-item_title {
         font-size: 16px;
@@ -1830,8 +1830,7 @@ label>a {
     .ag-courses_item {
       -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
-        margin: 0 0 16px 0;
-        height: 180px;
+        margin: 0 0 0 0;
     }
     .ag-courses-item_title {
         min-height: 45px;
@@ -2531,6 +2530,10 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
         width: 10px;
         height: 10px;
     }
+
+    .atl-image {
+        padding-top: 2rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2985,7 +2988,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     .ag-courses_item {
         -ms-flex-preferred-size: calc(33.33% - 14px);
         flex-basis: calc(33.33% - 14px);
-        margin: 0 0 20px 0;
+        margin: 0 0 0 0;
         height: 220px;
     }
     
@@ -3014,8 +3017,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     .ag-courses_item {
         -ms-flex-preferred-size: calc(50% - 6px);
         flex-basis: calc(50% - 6px);
-        margin: 0 0 20px 0;
-        height: 220px;
+        margin: 0 0 0 0;
     }
     .ag-courses-item_title {
         font-size: 17px;
@@ -3285,4 +3287,17 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
   .review-btn {
     min-width: 220px;
   }
+}
+
+.atl-image {
+    padding-top: 2rem;
+}
+
+.atl {
+    margin-top: 3rem;
+}
+
+.review-btn {
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
 }
