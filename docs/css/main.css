@@ -1622,8 +1622,8 @@ label>a {
 }
 
 .summer-subjects {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
@@ -1632,7 +1632,16 @@ label>a {
     color: #6B5B95;
 }
 
-#summer-subjects {
+/* Desktop styling for inline layout */
+.summer-subjects .subject-item {
+    display: inline;
+}
+
+.summer-subjects .separator {
+    display: inline;
+}
+
+#atividades {
     background-color: #f8f9fa;
 }
 
@@ -1898,8 +1907,8 @@ label>a {
     background-color: #948ACA;
     max-width: 100%;
     font-family: "Rubik", sans-serif;
-    padding-top: 10rem;
-    padding-bottom: 5rem;
+    padding-top: 7rem;
+    padding-bottom: 1rem;
     margin-top: 2rem;
     color: white;
 }
@@ -1945,10 +1954,6 @@ hr {
     background-size: 100% auto;
   }
 
-  .atl-image {
-    margin-top: 3rem;
-    padding-right: 1rem;
-  }
 
   .extra {
     margin-top: 4rem;
@@ -2533,6 +2538,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
     .atl-image {
         padding-top: 2rem;
+        padding-bottom: 2rem;
     }
 }
 
@@ -3291,6 +3297,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
 .atl-image {
     padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .atl {
@@ -3300,4 +3307,41 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 .review-btn {
   font-size: 0.85rem;
   padding: 0.5rem 1rem;
+}
+
+/* Mobile responsiveness for summer-subjects */
+@media (max-width: 768px) {
+    /* ... existing code ... */
+    
+    .summer-subjects {
+        font-size: 14px;
+        line-height: 1.6;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        word-spacing: 2px;
+    }
+    
+    .summer-subjects .subject-item {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    .summer-subjects .separator {
+        display: none;
+    }
+    
+    /* Hide h6 elements in the .atl section on mobile */
+    .atl h6 {
+        display: none;
+    }
+    
+    /* Remove margin-top for atl-image on mobile */
+    .atl-image {
+        margin-top: 0;
+    }
+    
+    /* Reduce padding-top for .atl on mobile */
+    .atl {
+        padding-top: 3rem;
+    }
 }
