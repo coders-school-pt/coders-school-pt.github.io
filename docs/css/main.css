@@ -244,13 +244,12 @@ form {
     justify-content: center;
     position: relative;
     z-index: 2;
-    overflow: visible;
+    overflow: hidden;
     padding: 0 60px;
     margin-top: 0.5rem;
 }
 
 .slider {
-    height: 280px;
     width: 100%;
     overflow: visible;
     position: relative;
@@ -260,16 +259,13 @@ form {
 
 .slider li {
     width: auto;
-    height: 140px;
+    height: auto;
+    min-height: 280px;
     opacity: 0;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
     z-index: 1;
     display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
     transition: opacity 0.5s ease-in-out;
@@ -279,6 +275,7 @@ form {
     opacity: 1;
     z-index: 2;
     display: flex;
+    position: relative;
 }
 
 .nav-arrow {
@@ -316,7 +313,7 @@ form {
     gap: 10px;
     margin-top: 10px;
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -342,9 +339,10 @@ form {
     max-width: 90%;
     position: relative;
     text-shadow: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Rubik', sans-serif;
     letter-spacing: 0.3px;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+    overflow: visible;
 }
 
 .feedback-tags {
@@ -352,8 +350,9 @@ form {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;;
 }
 
 .tag {
@@ -1066,6 +1065,10 @@ img {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%236bc4a1' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
 }
 
+.aulas .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23161616' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+}
+
 .aulas .navbar-toggler {
   border-color: #161616;
   background-color: #f3bf72;
@@ -1418,15 +1421,16 @@ label>a {
   }
   
   .slider {
-    height: 250px;
-    width: auto;
+    width: 100%;
     overflow: visible;
     position: relative;
-  }
+    background: transparent;
+    transition: all 0.3s ease;
+}
   
   .mask {
     overflow: hidden;
-    height: 320px;
+    height: auto;
   }
   
   .slider ul {
@@ -1437,19 +1441,17 @@ label>a {
   
   .slider li {
     width: auto;
-    height: 220px;
-    opacity: 1;
-    position: relative;
-    top: 0px;
-    left: 0px;
+    height: auto;
+    min-height: 280px;
+    opacity: 0;
     z-index: 1;
-    display: flex;
+    display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
-    transition: none;
-  }
+    transition: opacity 0.5s ease-in-out;
+}
   
   .slider .quote2 {
     font-size: 1rem;
@@ -2487,32 +2489,38 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 @media (max-width: 768px) {
     #feedback h1 {
         font-size: 2.2rem;
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
     }
 
     .content-slider {
         width: 95%;
-        margin-top: 0.5rem;
+        margin-top: 2rem;
+        height: auto;
+        min-height: 450px;
     }
 
     .slider {
-        height: 260px;
+        height: auto;
+        min-height: 400px;
+        overflow: visible;
     }
 
     .slider li {
-        height: 220px;
-        padding: 1.5rem;
+        height: auto;
+        min-height: 350px;
+        padding: 2rem;
     }
 
     .slider .quote2 {
         font-size: 1rem;
         line-height: 1.5;
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
     }
 
     .feedback-tags {
         gap: 0.4rem;
-        margin-top: 0.8rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
     }
 
     .tag {
@@ -2557,27 +2565,33 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
     #feedback h1 {
         font-size: 1.8rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 4rem;
     }
 
     .slider {
-        height: 240px;
+        height: auto;
+        min-height: 450px;
+        overflow: visible;
     }
 
     .slider li {
-        height: 200px;
-        padding: 1rem;
+        height: auto;
+        min-height: 400px;
+        padding: 2rem 1rem;
     }
 
     .slider .quote2 {
         font-size: 1rem;
         line-height: 1.5;
-        margin-bottom: 0.8rem;
+        margin-bottom: 2rem;
+        overflow: visible;
     }
 
     .feedback-tags {
         gap: 0.3rem;
-        margin-top: 0.6rem;
+        margin-top: 0.4rem;
+        margin-bottom: 4rem;
+        padding-bottom: 2rem;
     }
 
     .tag {
@@ -3084,6 +3098,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
   transition: all 0.3s ease;
   min-width: 180px;
   backdrop-filter: blur(10px);
+  font-family: 'Rubik', sans-serif;
 }
 
 .review-btn:hover {
@@ -3189,6 +3204,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     max-width: none;
     margin: 0;
     height: auto;
+    min-height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
