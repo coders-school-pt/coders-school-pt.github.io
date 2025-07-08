@@ -1745,7 +1745,7 @@ label>a {
 
 .ag-courses-item_title {
     min-height: 60px;
-    margin: 0 0 12px;
+    margin: 0 0 0;
     overflow: hidden;
     font-weight: 700;
     font-size: 18px;
