@@ -193,9 +193,8 @@ form {
 #feedback {
     color: #8A7ACC;
     background: #f8f9fa;
-    padding: 4rem 0;
+    padding: 6rem 0 ;
     position: relative;
-    overflow: hidden;
     padding-bottom: 4rem;
 }
 
@@ -221,32 +220,17 @@ form {
 
 #feedback h1 {
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: #8A7ACC;
     text-shadow: none;
     position: relative;
     z-index: 2;
-    margin-bottom: 1rem;
+    margin-bottom: 4.5rem;
 }
 
 #feedback h1::after {
     display: none;
-}
-
-.content-slider {
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-    padding: 0 60px;
-    margin-top: 0.5rem;
 }
 
 .slider {
@@ -1072,9 +1056,9 @@ img {
 .aulas .navbar-toggler {
   border-color: #161616;
   background-color: #f3bf72;
-  border-radius: .5rem;
+  border-radius: .3rem;
   border: 2px solid;
-  padding: 0em 0.25em;
+  padding: 0.25em 0.65em;
 }
 
 .summer-landing-page .navbar-toggler {
@@ -1413,12 +1397,6 @@ label>a {
         font-size: 60%;
     }
 }
-
-.content-slider {
-    width: 80%;
-    height: auto;
-    align-items: center;
-  }
   
   .slider {
     width: 100%;
@@ -1451,19 +1429,7 @@ label>a {
     align-items: center;
     text-align: center;
     transition: opacity 0.5s ease-in-out;
-}
-  
-  .slider .quote2 {
-    font-size: 1rem;
-    color: #8A7ACC;
-    line-height: 1.5;
-    max-width: 80%;
-    position: relative;
-    text-shadow: none;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.3px;
-  }
-  
+} 
   
   .slider .source {
     font-size: 1.1rem;
@@ -2492,12 +2458,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
         margin-bottom: 3rem;
     }
 
-    .content-slider {
-        width: 95%;
-        margin-top: 2rem;
-        height: auto;
-        min-height: 450px;
-    }
+    
 
     .slider {
         height: auto;
@@ -2515,6 +2476,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
         font-size: 1rem;
         line-height: 1.5;
         margin-bottom: 1rem;
+        max-width: 95%;;
     }
 
     .feedback-tags {
@@ -2536,11 +2498,11 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     }
 
     .nav-arrow.prev {
-        left: -22px;
+        left: -5px;
     }
 
     .nav-arrow.next {
-        right: -22px;
+        right: -5px;
     }
 
     .quote-indicators {
@@ -2585,6 +2547,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
         line-height: 1.5;
         margin-bottom: 2rem;
         overflow: visible;
+        max-width: 95%;
     }
 
     .feedback-tags {
@@ -2608,11 +2571,11 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     }
 
     .nav-arrow.prev {
-        left: -20px;
+        left: -10px;
     }
 
     .nav-arrow.next {
-        right: -20px;
+        right: -10px;
     }
 
     .quote-indicators {
@@ -2647,7 +2610,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
 /* Improve accessibility and readability */
 .slider .quote2 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Rubik', sans-serif;
     letter-spacing: 0.3px;
 }
 
@@ -3161,7 +3124,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 /* Feedback layout restructure */
 .feedback-layout {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 2rem;
   width: 100%;
@@ -3181,9 +3144,12 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
   font-weight: 700;
   color: #8A7ACC;
   text-shadow: none;
-  position: relative;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
   z-index: 2;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   margin-top: 0;
 }
 
@@ -3195,14 +3161,15 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 280px;
+  padding-top: 7.5rem;
 }
 
 .content-slider {
     width: 100%;
     max-width: none;
-    margin: 0;
+    margin: 0;      
     height: auto;
     min-height: 350px;
     display: flex;
@@ -3211,7 +3178,6 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     position: relative;
     z-index: 2;
     overflow: visible;
-    padding: 0 60px;
     margin-top: 0.5rem;
 }
 
@@ -3272,6 +3238,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
   }
   
   .carousel-section h1 {
+    position: relative;
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
   }
@@ -3280,6 +3247,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     flex: none;
     width: 100%;
     min-height: auto;
+    padding-top: 0;
   }
   
   .review-buttons {
