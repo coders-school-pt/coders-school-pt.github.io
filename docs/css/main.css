@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Rubik', sans-serif;
     background-color: #111111;
 }
 
@@ -544,6 +544,7 @@ form {
 
 #logo-exp {
     font-size: 14px;
+    text-align: justify;
 }
 
 .info h1 {
