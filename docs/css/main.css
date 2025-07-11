@@ -193,9 +193,9 @@ form {
 #feedback {
     color: #8A7ACC;
     background: #f8f9fa;
-    padding: 6rem 0 ;
+    padding: 4em 0 ;
     position: relative;
-    padding-bottom: 4rem;
+    padding-bottom: 2rem;
 }
 
 #feedback-page {
@@ -226,7 +226,7 @@ form {
     text-shadow: none;
     position: relative;
     z-index: 2;
-    margin-bottom: 4.5rem;
+    margin-bottom: 2rem;
 }
 
 #feedback h1::after {
@@ -244,7 +244,7 @@ form {
 .slider li {
     width: auto;
     height: auto;
-    min-height: 280px;
+    min-height: 160px;
     opacity: 0;
     z-index: 1;
     display: none;
@@ -325,7 +325,7 @@ form {
     text-shadow: none;
     font-family: 'Rubik', sans-serif;
     letter-spacing: 0.3px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     overflow: visible;
 }
 
@@ -335,8 +335,8 @@ form {
     justify-content: center;
     gap: 0.5rem;  
     margin-top: 0.5rem;
-    margin-bottom: 0;
-    padding-bottom: 1rem;;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
 }
 
 .tag {
@@ -1422,7 +1422,7 @@ label>a {
   .slider li {
     width: auto;
     height: auto;
-    min-height: 280px;
+    min-height: 160px;
     opacity: 0;
     z-index: 1;
     display: none;
@@ -2464,27 +2464,27 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
     .slider {
         height: auto;
-        min-height: 400px;
+        min-height: 320px;
         overflow: visible;
     }
 
     .slider li {
         height: auto;
-        min-height: 350px;
-        padding: 2rem;
+        min-height: 280px;
+        padding: 1rem;
     }
 
     .slider .quote2 {
         font-size: 1rem;
         line-height: 1.5;
-        margin-bottom: 1rem;
-        max-width: 95%;;
+        margin-bottom: 0.75rem;
+        max-width: 95%;
     }
 
     .feedback-tags {
         gap: 0.4rem;
         margin-top: 0.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
     }
 
     .tag {
@@ -2529,25 +2529,25 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
     #feedback h1 {
         font-size: 1.8rem;
-        margin-bottom: 4rem;
+        margin-bottom: 2.5rem;
     }
 
     .slider {
         height: auto;
-        min-height: 450px;
+        min-height: 340px;
         overflow: visible;
     }
 
     .slider li {
         height: auto;
-        min-height: 400px;
-        padding: 2rem 1rem;
+        min-height: 300px;
+        padding: 1rem;
     }
 
     .slider .quote2 {
         font-size: 1rem;
         line-height: 1.5;
-        margin-bottom: 2rem;
+        margin-bottom: 0.75rem;
         overflow: visible;
         max-width: 95%;
     }
@@ -2555,8 +2555,8 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     .feedback-tags {
         gap: 0.3rem;
         margin-top: 0.4rem;
-        margin-bottom: 4rem;
-        padding-bottom: 2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0;
     }
 
     .tag {
@@ -3159,13 +3159,18 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
   display: none;
 }
 
+  .carousel-section h1 .mobile-break{
+    display: none;
+  }
+  
+
 .reviews-section {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 280px;
-  padding-top: 7.5rem;
+  padding-top: 3rem;
 }
 
 .content-slider {
@@ -3173,9 +3178,9 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     max-width: none;
     margin: 0;      
     height: auto;
-    min-height: 350px;
+    min-height: 160px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     position: relative;
     z-index: 2;
@@ -3244,7 +3249,11 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
+  .carousel-section h1 .mobile-break { 
+    display: block;
+  }
+
   .reviews-section {
     flex: none;
     width: 100%;
