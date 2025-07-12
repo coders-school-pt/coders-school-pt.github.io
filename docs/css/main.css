@@ -537,6 +537,7 @@ form {
     margin-right: 10px;
     width: auto;
     display: inline;
+    vertical-align: middle;
 }
 
 .robot {
@@ -548,10 +549,7 @@ form {
     margin-bottom: 5rem;
 }
 
-#logo-exp {
-    font-size: 14px;
-    text-align: justify;
-}
+
 
 .info h1 {
     margin-top: 5em;
@@ -988,6 +986,7 @@ p {
     margin-right: 40px;
     margin-top: 40px;
     position: relative;
+    z-index: 2;
 }
 
 .importance {
@@ -1133,10 +1132,36 @@ footer {
     color: white;
 }
 
+.footer-brand {
+    padding-left: 0px;
+    height: 0;
+    color: white;
+    padding-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.footer-description {
+    width: 80%;
+    font-size: 14px;
+    color: white;
+}
+
+.footer-description p {
+    margin-bottom: 0;
+}
+
+#logo-exp {
+    margin-bottom: 1rem;
+}
+
+#contactos {
+    background-color: #948ACA;
+}
 
 footer a:hover {
-    color: #948ACA;
+    color: #322e47;
     text-decoration: none;
+    font-weight: 600;
 }
 
 #missao a,
@@ -1189,7 +1214,7 @@ feedback a:hover {
 }
 
 #oferta-formativa {
-    background-color: #948ACA;
+    background-color: #f8f9fa;
 }
 
 body>header>div>nav>span {
@@ -1225,9 +1250,13 @@ body>header>div>nav>span {
 }
 
 .shallow {
-    background-color: #948ACA;
+    background-color: #f8f9fa;
     height: 60px;
     margin-top: -50px;
+}
+
+#oferta-formativa h1 {
+    color: #948ACA;
 }
 
 footer {
@@ -1237,7 +1266,7 @@ footer {
 }
 
 .direitos {
-    color: #948ACA;
+    color: #f8f9fa;
     font-size: 20px;
 }
 
@@ -1358,11 +1387,12 @@ label>a {
 }
 
 .wave-container {  
-    height: 20vh;
-    background-color: #948aca;
+    /* height: 100px; */
+    background-color: #f8f9fa;
     position: relative;
-  }
-  
+    z-index: 1;
+}
+
 .wave-container::before {   
     content: "";
     width: 100%;
@@ -1373,7 +1403,7 @@ label>a {
     background-size: auto; 
     background-repeat: repeat no-repeat;
     background-position: 32vw bottom;
-    background-image: url("data:image/svg+xml;utf8,<svg preserveAspectRatio='none' viewBox='0 0 1200 123' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M0 20L33 17C82 12 133 13 200 27C267 41 333 61 400 65C467 68 533 54 600 37C667 20 733 0 800 0C867 0 933 20 1000 27C1067 34 1133 27 1167 23L1200 20V123H1167C1133 123 1067 123 1000 123C933 123 867 123 800 123C733 123 667 123 600 123C533 123 467 123 400 123C333 123 267 123 200 123C133 123 67 123 33 123H0V22.332Z' fill='%23161616'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg preserveAspectRatio='none' viewBox='0 0 1200 123' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M0 20L33 17C82 12 133 13 200 27C267 41 333 61 400 65C467 68 533 54 600 37C667 20 733 0 800 0C867 0 933 20 1000 27C1067 34 1133 27 1167 23L1200 20V123H1167C1133 123 1067 123 1000 123C933 123 867 123 800 123C733 123 667 123 600 123C533 123 467 123 400 123C333 123 267 123 200 123C133 123 67 123 33 123H0V22.332Z' fill='%23948ACA'/></svg>");
 }
 
 .wave-container-2 {  
@@ -1392,7 +1422,7 @@ label>a {
     background-size: auto; 
     background-repeat: repeat no-repeat;
     background-position: 32vw bottom;
-    background-image: url("data:image/svg+xml;utf8,<svg preserveAspectRatio='none' viewBox='0 0 1200 123' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M0 20L33 17C82 12 133 13 200 27C267 41 333 61 400 65C467 68 533 54 600 37C667 20 733 0 800 0C867 0 933 20 1000 27C1067 34 1133 27 1167 23L1200 20V123H1167C1133 123 1067 123 1000 123C933 123 867 123 800 123C733 123 667 123 600 123C533 123 467 123 400 123C333 123 267 123 200 123C133 123 67 123 33 123H0V22.332Z' fill='%23161616'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg preserveAspectRatio='none' viewBox='0 0 1200 123' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M0 20L33 17C82 12 133 13 200 27C267 41 333 61 400 65C467 68 533 54 600 37C667 20 733 0 800 0C867 0 933 20 1000 27C1067 34 1133 27 1167 23L1200 20V123H1167C1133 123 1067 123 1000 123C933 123 867 123 800 123C733 123 667 123 600 123C533 123 467 123 400 123C333 123 267 123 200 123C133 123 67 123 33 123H0V22.332Z' fill='%23948ACA'/></svg>");
 }
   
 @media(max-width:850px) {
@@ -1896,7 +1926,6 @@ label>a {
     font-family: "JetBrains", monospace;
     padding-top: 7rem;
     padding-bottom: 1rem;
-    margin-top: 2rem;
     color: white;
 }
 
@@ -3312,10 +3341,6 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 .atl-image {
     padding-top: 2rem;
     padding-bottom: 2rem;
-}
-
-.atl {
-    margin-top: 3rem;
 }
 
 .review-btn {
