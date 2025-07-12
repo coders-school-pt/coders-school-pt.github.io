@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     background-color: #111111;
 }
 
@@ -249,10 +249,11 @@ form {
     z-index: 1;
     display: none;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     transition: opacity 0.5s ease-in-out;
+    padding-bottom: 40px;
 }
 
 .slider li.active {
@@ -300,6 +301,7 @@ form {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 3;
 }
 
 .indicator {
@@ -327,6 +329,10 @@ form {
     letter-spacing: 0.3px;
     margin-bottom: 1rem;
     overflow: visible;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .feedback-tags {
@@ -883,7 +889,7 @@ form {
 }
 
 .summer-title-card {
-  font-family: "Rubik", sans-serif;
+  font-family: "JetBrains Mono", monospace;
   color: white;
   font-weight: 500;
   margin-top: 3rem;
@@ -1082,6 +1088,7 @@ img {
     border-color: #6bc4a1;
     border-radius: 0.7rem;
     padding: 0.2em 0.5em;
+    font-size: 1.1rem;
 }
 
 #navbarTogglerDemo02>ul>li>a:hover {
@@ -1122,6 +1129,7 @@ ul {
 }
 
 footer {
+    font-family: 'Rubik', sans-serif;
     color: white;
 }
 
@@ -1237,7 +1245,7 @@ footer {
     button.navbar-toggler {
         position: absolute !important;
         right: 10px !important;
-        top: 14px !important;
+        top: 0.5rem !important;
     }
 
     .summer-subjects {
@@ -1603,7 +1611,7 @@ label>a {
 .summer-subjects {
     padding-top: 3rem;
     padding-bottom: 3rem;
-    font-family: "Rubik", sans-serif;
+    font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
@@ -1885,7 +1893,7 @@ label>a {
 .atl {
     background-color: #948ACA;
     max-width: 100%;
-    font-family: "Rubik", sans-serif;
+    font-family: "JetBrains", monospace;
     padding-top: 7rem;
     padding-bottom: 1rem;
     margin-top: 2rem;
@@ -1895,7 +1903,7 @@ label>a {
 .atividades {
   background-color: #fbbd62;
     max-width: 100%;
-    font-family: "Rubik", sans-serif;
+    font-family: "JetBrains Mono", monospace;
     padding-top: 4rem;
   padding-bottom: 4rem;
     color: white;
@@ -2303,7 +2311,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     transition: all 0.3s ease;
     cursor: pointer;
     outline: none;
-    font-family: "Rubik", sans-serif;
+    font-family: "JetBrains Mono", monospace;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -2330,7 +2338,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     color: #161616;
     padding: 12px 16px;
     font-weight: 600;
-    font-family: "Rubik", sans-serif;
+    font-family: "JetBrains Mono", monospace;
     border: none;
 }
 
@@ -2376,7 +2384,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     margin-bottom: 15px;
     font-size: 1.1rem;
     font-weight: 700;
-    font-family: "Rubik", sans-serif;
+    font-family: "JetBrains", monospace;
     color: #df98bc !important;
 }
 
@@ -2473,6 +2481,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
         height: auto;
         min-height: 280px;
         padding: 1rem;
+        padding-bottom: 50px;
     }
 
     .slider .quote2 {
@@ -2543,6 +2552,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
         height: auto;
         min-height: 300px;
         padding: 1rem;
+        padding-bottom: 60px;
     }
 
     .slider .quote2 {
@@ -2685,7 +2695,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
 .modal-title {
   color: #FFFFFF;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 1.75rem;
   font-weight: 700;
   margin: 0;
@@ -2696,7 +2706,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 .modal-body {
   padding: 2rem;
   color: rgba(255, 255, 255, 0.95);
-  font-family: 'Rubik', sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   line-height: 1.6;
   position: relative;
   background: rgba(255, 255, 255, 0.02);
@@ -2705,7 +2715,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
 .modal-body h2 {
   color: #FFFFFF;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 1.75rem;
   font-weight: 700;
   margin: 0 0 1rem 0;
@@ -3064,7 +3074,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
   transition: all 0.3s ease;
   min-width: 180px;
   backdrop-filter: blur(10px);
-  font-family: 'Rubik', sans-serif;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .review-btn:hover {
