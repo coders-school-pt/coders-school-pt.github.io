@@ -192,7 +192,7 @@ form {
 
 #feedback {
     color: #8A7ACC;
-    background: #f8f9fa;
+    background: #f8f9fa;;
     padding: 4em 0 ;
     position: relative;
     padding-bottom: 2rem;
@@ -1408,6 +1408,15 @@ label>a {
   .wave-container-3 {  
     /* height: 100px; */
     background-color: #fbbd62;
+    position: relative;
+    z-index: 1;
+    height: 10vh;
+
+  }
+
+  .wave-container-5 {  
+    /* height: 100px; */
+    background-color: #948ACA;
     position: relative;
     z-index: 1;
     height: 10vh;
@@ -3546,8 +3555,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     .message-icon {
         font-size: 1.1rem;
     }
-<<<<<<< HEAD
-  }
+}
 
 /* SCROLL ANIMATION FOR PROGRAMMING TITLE */
 .programming-title {
@@ -3706,4 +3714,113 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     font-size: 0.95rem;
     margin-bottom: 3px;
   }
+}
+
+/* Simple Feedback CTA */
+.simple-feedback-cta {
+    background: #f8f9fa;
+    border: 2px solid #8A7ACC;
+    border-radius: 50px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 5rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.simple-feedback-cta:hover {
+    background: #8A7ACC;
+    color: white;
+    transform: scale(1.02);
+}
+
+.feedback-emoji {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.feedback-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.feedback-link {
+    color: #8A7ACC;
+    text-decoration: none;
+    font-weight: 1000;
+    transition: all 0.3s ease;
+}
+
+.simple-feedback-cta:hover .feedback-link {
+    color: white;
+    border-bottom-color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .simple-feedback-cta {
+        padding: 0.75rem 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .feedback-text {
+        font-size: 0.9rem;
+    }
+    
+    .feedback-emoji {
+        font-size: 1.3rem;
+    }
+}
+
+.feedback-love {
+    margin-top: 0.5rem;
+}
+
+.feedback-love span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    color: #8A7ACC;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    
+    .feedback-love span {
+        font-size: 0.8rem;
+    }
+}
+
+.feedback-love {
+    margin-left: 1rem;
+    vertical-align: middle;
+}
+
+.feedback-love span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    color: #8A7ACC;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .simple-feedback-cta {
+        padding: 0.75rem 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .feedback-text {
+        font-size: 0.9rem;
+    }
+    
+    .feedback-emoji {
+        font-size: 1.3rem;
+    }
+    
+    .feedback-love {
+        margin-left: 0.5rem;
+    }
+    
+    .feedback-love span {
+        font-size: 0.8rem;
+    }
 }
