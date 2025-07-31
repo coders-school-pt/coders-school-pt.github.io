@@ -3739,7 +3739,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 }
 
 .feedback-text {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Rubik', sans-serif;
     font-size: 1rem;
     font-weight: 500;
 }
@@ -3747,7 +3747,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 .feedback-link {
     color: #8A7ACC;
     text-decoration: none;
-    font-weight: 1000;
+    font-weight: 600;
     transition: all 0.3s ease;
 }
 
@@ -3793,12 +3793,15 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 .feedback-love {
     margin-left: 1rem;
     vertical-align: middle;
+    white-space: nowrap; /* Prevents line breaks */
+    display: inline-block; /* Ensures it stays inline */
 }
 
 .feedback-love span {
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.2rem;
     color: #8A7ACC;
+    white-space: nowrap; /* Prevents line breaks */
 }
 
 /* Responsive */
@@ -3818,9 +3821,19 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     
     .feedback-love {
         margin-left: 0.5rem;
+        white-space: nowrap; /* Prevents line breaks on mobile too */
     }
     
     .feedback-love span {
         font-size: 0.8rem;
+        white-space: nowrap; /* Prevents line breaks on mobile too */
     }
+}
+
+.feedback-title {
+    font-family: 'Rubik', sans-serif !important;
+}
+
+#feedback-cta {
+    margin-top: 2rem;
 }
