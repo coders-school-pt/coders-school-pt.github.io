@@ -874,7 +874,7 @@ form {
 
 .image-grid-container {
     height: 100%; 
-    display: grid;
+    display: none;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, auto);
     gap: 15px;
@@ -2636,7 +2636,16 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
         margin-bottom: 3rem;
     }
 
-    
+    #aulas-carousel.owl-carousel {
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 2em;
+    }
+
+    #aulas-carousel .owl-dots .owl-dot.active span,
+    #aulas-carousel .owl-dots .owl-dot:hover span {
+        background: #948ACA; 
+    }
 
     .slider {
         height: auto;
@@ -2696,6 +2705,17 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     .atl-image {
         padding-top: 2rem;
         padding-bottom: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .image-grid-container{
+        display: grid;
+    }
+
+    #aulas-carousel {
+        display: none !important;
+       
     }
 }
 
