@@ -715,9 +715,13 @@ form {
 
 .author img {
     width: 150px;
+    height: 150px;
     border-radius: 50%;
     float: left;
+    object-fit: cover;
+    object-position: 50% 20%;
 }
+
 
 .author p {
     padding-top: 3%;
