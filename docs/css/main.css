@@ -28,8 +28,9 @@ body {
   color: #f3bf72;
 }
 
-body.aulas {
+body.aulas .info {
     font-family: 'Rubik', sans-serif;
+    padding-top: 7em;
 }
 
 body.aulas .main-head-mini,
@@ -41,9 +42,6 @@ body.aulas .plus{
     font-family: 'JetBrains Mono', monospace;
 }
 
-body.aulas .info{
-    padding-top: 7em;
-}
 
 .main-header-summer {
     background-color: #948ACA;
@@ -3951,7 +3949,7 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
 .teacher-info {
     font-size: 0.9rem;
-    color: #cccccc;
+    color: #ffffff;
 }
 
 .teacher-info a {
