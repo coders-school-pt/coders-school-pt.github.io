@@ -28,18 +28,21 @@ body {
   color: #f3bf72;
 }
 
-.aulas p,
-.aulas h1,
-.aulas h2,
-.aulas h3,
-.aulas h4,
-.aulas h5,
-.aulas h6,
-.aulas li,
-.aulas span,
-.aulas label,
-.aulas a {
+body.aulas {
     font-family: 'Rubik', sans-serif;
+}
+
+body.aulas .main-head-mini,
+body.aulas #gratis,
+body.aulas .rose,
+body.aulas .yellow,
+body.aulas .green,
+body.aulas .plus{
+    font-family: 'JetBrains Mono', monospace;
+}
+
+body.aulas .info{
+    padding-top: 7em;
 }
 
 .main-header-summer {
@@ -882,12 +885,14 @@ form {
     background-color: #948ACA;
     border-radius: 8px;
     min-height: 1050px;
+    margin-top: 3em;
 }
 
 .main-content-row {
     flex-direction: row !important;
     align-items: flex-start;
     margin-top: 5em;
+    margin-bottom: 3em;
 }
 
 .grid-item img {
@@ -2642,9 +2647,24 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
         margin-top: 2em;
     }
 
+    #aulas-carousel .owl-dots {
+        margin-top: 25px !important;
+    }
+
     #aulas-carousel .owl-dots .owl-dot.active span,
     #aulas-carousel .owl-dots .owl-dot:hover span {
         background: #948ACA; 
+    }
+
+    #aulas-carousel .item img{
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    #aulas-carousel .owl-nav {
+        display: none;
     }
 
     .slider {
@@ -3927,4 +3947,19 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
 
 #feedback-cta {
     margin-top: 2rem;
+}
+
+.teacher-info {
+    font-size: 0.9rem;
+    color: #cccccc;
+}
+
+.teacher-info a {
+    color: #f5c57b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.teacher-info a:hover {
+    color: #ffffff;
 }
