@@ -2655,8 +2655,8 @@ body > main > div.tabs-container > div > div.atividades > div > div > div > div 
     }
 
     #aulas-carousel .item img{
-        height: 300px;
         width: 100%;
+        aspect-ratio: 1 / 1;
         object-fit: cover;
         object-position: center;
     }
