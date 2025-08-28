@@ -42,14 +42,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- All Classes -->
-  <url>
-    <loc>https://coders-school.pt/aulas.html</loc>
-    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
   <!-- Experimental Class -->
   <url>
     <loc>https://coders-school.pt/aula-experimental.html</loc>
@@ -58,37 +50,6 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- Workshops -->
-  <url>
-    <loc>https://coders-school.pt/workshops.html</loc>
-    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Tutoring -->
-  <url>
-    <loc>https://coders-school.pt/tutoring.html</loc>
-    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Course Offerings -->
-  <url>
-    <loc>https://coders-school.pt/oferta-formativa.html</loc>
-    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Blog -->
-  <url>
-    <loc>https://coders-school.pt/blog.html</loc>
-    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
 
   <!-- Blog Post -->
   <url>
