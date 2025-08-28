@@ -133,7 +133,7 @@
                 <div class="col-12">
                     <button type="submit" class="btn btn-warning" id="formButton">PRÉ-INSCRIÇÃO</button>
 
-                    <form id="contact" onsubmit="return postToRegular();">
+                    <form id="contact" style="display: none;">
                         <br>
                         <h3 class="rose">Pré-Inscrição</h3>
                             <br>
@@ -175,15 +175,37 @@
 
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-md-12 col-xxl-12 offset-xxl-1">
-
                                     <fieldset>
+                                        <select name="entry.1060917949" data-name="Horarios" id="Horarios" required>
+                                            <option value="">Qual o horário mais favorável para o seu filho/a?</option>
+                                            <option value="Sábado (início da manhã): 9:00-11:00">Sábado (início da manhã): 9:00-11:00</option>
+                                            <option value="Sábado (fim da manhã): 11:00-13:00">Sábado (fim da manhã): 11:00-13:00</option>
+                                            <option value="Quarta (tarde): 16:00-19:30">Quarta (tarde): 16:00-19:30</option>
+                                            <option value="Terça (tarde): 17:00-19:30">Terça (tarde): 17:00-19:30</option>
+                                            <option value="Segunda (tarde): 17:00-19:30">Segunda (tarde): 17:00-19:30</option>
+                                            <option value="Sexta (tarde): 17:00-19:30">Sexta (tarde): 17:00-19:30</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-xxl-12 offset-xxl-1">
+                                    <fieldset>
+                                        <textarea placeholder="Observações (opcional)" name="entry.679173537" data-name="Observacoes" id="Observacoes" rows="3"></textarea>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-xxl-12 offset-xxl-1">
+                                    <fieldset class="checkbox-fieldset">
                                         <input type="checkbox" name="entry.1896435546" data-name="Privacidade"
                                             id="Privacidade" required>
-                                        <label>Li e aceito a <a href="politica-de-privacidade.html">Política de
+                                        <label for="Privacidade">Li e aceito a <a href="politica-de-privacidade.html">Política de
                                                 Privacidade</a></label>
                                     </fieldset>
                                 </div>
-
                             </div>
                             <br>
                             <div class="row">
