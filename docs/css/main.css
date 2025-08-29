@@ -119,6 +119,59 @@ body.body-feedback .wave-container::before {
     background-color: #161616;
 }
 
+/* Info bullets styling */
+.info-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.info-bullets li {
+    background: linear-gradient(135deg, #6bc4a1 0%, #9982d0 100%);
+    color: white;
+    padding: 0.6rem 1rem;
+    margin: 0.4rem 0;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.info-bullets li:before {
+    content: "✓";
+    background: rgba(255, 255, 255, 0.2);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.8rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.info-bullets li:hover {
+    transform: translateY(-2px);
+}
+
+.info-bullets li:nth-child(1) {
+    background: linear-gradient(135deg, #6bc4a1 0%, #5ab08e 100%);
+}
+
+.info-bullets li:nth-child(2) {
+    background: linear-gradient(135deg, #9982d0 0%, #8570c2 100%);
+}
+
+.info-bullets li:nth-child(3) {
+    background: linear-gradient(135deg, #f5c57b 0%, #e8b565 100%);
+}
+
 h6 {
     color: #dfe3e8;
     margin-bottom: auto;
@@ -1492,11 +1545,26 @@ footer {
 input[type=text],
 input[type=email],
 input[type=number],
-input[type=tel] {
+input[type=tel],
+select {
     background-color: #161616;
     margin-bottom: 20px;
     padding: 10px;
     width: 100%;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #dfe3e8;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23dfe3e8' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    padding-right: 40px;
 }
 
 
@@ -1509,6 +1577,20 @@ input,
 select,
 textarea {
     color: #dfe3e8;
+}
+
+textarea {
+    resize: none !important;
+    height: 80px !important;
+    max-height: 80px !important;
+    min-height: 80px !important;
+}
+
+#Observacoes {
+    resize: none !important;
+    height: 80px !important;
+    max-height: 80px !important;
+    min-height: 80px !important;
 }
 
 label {
