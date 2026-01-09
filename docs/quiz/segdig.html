@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Segurança Digital para Crianças</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .start-screen, .quiz-screen, .result-screen {
+            display: none;
+        }
+
+        .start-screen.active, .quiz-screen.active, .result-screen.active {
+            display: block;
+        }
+
+        .start-info {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .question-card {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.05em;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .option.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 20px auto 0;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #4caf50;
+        }
+
+        .feedback.incorrect {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .score-label {
+            font-size: 0.4em;
+            margin-top: 5px;
+        }
+
+        .result-message {
+            text-align: center;
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .emoji {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .tips {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tips h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .tips ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+
+        .tips li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Quiz de Segurança Digital</h1>
+        <p class="subtitle">Vamos aprender a estar seguros online!</p>
+
+        <div class="start-screen active">
+            <div class="start-info">
+                <h2 style="color: #667eea; margin-bottom: 15px;">Olá, jovem explorador digital! 👋</h2>
+                <p style="margin-bottom: 10px;">Este quiz vai ajudar-te a aprender como estar seguro e responsável quando usas a internet.</p>
+                <p style="margin-bottom: 10px;"><strong>O que vais aprender:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>Como proteger as tuas informações pessoais</li>
+                    <li>O que fazer quando encontras algo estranho online</li>
+                    <li>Como ser um bom cidadão digital</li>
+                    <li>Dicas para usar a internet de forma segura</li>
+                </ul>
+                <p><strong>São 10 perguntas divertidas!</strong> Vamos começar? 🚀</p>
+            </div>
+            <button onclick="startQuiz()">Começar Quiz</button>
+        </div>
+
+        <div class="quiz-screen">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-number" id="questionNumber"></div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+            
+            <button id="nextBtn" onclick="nextQuestion()" disabled>Próxima Pergunta</button>
+        </div>
+
+        <div class="result-screen">
+            <div class="emoji" id="resultEmoji"></div>
+            <div class="score-display">
+                <div class="score-circle">
+                    <div>
+                        <span id="finalScore">0</span>
+                        <span class="score-label">/10</span>
+                    </div>
+                </div>
+            </div>
+            <div class="result-message" id="resultMessage"></div>
+            
+            <div class="tips">
+                <h3>🌟 Dicas Importantes de Segurança:</h3>
+                <ul>
+                    <li>Nunca partilhes passwords com ninguém (exceto os teus pais)</li>
+                    <li>Não aceites pedidos de amizade de pessoas que não conheces</li>
+                    <li>Se vires algo que te assusta ou incomoda, fala com um adulto</li>
+                    <li>Pensa antes de publicar - a internet não esquece!</li>
+                    <li>Sê sempre simpático e respeitador online</li>
+                </ul>
+            </div>
+            
+            <button onclick="restartQuiz()">Fazer Quiz Novamente</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "O que deves fazer se alguém que não conheces te pedir a tua morada pela internet?",
+                options: [
+                    "Dar a morada porque a pessoa parece simpática",
+                    "Não responder e contar a um adulto de confiança",
+                    "Dar só o nome da rua",
+                    "Perguntar primeiro o nome da pessoa"
+                ],
+                correct: 1,
+                correctExplanation: "Muito bem! Nunca devemos partilhar informações pessoais como morada, número de telefone ou nome da escola com desconhecidos online. É sempre importante contar a um adulto.",
+                incorrectExplanation: "Atenção! Nunca devemos partilhar informações pessoais como morada, número de telefone ou nome da escola com desconhecidos online. A resposta certa é sempre contar a um adulto de confiança."
+            },
+            {
+                question: "Qual destas passwords é mais segura?",
+                options: [
+                    "123456",
+                    "o meu nome",
+                    "DinoAzul2024!",
+                    "password"
+                ],
+                correct: 2,
+                correctExplanation: "Correto! Uma password segura tem letras maiúsculas e minúsculas, números e símbolos. Nunca uses coisas óbvias como '123456' ou o teu nome!",
+                incorrectExplanation: "Ops! Uma password segura deve ter letras maiúsculas e minúsculas, números e símbolos. 'DinoAzul2024!' é um bom exemplo. Evita passwords óbvias como '123456' ou o teu nome."
+            },
+            {
+                question: "Vês uma foto engraçada do teu amigo. O que deves fazer antes de partilhar?",
+                options: [
+                    "Partilhar imediatamente com todos",
+                    "Perguntar ao teu amigo se ele concorda",
+                    "Partilhar apenas com 3 pessoas",
+                    "Publicar sem marcar ninguém"
+                ],
+                correct: 1,
+                correctExplanation: "Fantástico! Devemos sempre pedir permissão antes de partilhar fotos ou informações sobre outras pessoas. Respeita a privacidade dos outros!",
+                incorrectExplanation: "Cuidado! Devemos sempre pedir permissão ao nosso amigo antes de partilhar fotos dele. Respeita a privacidade dos outros!"
+            },
+            {
+                question: "Recebes uma mensagem a dizer que ganhaste um prémio e pedem-te para clicar num link. O que fazes?",
+                options: [
+                    "Clico logo no link para receber o prémio",
+                    "Não clico e mostro a mensagem a um adulto",
+                    "Partilho o link com os amigos",
+                    "Respondo à mensagem pedindo mais informações"
+                ],
+                correct: 1,
+                correctExplanation: "Perfeito! Muitas vezes estas mensagens são esquemas para enganar pessoas. Nunca cliques em links suspeitos e avisa sempre um adulto.",
+                incorrectExplanation: "Atenção! Estas mensagens são normalmente esquemas para enganar. Nunca cliques em links suspeitos. A resposta certa é mostrar a mensagem a um adulto."
+            },
+            {
+                question: "Quanto tempo por dia é recomendado passares em frente a ecrãs (computador, tablet, telemóvel)?",
+                options: [
+                    "O dia todo, sem limites",
+                    "Apenas 1-2 horas de tempo recreativo",
+                    "Só aos fins de semana",
+                    "O máximo possível"
+                ],
+                correct: 1,
+                correctExplanation: "Muito bem! É importante equilibrar o tempo de ecrã com outras atividades como brincar lá fora, ler livros e estar com amigos e família.",
+                incorrectExplanation: "Lembra-te: é importante equilibrar o tempo de ecrã! O recomendado é apenas 1-2 horas de tempo recreativo por dia, para teres tempo para brincar lá fora, ler e estar com família."
+            },
+            {
+                question: "Um colega está a ser maldoso contigo nas redes sociais. O que deves fazer?",
+                options: [
+                    "Responder com mais insultos",
+                    "Ignorar completamente e não contar a ninguém",
+                    "Contar a um adulto e bloquear a pessoa",
+                    "Partilhar as mensagens para todos verem"
+                ],
+                correct: 2,
+                correctExplanation: "Correto! O cyberbullying é sério. Nunca respondas com mais agressividade. Fala com um adulto, guarda as provas e bloqueia a pessoa.",
+                incorrectExplanation: "O cyberbullying é muito sério! Nunca respondas com insultos. O melhor é contar a um adulto de confiança, guardar as provas e bloquear a pessoa."
+            },
+            {
+                question: "Encontras um jogo online grátis que pede informações do cartão de crédito dos teus pais. O que fazes?",
+                options: [
+                    "Escrevo os números que vejo no cartão",
+                    "Invento números aleatórios",
+                    "Não escrevo nada e pergunto aos meus pais",
+                    "Peço a um amigo para usar o cartão dele"
+                ],
+                correct: 2,
+                correctExplanation: "Excelente! Nunca uses informações de cartões de crédito sem permissão. Jogos verdadeiramente gratuitos não pedem estas informações.",
+                incorrectExplanation: "Cuidado! Nunca uses informações de cartões de crédito sem permissão dos teus pais. Jogos verdadeiramente gratuitos não pedem estas informações."
+            },
+            {
+                question: "O que significa ser um bom 'cidadão digital'?",
+                options: [
+                    "Passar muito tempo online",
+                    "Ter muitos seguidores",
+                    "Ser respeitoso, honesto e responsável online",
+                    "Jogar muitos jogos"
+                ],
+                correct: 2,
+                correctExplanation: "Perfeito! Ser um bom cidadão digital significa tratar os outros com respeito, não espalhar boatos, proteger a tua privacidade e usar a internet de forma responsável.",
+                incorrectExplanation: "Ser um bom cidadão digital não é sobre tempo online ou seguidores. É sobre tratar os outros com respeito, não espalhar boatos e usar a internet de forma responsável!"
+            },
+            {
+                question: "Vês um vídeo com informações falsas sobre um assunto importante. O que deves fazer?",
+                options: [
+                    "Partilhar imediatamente com todos",
+                    "Acreditar sem questionar",
+                    "Verificar a informação antes de partilhar",
+                    "Criar o meu próprio vídeo falso"
+                ],
+                correct: 2,
+                correctExplanation: "Muito bem! Nem tudo o que está na internet é verdade. Devemos sempre verificar a informação com fontes confiáveis antes de acreditar ou partilhar.",
+                incorrectExplanation: "Cuidado! Nem tudo na internet é verdade. Devemos sempre verificar a informação com fontes confiáveis antes de acreditar ou partilhar."
+            },
+            {
+                question: "Qual é a melhor forma de proteger a tua conta de email ou rede social?",
+                options: [
+                    "Usar a mesma password em tudo",
+                    "Nunca fazer logout",
+                    "Usar uma password forte e não a partilhar",
+                    "Deixar o computador sempre ligado"
+                ],
+                correct: 2,
+                correctExplanation: "Correto! Uma password forte e única para cada conta é a melhor proteção. E lembra-te: nunca partilhes as tuas passwords, nem com amigos!",
+                incorrectExplanation: "Lembra-te: a melhor proteção é usar uma password forte e única para cada conta. E nunca partilhes as tuas passwords com ninguém, nem com amigos!"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function startQuiz() {
+            document.querySelector('.start-screen').classList.remove('active');
+            document.querySelector('.quiz-screen').classList.add('active');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const question = questions[currentQuestion];
+            
+            document.getElementById('questionNumber').textContent = `Pergunta ${currentQuestion + 1} de ${questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+            document.getElementById('nextBtn').disabled = true;
+            
+            updateProgress();
+        }
+
+        function selectOption(selectedIndex) {
+            if (answered) return;
+            
+            answered = true;
+            const question = questions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedback');
+            
+            options.forEach((option, index) => {
+                option.classList.add('disabled');
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                }
+                if (index === selectedIndex && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            if (selectedIndex === question.correct) {
+                score++;
+                feedback.textContent = '✅ ' + question.correctExplanation;
+                feedback.classList.add('show', 'correct');
+            } else {
+                feedback.textContent = '❌ ' + question.incorrectExplanation;
+                feedback.classList.add('show', 'incorrect');
+            }
+            
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.querySelector('.quiz-screen').classList.remove('active');
+            document.querySelector('.result-screen').classList.add('active');
+            
+            document.getElementById('finalScore').textContent = score;
+            
+            let emoji, message;
+            const percentage = (score / questions.length) * 100;
+            
+            if (percentage === 100) {
+                emoji = '🏆';
+                message = 'Incrível! És um verdadeiro especialista em segurança digital!';
+            } else if (percentage >= 80) {
+                emoji = '🌟';
+                message = 'Excelente trabalho! Sabes muito sobre segurança online!';
+            } else if (percentage >= 60) {
+                emoji = '👍';
+                message = 'Bom trabalho! Continua a aprender sobre segurança digital!';
+            } else {
+                emoji = '📚';
+                message = 'Não te preocupes! Pratica mais e vais aprender muito!';
+            }
+            
+            document.getElementById('resultEmoji').textContent = emoji;
+            document.getElementById('resultMessage').textContent = message;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            document.querySelector('.result-screen').classList.remove('active');
+            document.querySelector('.start-screen').classList.add('active');
+        }
+    </script>
+</body>
+</html>
