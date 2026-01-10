@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz CiberFUNdamentais - Minecraft Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #4ADE80;
+            --primary-blue: #3B82F6;
+            --primary-orange: #F97316;
+            --primary-red: #EF4444;
+            --dark-bg: #0F172A;
+            --darker-bg: #020617;
+            --card-bg: #1E293B;
+            --text-light: #F1F5F9;
+            --text-muted: #94A3B8;
+            --glow-green: 0 0 30px rgba(74, 222, 128, 0.4);
+            --glow-blue: 0 0 30px rgba(59, 130, 246, 0.4);
+            --glow-orange: 0 0 30px rgba(249, 115, 22, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--darker-bg);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .pixel-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: var(--glow-green);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .unit-selector {
+            display: grid;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .unit-card {
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .unit-card:hover::before {
+            left: 100%;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .unit-card.green {
+            border-color: var(--primary-green);
+            box-shadow: var(--glow-green);
+        }
+
+        .unit-card.blue {
+            border-color: var(--primary-blue);
+            box-shadow: var(--glow-blue);
+        }
+
+        .unit-card.orange {
+            border-color: var(--primary-orange);
+            box-shadow: var(--glow-orange);
+        }
+
+        .unit-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .unit-card.green h3 { color: var(--primary-green); }
+        .unit-card.blue h3 { color: var(--primary-blue); }
+        .unit-card.orange h3 { color: var(--primary-orange); }
+
+        .unit-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Quiz Screen */
+        .quiz-screen {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .unit-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .unit-badge.green {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+        }
+
+        .unit-badge.blue {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+        }
+
+        .unit-badge.orange {
+            background: rgba(249, 115, 22, 0.2);
+            color: var(--primary-orange);
+            border: 1px solid var(--primary-orange);
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .progress-bar {
+            width: 150px;
+            height: 8px;
+            background: var(--card-bg);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-blue));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .question-container {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .question-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            background: var(--dark-bg);
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: var(--dark-bg);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 18px 25px;
+            text-align: left;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn:hover:not(.disabled) {
+            border-color: var(--primary-blue);
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateX(10px);
+        }
+
+        .option-btn.correct {
+            border-color: var(--primary-green);
+            background: rgba(74, 222, 128, 0.2);
+            animation: correctPulse 0.5s ease;
+        }
+
+        .option-btn.incorrect {
+            border-color: var(--primary-red);
+            background: rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s ease;
+        }
+
+        .option-btn.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-letter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            margin-right: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* Feedback Box */
+        .feedback-box {
+            display: none;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .feedback-box.correct {
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .feedback-box.incorrect {
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .feedback-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feedback-box.correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-box.incorrect .feedback-title {
+            color: var(--primary-red);
+        }
+
+        .feedback-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .next-btn {
+            display: none;
+            width: 100%;
+            padding: 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-blue));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .results-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+
+        .results-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .results-score {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+        }
+
+        .results-message {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .restart-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            border-radius: 10px;
+            color: var(--primary-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .question-container {
+                padding: 25px 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .quiz-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-grid"></div>
+    
+    <div class="container">
+        <!-- Start Screen -->
+        <div class="start-screen" id="startScreen">
+            <div class="logo-container">
+                <div class="logo-text">Quiz CiberFUNdamentais</div>
+                <div class="subtitle">Minecraft Education</div>
+            </div>
+            
+            <div class="unit-selector">
+                <div class="unit-card green" onclick="startQuiz('network')">
+                    <h3>🛡️ Unidade 1: Network Heroes</h3>
+                    <p>Componentes de rede, passwords, malware e proteção contra ataques cibernéticos</p>
+                </div>
+                
+                <div class="unit-card blue" onclick="startQuiz('interceptors')">
+                    <h3>🔐 Unidade 2: The Interceptors</h3>
+                    <p>Autenticação multifator, equipas de resposta a incidentes e carreiras em cibersegurança</p>
+                </div>
+                
+                <div class="unit-card orange" onclick="startQuiz('cloud')">
+                    <h3>☁️ Unidade 3: Cloud Champions</h3>
+                    <p>Pegada digital, backups de dados, IoT e proteção na nuvem</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div class="quiz-screen" id="quizScreen">
+            <div class="quiz-header">
+                <span class="unit-badge" id="unitBadge">Unidade 1</span>
+                <div class="progress-container">
+                    <span class="progress-text" id="progressText">1/5</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <span class="question-number" id="questionNumber">Pergunta 1</span>
+                <div class="question-text" id="questionText">Pergunta carregando...</div>
+                <div class="options-container" id="optionsContainer"></div>
+            </div>
+
+            <div class="feedback-box" id="feedbackBox">
+                <div class="feedback-title" id="feedbackTitle">Feedback</div>
+                <div class="feedback-text" id="feedbackText">Explicação...</div>
+            </div>
+
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Próxima Pergunta →</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="results-screen" id="resultsScreen">
+            <div class="results-icon" id="resultsIcon">🏆</div>
+            <div class="results-title">Quiz Completo!</div>
+            <div class="results-score" id="resultsScore">0/5</div>
+            <div class="results-message" id="resultsMessage">Parabéns!</div>
+            <button class="restart-btn" onclick="restart()">← Voltar ao Início</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data - Unit 1: Network Heroes
+        const networkQuestions = [
+            {
+                question: "Qual é a diferença principal entre uma LAN (Rede de Área Local) e uma WAN (Rede de Área Alargada)?",
+                options: [
+                    "A LAN usa cabos e a WAN usa Wi-Fi",
+                    "A LAN cobre uma área pequena como uma escola, enquanto a WAN conecta áreas geográficas maiores",
+                    "A LAN é mais rápida que a WAN",
+                    "A LAN é grátis e a WAN é paga"
+                ],
+                correct: 1,
+                explanation: "Uma LAN (Local Area Network) cobre uma área geográfica pequena, como uma casa, escola ou escritório. Uma WAN (Wide Area Network) conecta redes através de grandes distâncias, podendo ligar cidades ou países. A Internet é o maior exemplo de uma WAN!"
+            },
+            {
+                question: "O que é a 'entropia' quando falamos de passwords?",
+                options: [
+                    "A velocidade com que a password é digitada",
+                    "O número de caracteres da password",
+                    "Uma medida de quão difícil é adivinhar ou quebrar a password",
+                    "O tempo que a password fica ativa"
+                ],
+                correct: 2,
+                explanation: "A entropia mede a imprevisibilidade de uma password. Quanto maior a entropia, mais difícil é para um atacante adivinhar ou quebrar a password através de ataques de força bruta. Passwords com mais caracteres, símbolos e combinações aleatórias têm maior entropia."
+            },
+            {
+                question: "O que é 'malware'?",
+                options: [
+                    "Um tipo de hardware de computador",
+                    "Software malicioso criado para danificar ou aceder sem autorização a sistemas",
+                    "Uma atualização de segurança",
+                    "Um programa de antivírus"
+                ],
+                correct: 1,
+                explanation: "Malware (software malicioso) é qualquer software criado intencionalmente para causar danos a um computador, servidor, rede ou utilizador. Inclui vírus, ransomware, spyware e trojans. É essencial ter proteção atualizada e cuidado ao descarregar ficheiros!"
+            },
+            {
+                question: "O que é um ataque de 'phishing'?",
+                options: [
+                    "Um ataque que torna o computador mais lento",
+                    "Uma tentativa de enganar pessoas para revelarem informações pessoais através de mensagens ou websites falsos",
+                    "Um vírus que apaga ficheiros",
+                    "Um tipo de firewall"
+                ],
+                correct: 1,
+                explanation: "Phishing é uma técnica de engenharia social onde atacantes fingem ser entidades legítimas (bancos, empresas, amigos) para enganar as vítimas e obter passwords, dados bancários ou outras informações sensíveis. Verifica sempre os remetentes e URLs antes de clicares!"
+            },
+            {
+                question: "O que é uma 'firewall' e qual a sua função?",
+                options: [
+                    "Um programa que acelera a Internet",
+                    "Um sistema que monitoriza e controla o tráfego de rede, bloqueando acessos não autorizados",
+                    "Um antivírus que remove malware",
+                    "Um cabo especial de rede"
+                ],
+                correct: 1,
+                explanation: "Uma firewall é uma barreira de segurança que monitoriza todo o tráfego de entrada e saída da rede. Funciona como um porteiro digital, permitindo apenas comunicações autorizadas e bloqueando tentativas de acesso suspeitas ou maliciosas."
+            }
+        ];
+
+        // Quiz Data - Unit 2: The Interceptors
+        const interceptorsQuestions = [
+            {
+                question: "O que é a autenticação multifator (MFA)?",
+                options: [
+                    "Usar a mesma password em múltiplos sites",
+                    "Um método que requer duas ou mais formas de verificação para provar a identidade",
+                    "Mudar a password todos os meses",
+                    "Partilhar a password com pessoas de confiança"
+                ],
+                correct: 1,
+                explanation: "A autenticação multifator (MFA) adiciona camadas extra de segurança além da password. Pode incluir algo que sabes (password), algo que tens (telemóvel para receber código) e algo que és (impressão digital). Mesmo que alguém descubra a tua password, não consegue aceder sem os outros fatores!"
+            },
+            {
+                question: "O que são dados biométricos e dá um exemplo?",
+                options: [
+                    "Dados sobre a biografia de uma pessoa, como a idade",
+                    "Características físicas únicas usadas para autenticação, como impressões digitais ou reconhecimento facial",
+                    "Dados guardados em bibliotecas digitais",
+                    "Informações sobre medicamentos"
+                ],
+                correct: 1,
+                explanation: "Dados biométricos são características físicas ou comportamentais únicas de cada pessoa. Exemplos incluem impressões digitais, reconhecimento facial, da íris ou da voz. São muito difíceis de falsificar, o que os torna excelentes para autenticação segura."
+            },
+            {
+                question: "O que faz uma 'Equipa de Resposta a Incidentes' em cibersegurança?",
+                options: [
+                    "Vende software de segurança",
+                    "Responde, investiga e recupera de ataques cibernéticos",
+                    "Apenas instala antivírus",
+                    "Faz publicidade a produtos tecnológicos"
+                ],
+                correct: 1,
+                explanation: "Uma Equipa de Resposta a Incidentes (IRT) é um grupo de especialistas que atua quando ocorre um ataque cibernético. Investigam o que aconteceu, contêm os danos, recuperam os sistemas e implementam medidas para prevenir ataques futuros. São os 'bombeiros' do mundo digital!"
+            },
+            {
+                question: "Qual destes profissionais analisa evidências digitais após um ciberataque?",
+                options: [
+                    "Analista de Marketing",
+                    "Especialista em Forense Digital",
+                    "Designer Gráfico",
+                    "Gestor de Projeto"
+                ],
+                correct: 1,
+                explanation: "O Especialista em Forense Digital é como um detetive do mundo cibernético. Analisa evidências digitais para descobrir como o ataque aconteceu, quem foi responsável e que dados foram afetados. O seu trabalho é crucial para aprender com incidentes e melhorar a segurança."
+            },
+            {
+                question: "Porque é importante ter várias formas de autenticação (como password + código SMS)?",
+                options: [
+                    "Torna o login mais rápido",
+                    "Poupa bateria do dispositivo",
+                    "Mesmo que uma forma seja comprometida, as outras continuam a proteger a conta",
+                    "É exigido por lei em todos os países"
+                ],
+                correct: 2,
+                explanation: "A autenticação em camadas significa que um atacante teria de ultrapassar múltiplas barreiras. Se descobrirem a tua password, ainda precisam do teu telemóvel para o código. Se roubarem o telemóvel, ainda precisam da password. Cada camada adicional torna o ataque exponencialmente mais difícil!"
+            }
+        ];
+
+        // Quiz Data - Unit 3: Cloud Champions
+        const cloudQuestions = [
+            {
+                question: "O que é uma 'pegada digital'?",
+                options: [
+                    "A marca que o teu dedo deixa no ecrã",
+                    "O rasto de informações que deixas online através das tuas atividades na Internet",
+                    "Um tipo de vírus de computador",
+                    "A velocidade da tua ligação à Internet"
+                ],
+                correct: 1,
+                explanation: "A tua pegada digital é todo o rasto que deixas online: publicações em redes sociais, pesquisas, compras, comentários e muito mais. Esta informação pode durar para sempre e ser vista por futuros empregadores, universidades ou até criminosos. Pensa sempre antes de publicar!"
+            },
+            {
+                question: "O que significa o método de backup '3-2-1'?",
+                options: [
+                    "Fazer backup 3 vezes por dia, 2 vezes por semana, 1 vez por mês",
+                    "3 cópias dos dados, em 2 tipos diferentes de armazenamento, com 1 cópia fora do local",
+                    "Usar 3 passwords, 2 emails e 1 número de telefone",
+                    "Esperar 3 segundos, 2 minutos e 1 hora entre backups"
+                ],
+                correct: 1,
+                explanation: "O método 3-2-1 é uma estratégia de backup essencial: ter 3 cópias dos dados importantes, guardadas em 2 tipos diferentes de armazenamento (por exemplo, disco rígido e nuvem), com 1 cópia guardada num local diferente (offsite). Assim, mesmo em caso de desastre, os teus dados estão seguros!"
+            },
+            {
+                question: "O que é 'ransomware'?",
+                options: [
+                    "Um programa que acelera o computador",
+                    "Malware que encripta os ficheiros e exige pagamento para os desbloquear",
+                    "Uma aplicação de backup",
+                    "Um serviço de armazenamento na nuvem"
+                ],
+                correct: 1,
+                explanation: "Ransomware é um tipo de malware que 'sequestra' os teus ficheiros, encriptando-os para que não os possas usar. Os atacantes exigem um pagamento (resgate) para fornecer a chave de desencriptação. NUNCA pagues - não há garantia de recuperação e incentivas mais ataques. Ter backups é a melhor proteção!"
+            },
+            {
+                question: "O que significa IoT (Internet das Coisas)?",
+                options: [
+                    "Um novo tipo de Internet mais rápido",
+                    "Dispositivos físicos do dia-a-dia conectados à Internet que podem recolher e partilhar dados",
+                    "Uma rede social para programadores",
+                    "Um protocolo de segurança"
+                ],
+                correct: 1,
+                explanation: "IoT (Internet of Things) refere-se a objetos do quotidiano conectados à Internet: smartwatches, câmaras de segurança, frigoríficos inteligentes, assistentes de voz, etc. Embora convenientes, podem ser vulneráveis a ataques se não estiverem bem protegidos. Muda sempre as passwords padrão!"
+            },
+            {
+                question: "Qual é um risco de partilhar demasiada informação pessoal nas redes sociais?",
+                options: [
+                    "Ter mais amigos",
+                    "Receber mais likes",
+                    "Criminosos podem usar essa informação para roubo de identidade ou engenharia social",
+                    "A Internet fica mais lenta"
+                ],
+                correct: 2,
+                explanation: "Partilhar demasiada informação (onde moras, onde estudas, quando estás de férias) permite que criminosos criem perfis detalhados sobre ti. Podem usar esses dados para roubo de identidade, burlas personalizadas ou até para saber quando a tua casa está vazia. Protege a tua privacidade!"
+            }
+        ];
+
+        // Quiz State
+        let currentUnit = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        function startQuiz(unit) {
+            currentUnit = unit;
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+
+            // Select questions based on unit
+            switch(unit) {
+                case 'network':
+                    currentQuestions = [...networkQuestions];
+                    document.getElementById('unitBadge').textContent = 'Network Heroes';
+                    document.getElementById('unitBadge').className = 'unit-badge green';
+                    break;
+                case 'interceptors':
+                    currentQuestions = [...interceptorsQuestions];
+                    document.getElementById('unitBadge').textContent = 'The Interceptors';
+                    document.getElementById('unitBadge').className = 'unit-badge blue';
+                    break;
+                case 'cloud':
+                    currentQuestions = [...cloudQuestions];
+                    document.getElementById('unitBadge').textContent = 'Cloud Champions';
+                    document.getElementById('unitBadge').className = 'unit-badge orange';
+                    break;
+            }
+
+            // Show quiz screen
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+            document.getElementById('resultsScreen').style.display = 'none';
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const question = currentQuestions[currentQuestionIndex];
+            
+            // Update progress
+            document.getElementById('progressText').textContent = `${currentQuestionIndex + 1}/5`;
+            document.getElementById('progressFill').style.width = `${((currentQuestionIndex + 1) / 5) * 100}%`;
+            document.getElementById('questionNumber').textContent = `Pergunta ${currentQuestionIndex + 1}`;
+            
+            // Update question
+            document.getElementById('questionText').textContent = question.question;
+            
+            // Create options
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            const letters = ['A', 'B', 'C', 'D'];
+            question.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<span class="option-letter">${letters[index]}</span>${option}`;
+                btn.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
+
+            // Hide feedback and next button
+            document.getElementById('feedbackBox').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function selectAnswer(selectedIndex) {
+            if (answered) return;
+            answered = true;
+
+            const question = currentQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option-btn');
+            const feedbackBox = document.getElementById('feedbackBox');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackText = document.getElementById('feedbackText');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Disable all options
+            options.forEach(opt => opt.classList.add('disabled'));
+
+            // Mark correct and incorrect
+            options[question.correct].classList.add('correct');
+            
+            if (selectedIndex === question.correct) {
+                score++;
+                feedbackBox.className = 'feedback-box correct';
+                feedbackTitle.innerHTML = '✓ Correto!';
+            } else {
+                options[selectedIndex].classList.add('incorrect');
+                feedbackBox.className = 'feedback-box incorrect';
+                feedbackTitle.innerHTML = '✗ Incorreto';
+            }
+
+            feedbackText.textContent = question.explanation;
+            feedbackBox.style.display = 'block';
+            
+            // Update next button text
+            if (currentQuestionIndex < 4) {
+                nextBtn.textContent = 'Próxima Pergunta →';
+            } else {
+                nextBtn.textContent = 'Ver Resultados →';
+            }
+            nextBtn.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex >= 5) {
+                showResults();
+            } else {
+                loadQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+
+            const resultsScore = document.getElementById('resultsScore');
+            const resultsMessage = document.getElementById('resultsMessage');
+            const resultsIcon = document.getElementById('resultsIcon');
+
+            resultsScore.textContent = `${score}/5`;
+
+            if (score === 5) {
+                resultsIcon.textContent = '🏆';
+                resultsMessage.textContent = 'Perfeito! És um verdadeiro especialista em cibersegurança!';
+            } else if (score >= 4) {
+                resultsIcon.textContent = '🌟';
+                resultsMessage.textContent = 'Excelente! Tens ótimos conhecimentos de cibersegurança!';
+            } else if (score >= 3) {
+                resultsIcon.textContent = '👍';
+                resultsMessage.textContent = 'Bom trabalho! Continua a aprender sobre cibersegurança!';
+            } else if (score >= 2) {
+                resultsIcon.textContent = '📚';
+                resultsMessage.textContent = 'Podes melhorar! Revê os conteúdos e tenta novamente.';
+            } else {
+                resultsIcon.textContent = '💪';
+                resultsMessage.textContent = 'Não desistas! Revê a matéria e volta a tentar!';
+            }
+        }
+
+        function restart() {
+            document.getElementById('startScreen').style.display = 'block';
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
