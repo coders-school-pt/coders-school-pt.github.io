@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Detetor de Phishing - Protege-te Online!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .start-screen {
+            text-align: center;
+        }
+
+        .start-screen h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .start-screen p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .tips-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .tips-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .tips-box ul {
+            margin-left: 20px;
+        }
+
+        .tips-box li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .email-container {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .email-container.active {
+            display: block;
+        }
+
+        .email-header {
+            background: #f5f5f5;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .email-field {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .email-field strong {
+            color: #555;
+        }
+
+        .email-body {
+            padding: 20px;
+            background: white;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .email-body img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        .link-preview {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .btn-safe {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-safe:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-phishing {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-phishing:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .btn-start {
+            background: #667eea;
+            color: white;
+            font-size: 1.2em;
+            padding: 15px 40px;
+        }
+
+        .btn-start:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+        }
+
+        .feedback.incorrect {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+        }
+
+        .feedback h3 {
+            margin-bottom: 10px;
+        }
+
+        .feedback.correct h3 {
+            color: #059669;
+        }
+
+        .feedback.incorrect h3 {
+            color: #dc2626;
+        }
+
+        .red-flag {
+            background: #fef3c7;
+            border-left: 3px solid #f59e0b;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .red-flag strong {
+            color: #d97706;
+        }
+
+        .progress {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .final-screen {
+            text-align: center;
+            display: none;
+        }
+
+        .final-screen.show {
+            display: block;
+        }
+
+        .final-score {
+            font-size: 3em;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 5em;
+            margin: 20px 0;
+        }
+
+        .summary-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .summary-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .tutorial-screen {
+            display: none;
+        }
+
+        .tutorial-screen.show {
+            display: block;
+        }
+
+        .tutorial-card {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+        }
+
+        .tutorial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .tutorial-icon {
+            font-size: 3em;
+            background: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .tutorial-title h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 1.5em;
+        }
+
+        .tutorial-subtitle {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .example-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .example-good {
+            border-left: 4px solid #10b981;
+        }
+
+        .example-bad {
+            border-left: 4px solid #ef4444;
+        }
+
+        .example-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-good .example-label {
+            color: #10b981;
+        }
+
+        .example-bad .example-label {
+            color: #ef4444;
+        }
+
+        .quiz-question {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .quiz-question h4 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .quiz-option.selected {
+            border-color: #667eea;
+            background: #e8ebff;
+        }
+
+        .quiz-option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            color: #065f46;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            color: #991b1b;
+        }
+
+        .tutorial-progress {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s;
+        }
+
+        .progress-dot.completed {
+            background: #10b981;
+        }
+
+        .progress-dot.current {
+            background: #667eea;
+            transform: scale(1.3);
+        }
+
+        .btn-next {
+            background: #667eea;
+            color: white;
+            display: none;
+        }
+
+        .btn-next.show {
+            display: inline-block;
+        }
+
+        .btn-next:hover {
+            background: #5568d3;
+        }
+
+        .btn-next-email {
+            background: #667eea;
+            color: white;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .btn-next-email.show {
+            display: inline-block;
+        }
+
+        .btn-next-email:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Detetor de Phishing</h1>
+            <p>És capaz de identificar emails falsos?</p>
+            <div class="score-board">
+                <div class="score-item">
+                    <div class="score-value" id="correct">0</div>
+                    <div>✅ Corretas</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="total">0</div>
+                    <div>📨 Mensagens</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="streak">0</div>
+                    <div>🔥 Sequência</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Ecrã Inicial -->
+            <div id="start-screen" class="start-screen">
+                <h2>Bem-vindo(a) ao Desafio Anti-Phishing!</h2>
+                <p>O <strong>phishing</strong> é quando criminosos se fazem passar por empresas, jogos ou pessoas de confiança para roubar as tuas informações (passwords, contas de jogos, dados pessoais).</p>
+                
+                <p style="margin: 20px 0;">⚠️ <strong>Sabias que:</strong> Milhares de jovens perdem contas de Roblox, Instagram e Snapchat todos os anos por causa de burlas online! Alguns até são vítimas de chantagem.</p>
+
+                <p>Antes do desafio, vamos aprender os <strong>7 sinais de alerta</strong> que te vão ajudar a detetar phishing nas redes sociais, jogos e mensagens! 🕵️</p>
+                
+                <button class="btn btn-start" onclick="startTutorial()">📚 Vamos Aprender!</button>
+            </div>
+
+            <!-- Ecrã Tutorial -->
+            <div id="tutorial-screen" class="tutorial-screen">
+                <div class="tutorial-progress" id="tutorial-progress"></div>
+                <div id="tutorial-content"></div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-next" id="btn-next" onclick="nextTutorial()">Próximo ➜</button>
+                </div>
+            </div>
+
+            <!-- Ecrã de Transição -->
+            <div id="transition-screen" style="display: none; text-align: center;">
+                <div class="tutorial-card" style="background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-color: #10b981;">
+                    <div style="font-size: 5em; margin-bottom: 20px;">🎉</div>
+                    <h2 style="color: #065f46; margin-bottom: 20px;">Parabéns!</h2>
+                    <p style="font-size: 1.2em; margin-bottom: 20px;">
+                        Completaste as <strong>7 lições</strong> e agora sabes como te proteger contra phishing!
+                    </p>
+                    
+                    <div style="background: white; border-radius: 10px; padding: 20px; margin: 25px 0; text-align: left;">
+                        <h3 style="color: #10b981; margin-bottom: 15px;">✅ O que aprendeste:</h3>
+                        <ul style="line-height: 2;">
+                            <li>📧 Identificar remetentes suspeitos</li>
+                            <li>⚠️ Reconhecer táticas de urgência falsa</li>
+                            <li>🔗 Detetar links perigosos</li>
+                            <li>✍️ Notar erros de português</li>
+                            <li>🎁 Desconfiar de ofertas impossíveis</li>
+                            <li>📎 Evitar anexos inesperados</li>
+                            <li>🔐 Nunca partilhar informações confidenciais</li>
+                        </ul>
+                    </div>
+
+                    <p style="font-size: 1.2em; margin: 25px 0;">
+                        <strong>Agora vamos testar o que aprendeste!</strong> 🎯
+                    </p>
+                    
+                    <p style="color: #065f46; margin-bottom: 25px;">
+                        Vais receber 10 mensagens (emails, DMs, SMS). Usa os teus novos conhecimentos para decidir se cada uma é segura ou phishing.
+                    </p>
+                    
+                    <button class="btn btn-start" onclick="startGameFromTransition()" style="font-size: 1.3em; padding: 20px 40px;">
+                        🚀 Começar o Desafio!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Área do Jogo -->
+            <div id="game-area" style="display: none;">
+                <div class="progress" id="progress">Mensagem 1 de 10</div>
+                
+                <div id="email-display"></div>
+                
+                <div class="buttons">
+                    <button class="btn btn-safe" onclick="checkAnswer(false)">✅ Mensagem Segura</button>
+                    <button class="btn btn-phishing" onclick="checkAnswer(true)">🚨 É Phishing/Burla!</button>
+                </div>
+
+                <div id="feedback" class="feedback"></div>
+                
+                <div style="text-align: center;">
+                    <button class="btn btn-next-email" id="btn-next-email" onclick="nextEmail()">
+                        Próxima Mensagem ➜
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ecrã Final -->
+            <div id="final-screen" class="final-screen">
+                <h2>🎉 Desafio Completo!</h2>
+                <div class="badge" id="badge">🏆</div>
+                <div class="final-score">
+                    <span id="final-correct">0</span> / 10
+                </div>
+                <h3 id="final-message"></h3>
+                
+                <div class="summary-box">
+                    <h3>📚 O que aprendeste:</h3>
+                    <ul id="learning-points"></ul>
+                </div>
+
+                <button class="btn btn-start" onclick="restartGame()">🔄 Jogar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tutorial lessons
+        const tutorialLessons = [
+            {
+                icon: "📧",
+                title: "Remetente Suspeito",
+                subtitle: "Lição 1 de 7",
+                content: `
+                    <p>O <strong>endereço de email, nome de utilizador ou número</strong> é a primeira coisa a verificar! Criminosos tentam enganar-te usando nomes parecidos com os reais.</p>
+                    <p><strong>💡 Isto aplica-se a:</strong> Emails, SMS, Instagram, Discord, Roblox, TikTok, WhatsApp...</p>
+                `,
+                examples: [
+                    {
+                        type: "bad",
+                        label: "❌ Instagram Falso:",
+                        content: "@instagram_0fficial • Segue de volta para verificação!",
+                        note: "Repara: usa '0' (zero) em vez de 'o'! O Instagram oficial é @instagram, sem mais nada."
+                    },
+                    {
+                        type: "bad",
+                        label: "❌ SMS Suspeito:",
+                        content: "CTT-Portugal: Encomenda retida. Link: ctt-pt.tk/track",
+                        note: "CTT verdadeiro usa '.pt', não '.tk'. E nunca enviam SMS com links para domínios estranhos."
+                    },
+                    {
+                        type: "bad",
+                        label: "❌ Roblox Falso:",
+                        content: "ROBLOX_Admin_Support: Dá-nos a tua password para verificar a conta!",
+                        note: "Administradores REAIS do Roblox nunca pedem passwords! E têm badge oficial ✓"
+                    },
+                    {
+                        type: "good",
+                        label: "✅ Discord Legítimo:",
+                        content: "Discord • noreply@discord.com",
+                        note: "Domínio oficial, sem variações ou números estranhos."
+                    }
+                ],
+                quiz: {
+                    question: "Recebes uma mensagem no Instagram de '@tiktok_oficial_pt' a dizer que ganhaste um prémio. É legítimo?",
+                    options: [
+                        { text: "Sim, tem 'oficial' no nome", correct: false, explanation: "Não! Qualquer pessoa pode pôr 'oficial' no nome. O TikTok não contacta pelo Instagram!" },
+                        { text: "Não! O TikTok não usa Instagram para prémios", correct: true, explanation: "Correto! Empresas contactam através das suas próprias plataformas. E verifica sempre se têm o símbolo ✓ de verificação!" },
+                        { text: "Sim, porque tem muitos seguidores", correct: false, explanation: "Seguidores podem ser comprados! Procura sempre o símbolo ✓ azul de conta verificada." },
+                        { text: "Vou clicar para ver se é verdade", correct: false, explanation: "Nunca cliques em links suspeitos 'para ver'! Podes ser hackeado!" }
+                    ]
+                }
+            },
+            {
+                icon: "⚠️",
+                title: "Urgência Falsa",
+                subtitle: "Lição 2 de 7",
+                content: `
+                    <p>Criminosos criam <strong>sensação de urgência</strong> para te fazer agir sem pensar! "RÁPIDO!", "ÚLTIMA CHANCE!", "CONTA BLOQUEADA!" são bandeiras vermelhas.</p>
+                    <p><strong>💡 Onde acontece:</strong> SMS, DMs no Instagram/TikTok, Discord, mensagens no Roblox, emails, WhatsApp...</p>
+                `,
+                examples: [
+                    {
+                        type: "bad",
+                        label: "🚨 SMS Urgente:",
+                        content: "MB WAY: ALERTA! Transação suspeita de 500€. BLOQUEIE AGORA: link-urgente.tk",
+                        note: "MB WAY nunca te pressiona assim! Podes sempre verificar no app oficial."
+                    },
+                    {
+                        type: "bad",
+                        label: "🚨 Roblox Falso:",
+                        content: "[ADMIN] Tua conta será APAGADA em 1 HORA! Verifica já em roblox-save.com",
+                        note: "Roblox nunca apaga contas de repente! E administradores têm badge oficial no jogo."
+                    },
+                    {
+                        type: "bad",
+                        label: "🚨 Instagram DM:",
+                        content: "⚠️ ATENÇÃO! Alguém está a tentar entrar na tua conta! Clica aqui AGORA para proteger!",
+                        note: "Cria pânico para te fazer clicar. Instagram envia notificações dentro da app, não por DM."
+                    },
+                    {
+                        type: "good",
+                        label: "✅ Notificação Real:",
+                        content: "Discord: Novo login detetado de Lisboa. Foi tu? Verifica em Definições > Dispositivos",
+                        note: "Dá-te informação mas sem pressão extrema. Diz-te onde verificar na app oficial."
+                    }
+                ],
+                quiz: {
+                    question: "Recebes no WhatsApp: '🚨URGENTE! Seu número será bloqueado em 2h! Confirme AGORA: wa.me/bloqueio'. O que fazes?",
+                    options: [
+                        { text: "Clico rápido porque só tenho 2 horas", correct: false, explanation: "É exatamente isso que querem! A urgência é falsa para te fazer agir sem pensar." },
+                        { text: "Ignoro! WhatsApp nunca bloqueia assim", correct: true, explanation: "Exatamente! WhatsApp avisa dentro da app e dá tempo razoável. Urgência extrema = golpe!" },
+                        { text: "Partilho com amigos para avisá-los", correct: false, explanation: "Não! Estarias a espalhar o golpe. Apenas bloqueia e reporta." },
+                        { text: "Respondo a perguntar se é verdade", correct: false, explanation: "Nunca respondas a mensagens suspeitas! Podem usar isso para confirmar que o número está ativo." }
+                    ]
+                }
+            },
+            {
+                icon: "🔗",
+                title: "Links Suspeitos",
+                subtitle: "Lição 3 de 7",
+                content: `
+                    <p><strong>NUNCA cliques em links suspeitos!</strong> No telemóvel, mantém o dedo no link para ver o URL completo antes de clicar.</p>
+                    <p><strong>🎯 Cuidado especial:</strong> Links encurtados (bit.ly, tinyurl) escondem o destino real. Vê sempre onde vais parar!</p>
+                `,
+                examples: [
+                    {
+                        type: "bad",
+                        label: "❌ Link no Discord:",
+                        content: "OMG vê este jogo grátis! disc0rd-nitro-free.ru/gift",
+                        note: "Discord é '.com', não '.ru'! E Nitro grátis não existe. O '0' (zero) em vez de 'o' é truque clássico."
+                    },
+                    {
+                        type: "bad",
+                        label: "❌ SMS com Link:",
+                        content: "Pacote retido nos CTT. Paga 2€: ctt-encomenda.tk/pagar",
+                        note: "Domínio '.tk' é gratuito e usado em fraudes. CTT real usa ctt.pt e nunca pede pagamento por SMS."
+                    },
+                    {
+                        type: "bad",
+                        label: "❌ Instagram Story:",
+                        content: "GIVEAWAY! Clica: bit.ly/xy3k9s para ganhar iPhone!",
+                        note: "Links encurtados escondem o destino. Giveaways reais são no perfil verificado da marca."
+                    },
+                    {
+                        type: "good",
+                        label: "✅ Link Verificado:",
+                        content: "Novo vídeo! youtu.be/dQw4w9WgXcQ (partilhado de dentro da app YouTube)",
+                        note: "youtu.be é o encurtador oficial do YouTube. Mas sempre verifica quem partilhou!"
+                    }
+                ],
+                quiz: {
+                    question: "Amigo envia no chat do Roblox: 'FREE ROBUX AQUI: roblox-gems.tk'. O que fazes?",
+                    options: [
+                        { text: "Clico! Robux grátis!", correct: false, explanation: "STOP! Robux grátis não existe. Vão roubar a tua conta!" },
+                        { text: "Não clico! Domínio falso + Robux grátis = SCAM", correct: true, explanation: "Perfeito! Roblox é '.com', não '.tk'. E nada é grátis no Roblox fora do jogo oficial!" },
+                        { text: "Pergunto ao amigo se funcionou", correct: false, explanation: "A conta do teu amigo pode estar hackeada a enviar spam! Avisa-o e reporta." },
+                        { text: "Partilho com outros amigos", correct: false, explanation: "Nunca! Estarias a ajudar a espalhar um scam que rouba contas!" }
+                    ]
+                }
+            },
+            {
+                icon: "✍️",
+                title: "Erros de Linguagem",
+                subtitle: "Lição 4 de 7",
+                content: `
+                    <p>Muitas mensagens falsas vêm de outros países e usam <strong>tradutores automáticos</strong>, resultando em erros óbvios!</p>
+                    <p><strong>⚠️ Atenção a:</strong> Português brasileiro quando deveria ser europeu, erros gramaticais, emojis estranhos, palavras sem sentido.</p>
+                `,
+                examples: [
+                    {
+                        type: "bad",
+                        label: "❌ SMS com Erros:",
+                        content: "Olá! Você ganhou um prêmio! Clique aqui para resgatar seu presente gratis!",
+                        note: "Usa 'você', 'prêmio' (brasileiro), 'resgatar', 'gratis' sem 't'. Empresas portuguesas usam PT-PT."
+                    },
+                    {
+                        type: "bad",
+                        label: "❌ DM no Instagram:",
+                        content: "Oi amigo! Vc foi selecionado p/ verificação azul. Responda p/ confirmar.",
+                        note: "'Oi' e 'vc' são muito informais. Instagram oficial não usa abreviações."
+                    },
+                    {
+                        type: "bad",
+                        label: "❌ Chat do Discord:",
+                        content: "🎉🎉🎉PARABÉNS🎉🎉🎉 Voce é sorte vencedor! Contate admin rapidamente!!!",
+                        note: "Emojis excessivos, 'Voce' sem acento, 'sorte' (sortudo?), '!!!' exagerado. Red flags!"
+                    },
+                    {
+                        type: "good",
+                        label: "✅ Mensagem Real:",
+                        content: "Olá! A tua encomenda foi enviada e chegará em 2-3 dias úteis. Obrigado!",
+                        note: "Português correto, profissional, sem exageros. Linguagem natural e clara."
+                    }
+                ],
+                quiz: {
+                    question: "WhatsApp de número desconhecido: 'Oi! Você ganhou 100€! Me envia seu dados bancários para transferencia'. É legítimo?",
+                    options: [
+                        { text: "Sim! São 100€ grátis!", correct: false, explanation: "Não! Além do dinheiro impossível, a linguagem brasileira ('oi', 'você', 'me envia') é suspeita." },
+                        { text: "Não! Erros + dinheiro grátis + dados bancários = SCAM total", correct: true, explanation: "Perfeito! Juntaste todos os sinais: linguagem errada, oferta impossível, e pede dados sensíveis!" },
+                        { text: "Respondo para saber mais detalhes", correct: false, explanation: "Nunca respondas! Confirma que o teu número está ativo e receberás mais spam." },
+                        { text: "É legítimo porque tem o código de Portugal +351", correct: false, explanation: "Números podem ser falsificados (spoofing)! Códigos de país não garantem legitimidade." }
+                    ]
+                }
+            },
+            {
+                icon: "🎁",
+                title: "Ofertas Impossíveis",
+                subtitle: "Lição 5 de 7",
+                content: `
+                    <p><strong>"Se parece bom demais para ser verdade, provavelmente é mentira!"</strong></p>
+                    <p>V-Bucks grátis, Robux infinitos, códigos para Fortnite, iPhones de borla... são SEMPRE scams!</p>
+                    <p><strong>🤔 Pergunta-te:</strong> Porque dariam isto de graça? Como ganham dinheiro? Faz sentido?</p>
+                `,
+                examples: [
+                    {
+                        type: "bad",
+                        label: "🎯 Vídeo do YouTube:",
+                        content: "🔥 ROBUX INFINITOS GRÁTIS 2026! 🔥 FUNCIONANDO! Link na descrição! 👇",
+                        note: "Robux infinitos não existem! Vídeos assim roubam contas. Roblox NUNCA dá Robux grátis."
+                    },
+                    {
+                        type: "bad",
+                        label: "🎯 Story do Instagram:",
+                        content: "😱 SORTEIOO! iPhone 15 Pro! Segue + Marca 3 amigos + Clica no link! 🎁",
+                        note: "Contas não verificadas não fazem sorteios reais. Querem seguidores e dados!"
+                    },
+                    {
+                        type: "bad",
+                        label: "🎯 Discord/Roblox:",
+                        content: "[ADMIN] Código secreto de 10.000 Robux: USE CÓDIGO 'FREE10K' no site rbx-codes.net",
+                        note: "Administradores reais nunca aparecem assim. Códigos 'secretos' roubam contas!"
+                    },
+                    {
+                        type: "good",
+                        label: "✅ Promoção Real:",
+                        content: "PlayStation Store: Jogos com 50% desconto este fim de semana! Vê na store.playstation.com",
+                        note: "Desconto realista, de fonte oficial, no site verdadeiro. Não pede dados nem promete coisas grátis."
+                    }
+                ],
+                quiz: {
+                    question: "Amigo envia: 'Usei este site e recebi 1000 V-Bucks! Tenta: fortnite-vbucks.tk'. Deves clicar?",
+                    options: [
+                        { text: "Sim! Se funcionou com ele...", correct: false, explanation: "A conta dele foi HACKEADA! Está a enviar spam sem saber. V-Bucks grátis não existem!" },
+                        { text: "Não! V-Bucks grátis = SCAM. Aviso o amigo", correct: true, explanation: "Exato! Avisa o amigo que foi hackeado. V-Bucks só se compram oficialmente na Epic Games!" },
+                        { text: "Vou usar email falso para testar", correct: false, explanation: "Mesmo com email falso, podes apanhar vírus ou ter outros dados roubados!" },
+                        { text: "É seguro porque foi amigo que enviou", correct: false, explanation: "Contas hackeadas enviam mensagens automáticas aos amigos. Nunca confies cegamente!" }
+                    ]
+                }
+            },
+            {
+                icon: "📎",
+                title: "Ficheiros e QR Codes Suspeitos",
+                subtitle: "Lição 6 de 7",
+                content: `
+                    <p><strong>NUNCA abras ficheiros inesperados ou scanneies QR codes de desconhecidos!</strong> Podem conter vírus.</p>
+                    <p><strong>⚠️ Especialmente perigosos:</strong> APKs (apps Android), ficheiros .exe, ZIPs, e QR codes de fontes não confiáveis.</p>
+                `,
+                examples: [
+                    {
+                        type: "bad",
+                        label: "🚨 WhatsApp Suspeito:",
+                        content: "Oi! Vê estas fotos da festa 😂 [festa_fotos.apk - 2.3 MB]",
+                        note: "PERIGO! .apk é instalador Android que pode ser vírus. Fotos são .jpg, não .apk!"
+                    },
+                    {
+                        type: "bad",
+                        label: "🚨 Discord/Telegram:",
+                        content: "Novo hack para jogos! Download: game_hack.exe",
+                        note: "Ficheiros .exe podem ser vírus! 'Hacks' são quase sempre malware que rouba contas."
+                    },
+                    {
+                        type: "bad",
+                        label: "🚨 QR Code Suspeito:",
+                        content: "Papel colado na rua: 'Scanneia para ganhar Robux grátis! 🎁'",
+                        note: "QR codes em locais públicos podem levar a sites maliciosos! Nunca scanneies QR de desconhecidos."
+                    },
+                    {
+                        type: "good",
+                        label: "✅ Partilha Segura:",
+                        content: "Professora no Google Classroom: [Trabalho_Casa.pdf - 150 KB]",
+                        note: "De fonte conhecida e confiável, formato apropriado (PDF), contexto esperado."
+                    }
+                ],
+                quiz: {
+                    question: "Recebes SMS: 'Pacote retido. Pague taxa: [QR Code]'. Deves scannear?",
+                    options: [
+                        { text: "Sim, para saber quanto é", correct: false, explanation: "NÃO! CTT nunca usa QR codes por SMS. Pode levar a site que rouba dados bancários!" },
+                        { text: "Não! SMS + QR + Pagamento = FRAUDE clássica", correct: true, explanation: "Correto! Esta é uma fraude muito comum. CTT contacta por carta ou no site oficial ctt.pt!" },
+                        { text: "Scanneia mas não pagues", correct: false, explanation: "Ao scannear já podes ser infetado ou levado a site falso! Nem abras!" },
+                        { text: "Partilho o SMS para outros opinarem", correct: false, explanation: "Nunca partilhes scams! Podes enganar alguém que seja menos atento." }
+                    ]
+                }
+            },
+            {
+                icon: "🔐",
+                title: "Pedidos de Informação Pessoal",
+                subtitle: "Lição 7 de 7",
+                content: `
+                    <p><strong>REGRA DE OURO: Empresas, jogos e redes sociais NUNCA pedem passwords, códigos ou dados pessoais por mensagem!</strong></p>
+                    <p>Nem por email, SMS, WhatsApp, Discord, Instagram DM, chat de jogo... NADA!</p>
+                `,
+                examples: [
+                    {
+                        type: "bad",
+                        label: "🚫 Roblox Falso:",
+                        content: "[ROBLOX ADMIN] Precisamos verificar tua conta. Envia tua password e email para evitar ban.",
+                        note: "100% SCAM! Roblox NUNCA pede passwords. Administradores não contactam assim."
+                    },
+                    {
+                        type: "bad",
+                        label: "🚫 Instagram DM:",
+                        content: "Olá! Para receberes o badge de verificação ✓, confirma: Email, Password, Data de nascimento",
+                        note: "Instagram não dá verificação por DM! E NUNCA pede passwords. É golpe para roubar conta."
+                    },
+                    {
+                        type: "bad",
+                        label: "🚫 SMS Bancário:",
+                        content: "BCP: Bloqueio suspeito. Confirme: Número de conta, cartão, código MB WAY. Responda JÁ.",
+                        note: "Bancos NUNCA pedem dados assim! Nem por SMS, nem por telefone, nem por email!"
+                    },
+                    {
+                        type: "good",
+                        label: "✅ Comunicação Legítima:",
+                        content: "Epic Games: Novo login de dispositivo desconhecido. Se não foste tu, muda a password em epicgames.com/account",
+                        note: "Avisa-te mas não pede dados. Diz-te onde TU vais (site oficial) para fazer alterações."
+                    }
+                ],
+                quiz: {
+                    question: "'Administrador' no Discord pede código de autenticação de 2 fatores 'para verificar segurança'. Dás?",
+                    options: [
+                        { text: "Sim, é admin e quer ajudar", correct: false, explanation: "NUNCA! Esse código dá acesso total à tua conta. Administradores reais nunca pedem!" },
+                        { text: "NÃO! Código 2FA é como a password - nunca partilho!", correct: true, explanation: "PERFEITO! Código 2FA = chave da tua conta. Dar isso = perder a conta imediatamente!" },
+                        { text: "Pergunto primeiro se é admin verdadeiro", correct: false, explanation: "Ele vai dizer que sim! Admins reais têm badges e não pedem códigos privados." },
+                        { text: "Dou só os primeiros 3 números", correct: false, explanation: "Dar QUALQUER parte do código é perigoso! Nunca partilhes, nem parcialmente!" }
+                    ]
+                }
+            }
+        ];
+
+        let currentLesson = 0;
+        let lessonCompleted = Array(tutorialLessons.length).fill(false);
+
+        // Shuffle function to randomize array order
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startTutorial() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('tutorial-screen').classList.add('show');
+            currentLesson = 0;
+            
+            // Shuffle quiz options for each lesson
+            tutorialLessons.forEach(lesson => {
+                lesson.quiz.options = shuffleArray(lesson.quiz.options);
+            });
+            
+            showTutorialLesson();
+            updateTutorialProgress();
+        }
+
+        function showTutorialLesson() {
+            const lesson = tutorialLessons[currentLesson];
+            let examplesHTML = '';
+            
+            lesson.examples.forEach(example => {
+                examplesHTML += `
+                    <div class="example-box example-${example.type}">
+                        <div class="example-label">${example.label}</div>
+                        <div style="margin: 10px 0; font-family: monospace; background: #f9f9f9; padding: 10px; border-radius: 5px;">
+                            ${example.content}
+                        </div>
+                        <div style="color: #666; font-size: 0.9em; margin-top: 8px;">
+                            💡 ${example.note}
+                        </div>
+                    </div>
+                `;
+            });
+
+            let optionsHTML = '';
+            lesson.quiz.options.forEach((option, index) => {
+                optionsHTML += `
+                    <button class="quiz-option" onclick="checkQuizAnswer(${index})" id="option-${index}">
+                        ${option.text}
+                    </button>
+                `;
+            });
+
+            const html = `
+                <div class="tutorial-card">
+                    <div class="tutorial-header">
+                        <div class="tutorial-icon">${lesson.icon}</div>
+                        <div class="tutorial-title">
+                            <h3>${lesson.title}</h3>
+                            <div class="tutorial-subtitle">${lesson.subtitle}</div>
+                        </div>
+                    </div>
+                    ${lesson.content}
+                    ${examplesHTML}
+                    <div class="quiz-question">
+                        <h4>🤔 Testa o teu conhecimento:</h4>
+                        <p><strong>${lesson.quiz.question}</strong></p>
+                        <div class="quiz-options">
+                            ${optionsHTML}
+                        </div>
+                        <div id="quiz-feedback" class="quiz-feedback"></div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('tutorial-content').innerHTML = html;
+            document.getElementById('btn-next').classList.remove('show');
+        }
+
+        function checkQuizAnswer(selectedIndex) {
+            const lesson = tutorialLessons[currentLesson];
+            const option = lesson.quiz.options[selectedIndex];
+            const feedback = document.getElementById('quiz-feedback');
+            const selectedButton = document.getElementById(`option-${selectedIndex}`);
+            
+            if (option.correct) {
+                // Correct answer - disable all buttons and show success
+                const buttons = document.querySelectorAll('.quiz-option');
+                buttons.forEach((btn, index) => {
+                    btn.disabled = true;
+                    btn.style.cursor = 'not-allowed';
+                    if (lesson.quiz.options[index].correct) {
+                        btn.classList.add('correct');
+                    }
+                });
+
+                feedback.className = 'quiz-feedback show correct';
+                feedback.innerHTML = `
+                    <strong>✅ Correto! Excelente!</strong><br>
+                    ${option.explanation}
+                `;
+
+                // Mark lesson as completed and show next button
+                lessonCompleted[currentLesson] = true;
+                document.getElementById('btn-next').classList.add('show');
+                updateTutorialProgress();
+            } else {
+                // Wrong answer - mark as incorrect but allow retry
+                selectedButton.classList.add('incorrect');
+                selectedButton.disabled = true;
+                selectedButton.style.cursor = 'not-allowed';
+
+                feedback.className = 'quiz-feedback show incorrect';
+                feedback.innerHTML = `
+                    <strong>❌ Não é essa...</strong><br>
+                    ${option.explanation}
+                    <br><br>
+                    <strong>💡 Dica:</strong> Tenta outra vez! Relê os exemplos acima se precisares de ajuda.
+                `;
+            }
+        }
+
+        function updateTutorialProgress() {
+            let html = '';
+            for (let i = 0; i < tutorialLessons.length; i++) {
+                let className = 'progress-dot';
+                if (i < currentLesson) className += ' completed';
+                if (i === currentLesson) className += ' current';
+                html += `<div class="${className}"></div>`;
+            }
+            document.getElementById('tutorial-progress').innerHTML = html;
+        }
+
+        function nextTutorial() {
+            currentLesson++;
+            if (currentLesson < tutorialLessons.length) {
+                showTutorialLesson();
+                updateTutorialProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                // Tutorial completed, show transition screen
+                document.getElementById('tutorial-screen').classList.remove('show');
+                document.getElementById('transition-screen').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function startGameFromTransition() {
+            document.getElementById('transition-screen').style.display = 'none';
+            startGame();
+        }
+
+        const emails = [
+            {
+                isPhishing: true,
+                from: "RobIox_Rewards@rbxfree-generator.com",
+                subject: "🎮 5000 ROBUX GRÁTIS - Celebração 20M Utilizadores!",
+                body: `
+                    <p>🎉 <strong>PARABÉNS JOGADOR!</strong> 🎉</p>
+                    <p>A Roblox está a celebrar 20 milhões de utilizadores em Portugal e TU foste selecionado para receber <strong>5000 ROBUX GRÁTIS!</strong></p>
+                    <p>Para reclamar os teus Robux:</p>
+                    <ol>
+                        <li>Clica no link abaixo</li>
+                        <li>Insere o teu username do Roblox</li>
+                        <li>Completa uma verificação rápida (1 minuto)</li>
+                        <li>Os Robux aparecem na tua conta em 24h!</li>
+                    </ol>
+                    <div class="link-preview">http://rbxfree-generator.com/claim?user=pt&robux=5000</div>
+                    <p><strong>⏰ ATENÇÃO:</strong> Esta oferta expira em 30 minutos! Só os primeiros 100 jogadores recebem!</p>
+                    <p>Não percas esta oportunidade! 🚀</p>
+                    <p>Equipa Roblox Rewards</p>
+                `,
+                redFlags: [
+                    "📧 Email falso: 'RobIox' com 'I' maiúsculo! O Roblox oficial usa @roblox.com",
+                    "🎁 Robux grátis NÃO EXISTEM: a Roblox NUNCA dá Robux de graça por email",
+                    "⚠️ Urgência falsa: '30 minutos' e 'primeiros 100' são táticas de pressão",
+                    "🔗 Link suspeito: 'rbxfree-generator.com' não é roblox.com",
+                    "🔐 Pede o teu username: primeiro passo para roubar a tua conta!"
+                ],
+                explanation: "NÃO EXISTE forma de ganhar Robux grátis! Sites que prometem isto querem roubar a tua conta ou instalar malware. A Roblox oficial confirma: qualquer oferta de 'Robux grátis' é SEMPRE uma burla. Só podes comprar Robux no site oficial ou ganhar através do programa de criadores."
+            },
+            {
+                isPhishing: true,
+                from: "DM do Instagram: @iphone.giveaway.oficial.pt",
+                subject: "📱 DM Instagram: Ganhaste um iPhone 15!",
+                body: `
+                    <p><strong>@iphone.giveaway.oficial.pt</strong> enviou-te uma mensagem:</p>
+                    <div style="background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <p>Olááá! 🎉🎉</p>
+                        <p>Vimos que seguiste a nossa página e participaste no sorteio!</p>
+                        <p>PARABÉNS! 🏆 Foste um dos 3 vencedores do iPhone 15 Pro Max!</p>
+                        <p>Para receberes o teu prémio, só precisas de:</p>
+                        <p>1️⃣ Clicar neste link: bit.ly/iphone15-premio-pt</p>
+                        <p>2️⃣ Preencher os dados de envio</p>
+                        <p>3️⃣ Pagar só 4,99€ de portes (oferta especial!)</p>
+                        <p>Responde rápido porque temos de enviar hoje! 📦✨</p>
+                    </div>
+                    <p><em>Conta: 2.3k seguidores • Sem verificação</em></p>
+                `,
+                redFlags: [
+                    "📱 Conta sem verificação: marcas reais têm o ✓ azul verificado",
+                    "🎁 Prémio que não pediste: não te lembras de participar em nenhum sorteio?",
+                    "💳 Pede pagamento: prémios reais NUNCA pedem dinheiro para 'portes'",
+                    "🔗 Link encurtado (bit.ly): esconde o verdadeiro destino - pode ser phishing",
+                    "⚠️ Pressão: 'responde rápido', 'enviar hoje' são táticas de urgência",
+                    "👥 Poucos seguidores: 2.3k é muito pouco para uma marca que dá iPhones"
+                ],
+                explanation: "Sorteios falsos no Instagram são muito comuns! Marcas verdadeiras contactam-te por canais oficiais verificados, NUNCA pedem dinheiro para enviar prémios, e não usam links encurtados. Se ganhaste algo, a marca entra em contacto pelo perfil oficial com ✓ azul."
+            },
+            {
+                isPhishing: true,
+                from: "Snapchat: utilizador desconhecido",
+                subject: "👻 Snap de desconhecido: 'Adicionei-te por engano'",
+                body: `
+                    <p><strong>Snap recebido de @jessica_model_2009:</strong></p>
+                    <div style="background: #FFFC00; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <p>heyy desculpa adicionei-te por engano ahahah 😅</p>
+                        <p>mas já agora és giro/a! de onde és?</p>
+                        <p>tenho 16 anos, tu?</p>
+                        <p>podemos ser amigos? 💕</p>
+                        <p>adiciona-me no insta: @jessica.modelo.real</p>
+                    </div>
+                    <p style="margin-top: 15px;"><strong>Mais tarde...</strong></p>
+                    <div style="background: #FFFC00; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <p>tens snap privado? 😏</p>
+                        <p>manda-me uma foto tua? eu mando uma minha primeiro</p>
+                        <p>prometo que fica só entre nós...</p>
+                    </div>
+                `,
+                redFlags: [
+                    "🚨 PERIGO EXTREMO: Este padrão é típico de 'sextortion' (chantagem sexual)",
+                    "👤 Perfil falso: 'adicionei por engano' é uma desculpa clássica para iniciar conversa",
+                    "📷 Pede fotos pessoais: NUNCA envies fotos íntimas a desconhecidos!",
+                    "🎭 Finge ter a tua idade: muitos são adultos a fingir ser jovens",
+                    "🔗 Quer mudar de plataforma: para ter menos controlo/denúncias"
+                ],
+                explanation: "CUIDADO! Este é um dos golpes mais perigosos: sextortion. Criminosos fingem ser jovens, pedem fotos íntimas e depois ameaçam partilhar com amigos/família se não pagares. Em 2024, milhares de jovens foram vítimas disto. NUNCA envies fotos íntimas a ninguém online. Se isto acontecer, conta a um adulto de confiança - não tens culpa e podes denunciar!"
+            },
+            {
+                isPhishing: false,
+                from: "noreply@id.roblox.com",
+                subject: "Código de verificação Roblox",
+                body: `
+                    <p>Olá,</p>
+                    <p>Recebemos um pedido para iniciar sessão na tua conta Roblox a partir de um novo dispositivo.</p>
+                    <p>O teu código de verificação é: <strong style="font-size: 1.5em; letter-spacing: 3px;">847293</strong></p>
+                    <p>Este código expira em 15 minutos.</p>
+                    <p><strong>Não pediste este código?</strong></p>
+                    <p>Se não tentaste iniciar sessão, alguém pode estar a tentar aceder à tua conta. Recomendamos que mudes a tua password em roblox.com.</p>
+                    <p>Para mais ajuda, visita o nosso centro de suporte em help.roblox.com</p>
+                    <p>Obrigado,<br>Equipa Roblox</p>
+                `,
+                redFlags: [],
+                explanation: "Email legítimo do Roblox: vem do domínio oficial (@id.roblox.com), dá um código de uso único, não tem links suspeitos nem pede a tua password. Nota que NUNCA deves partilhar códigos de verificação com ninguém - nem mesmo 'amigos' que peçam!"
+            },
+            {
+                isPhishing: true,
+                from: "Discord DM: ModeradorRoblox#0001",
+                subject: "🎮 Mensagem Discord: 'A tua conta vai ser banida'",
+                body: `
+                    <p><strong>ModeradorRoblox#0001</strong> enviou-te uma DM:</p>
+                    <div style="background: #36393f; color: white; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <p>⚠️ <strong>AVISO OFICIAL ROBLOX</strong> ⚠️</p>
+                        <p>Olá jogador,</p>
+                        <p>Detetámos atividade suspeita na tua conta Roblox. Alguém reportou-te por uso de exploits/hacks.</p>
+                        <p>A tua conta será <strong>PERMANENTEMENTE BANIDA</strong> nas próximas 24 horas se não verificares que és o dono legítimo.</p>
+                        <p>Para evitar o ban, precisamos que:</p>
+                        <p>1. Acedas a: roblox-verification.com/appeal</p>
+                        <p>2. Faças login com a tua conta</p>
+                        <p>3. Confirmes os teus dados</p>
+                        <p>Se não fizeres isto, perdes todos os teus Robux e itens.</p>
+                        <p>- Equipa de Moderação Roblox</p>
+                    </div>
+                `,
+                redFlags: [
+                    "📧 Roblox NUNCA contacta por Discord DM para assuntos de conta",
+                    "🔗 Link falso: 'roblox-verification.com' NÃO é o site oficial (roblox.com)",
+                    "⚠️ Ameaça de ban: tática de medo para te fazer agir sem pensar",
+                    "🔐 Pede login: querem roubar a tua password!",
+                    "👤 Moderadores falsos: qualquer um pode criar uma conta com esse nome no Discord"
+                ],
+                explanation: "A Roblox NUNCA contacta jogadores por Discord, WhatsApp ou outras apps! Comunicações oficiais vêm apenas por email oficial ou notificações dentro do próprio Roblox. Se receberes mensagens assim, é 100% burla. Ignora, bloqueia e reporta!"
+            },
+            {
+                isPhishing: true,
+                from: "SMS: +351 9XX XXX XXX",
+                subject: "📱 SMS: Encomenda retida nos CTT",
+                body: `
+                    <p><strong>Mensagem de texto recebida:</strong></p>
+                    <div style="background: #e8e8e8; padding: 15px; border-radius: 10px; margin: 10px 0; font-family: monospace;">
+                        <p>CTT: A sua encomenda EC938271625PT esta retida por falta de pagamento de taxa alfandegaria de 2,99€.</p>
+                        <p>Efetue o pagamento em 24h para evitar devolucao:</p>
+                        <p>ctt-pagamentos.com/tracking</p>
+                    </div>
+                    <p style="color: #666; font-size: 0.9em;"><em>Recebido às 14:32</em></p>
+                `,
+                redFlags: [
+                    "📱 SMS de número desconhecido: CTT usam números oficiais identificados",
+                    "🔗 Link falso: o site oficial dos CTT é ctt.pt, não 'ctt-pagamentos.com'",
+                    "💳 Pede pagamento urgente: táctica clássica de phishing",
+                    "✍️ Erros ortográficos: 'alfandegaria' em vez de 'alfandegária', falta de acentos",
+                    "⚠️ Urgência: '24h para evitar devolução' - pressão para não pensares"
+                ],
+                explanation: "SMS de encomendas falsas são muito comuns! Os CTT verdadeiros enviam notificações pela app oficial ou por cartas. Nunca cliques em links de SMS suspeitos. Se tiveres dúvidas sobre uma encomenda real, vai diretamente a ctt.pt e usa o código de rastreio."
+            },
+            {
+                isPhishing: false,
+                from: "noreply@spotify.com",
+                subject: "O teu resumo Spotify Wrapped 2025",
+                body: `
+                    <p>Olá,</p>
+                    <p>O teu ano em música chegou! 🎵</p>
+                    <p>Em 2025, ouviste <strong>23.847 minutos</strong> de música no Spotify.</p>
+                    <p><strong>O teu top 5 artistas:</strong></p>
+                    <ul>
+                        <li>1. Taylor Swift</li>
+                        <li>2. Bad Bunny</li>
+                        <li>3. The Weeknd</li>
+                        <li>4. Doja Cat</li>
+                        <li>5. Olivia Rodrigo</li>
+                    </ul>
+                    <p>Descobre mais sobre o teu ano em música na app Spotify ou em spotify.com/wrapped</p>
+                    <p>Obrigado por ouvires connosco,<br>Equipa Spotify</p>
+                `,
+                redFlags: [],
+                explanation: "Email legítimo do Spotify: domínio oficial (@spotify.com), conteúdo personalizado sem pedir dados, link para o site oficial (spotify.com), tom amigável sem urgência. Emails de resumo anual como o Wrapped são normais e seguros."
+            },
+            {
+                isPhishing: true,
+                from: "TikTok DM: @verified_tiktoker_oficial",
+                subject: "🎬 TikTok: 'Quero usar o teu vídeo!'",
+                body: `
+                    <p><strong>@verified_tiktoker_oficial</strong> (847K seguidores) comentou no teu vídeo e enviou DM:</p>
+                    <div style="background: #010101; color: white; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <p>omggg adoro o teu conteúdo!! 🔥🔥</p>
+                        <p>sou criador verificado e quero fazer uma collab contigo!</p>
+                        <p>pago 50€ para usar este teu vídeo no meu canal 💰</p>
+                        <p>só precisas de preencher este formulário para receber o pagamento:</p>
+                        <p>tiktok-creator-payments.com/form</p>
+                        <p>responde rápido pq tenho outras pessoas interessadas!!</p>
+                    </div>
+                    <p><em>Nota: conta criada há 2 semanas, sem ✓ de verificação real</em></p>
+                `,
+                redFlags: [
+                    "✓ Verificação falsa: o nome diz 'verified' mas não tem o badge real do TikTok",
+                    "💰 Dinheiro fácil: ofertas de pagamento por DM são quase sempre burla",
+                    "🔗 Link externo suspeito: 'tiktok-creator-payments.com' não é do TikTok",
+                    "⚠️ Pressão: 'responde rápido' e 'outras pessoas interessadas'",
+                    "📅 Conta recente: criadores reais com 847K seguidores não têm contas de 2 semanas"
+                ],
+                explanation: "Burlas de 'colaboração' no TikTok são muito comuns! Criadores reais verificados têm o ✓ oficial (não no nome), não pedem dados por formulários externos, e pagamentos são feitos por plataformas seguras. Se parece bom demais para ser verdade, provavelmente é burla!"
+            },
+            {
+                isPhishing: true,
+                from: "seguranca@bancoportugal-verificacao.tk",
+                subject: "🚨 URGENTE: Confirme sua conta em 24 horas",
+                body: `
+                    <p>Prezado cliente,</p>
+                    <p>Detectamos uma atividade suspeita em sua conta bancária. Por razões de segurança, <strong>você tem 24 horas</strong> para confirmar seus dados ou sua conta será permanentemente bloqueada.</p>
+                    <p><strong>Clique aqui imediatamente para verificar:</strong></p>
+                    <div class="link-preview">http://banco-portugal.tk/verificacao-urgente.php?id=98347</div>
+                    <p>Precisamos que confirme:</p>
+                    <ul>
+                        <li>Número de conta</li>
+                        <li>Password do homebanking</li>
+                        <li>Código do cartão de coordenadas</li>
+                    </ul>
+                    <p><strong>ATENÇÃO:</strong> Não responda a este email. Use apenas o link acima.</p>
+                    <p>Departamento de Segurança<br>Banco Portugal</p>
+                `,
+                redFlags: [
+                    "📧 Domínio falso: '.tk' é gratuito e usado em burlas (bancos usam .pt ou .com)",
+                    "⚠️ Urgência extrema: '24 horas ou conta bloqueada'",
+                    "🔐 Pede password e códigos: bancos NUNCA pedem isto por email!",
+                    "✍️ Português brasileiro: 'sua' em vez de 'a sua', 'você' em vez de 'o cliente'",
+                    "🔗 Link suspeito: não é o site oficial de nenhum banco português"
+                ],
+                explanation: "Bancos NUNCA pedem passwords, códigos ou dados do cartão por email! Se receberes algo assim, é 100% burla. Em caso de dúvida, liga para o número oficial do teu banco (que está no cartão) ou vai à app oficial. Nunca cliques em links de emails."
+            },
+            {
+                isPhishing: false,
+                from: "no-reply@steampowered.com",
+                subject: "A tua Lista de Desejos - Jogo em promoção!",
+                body: `
+                    <p>Olá,</p>
+                    <p>Um jogo da tua Lista de Desejos está em promoção!</p>
+                    <p><strong>Hollow Knight</strong></p>
+                    <p>Preço original: 14,99€</p>
+                    <p>Preço atual: <strong>7,49€ (-50%)</strong></p>
+                    <p>Esta promoção termina a 20 de janeiro de 2026.</p>
+                    <p>Para ver a tua Lista de Desejos completa, visita store.steampowered.com</p>
+                    <p>Boas compras,<br>Equipa Steam</p>
+                    <p style="font-size: 0.8em; color: #666;">Para deixares de receber estes emails, altera as tuas preferências nas definições da conta Steam.</p>
+                `,
+                redFlags: [],
+                explanation: "Email legítimo da Steam: domínio oficial (@steampowered.com), refere um jogo que tu próprio adicionaste à lista de desejos, não pede dados pessoais, link para o site oficial, e oferece opção de cancelar notificações. Promoções da Steam são seguras quando vêm do email oficial!"
+            }
+        ];
+
+        let currentEmail = 0;
+        let correctAnswers = 0;
+        let streak = 0;
+        let answeredEmails = [];
+
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('game-area').style.display = 'block';
+            currentEmail = 0;
+            correctAnswers = 0;
+            streak = 0;
+            answeredEmails = [];
+            
+            // Embaralhar emails
+            emails.sort(() => Math.random() - 0.5);
+            
+            updateScores();
+            showEmail();
+        }
+
+        function showEmail() {
+            const email = emails[currentEmail];
+            document.getElementById('progress').textContent = `Mensagem ${currentEmail + 1} de ${emails.length}`;
+            
+            const emailHTML = `
+                <div class="email-container active">
+                    <div class="email-header">
+                        <div class="email-field"><strong>De:</strong> ${email.from}</div>
+                        <div class="email-field"><strong>Assunto:</strong> ${email.subject}</div>
+                    </div>
+                    <div class="email-body">${email.body}</div>
+                </div>
+            `;
+            
+            document.getElementById('email-display').innerHTML = emailHTML;
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+        }
+
+        function checkAnswer(userSaysPhishing) {
+            const email = emails[currentEmail];
+            const isCorrect = userSaysPhishing === email.isPhishing;
+            
+            // Disable answer buttons after selection
+            document.querySelector('.btn-safe').disabled = true;
+            document.querySelector('.btn-phishing').disabled = true;
+            
+            answeredEmails.push({
+                isCorrect,
+                isPhishing: email.isPhishing,
+                subject: email.subject
+            });
+
+            if (isCorrect) {
+                correctAnswers++;
+                streak++;
+                showFeedback(true, email);
+            } else {
+                streak = 0;
+                showFeedback(false, email);
+            }
+            
+            updateScores();
+            
+            // Show next email button instead of auto-progressing
+            document.getElementById('btn-next-email').classList.add('show');
+        }
+
+        function nextEmail() {
+            currentEmail++;
+            
+            // Re-enable answer buttons
+            document.querySelector('.btn-safe').disabled = false;
+            document.querySelector('.btn-phishing').disabled = false;
+            
+            // Hide next button
+            document.getElementById('btn-next-email').classList.remove('show');
+            
+            if (currentEmail < emails.length) {
+                showEmail();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        function showFeedback(isCorrect, email) {
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            
+            let html = '';
+            if (isCorrect) {
+                html = '<h3>✅ Correto! Bem feito!</h3>';
+                if (email.isPhishing) {
+                    html += '<p><strong>Identificaste bem o phishing!</strong> Aqui estão os sinais de alerta:</p>';
+                    html += '<div class="red-flag"><strong>🚩 Sinais de Alerta Identificados:</strong><ul>';
+                    email.redFlags.forEach(flag => {
+                        html += `<li>${flag}</li>`;
+                    });
+                    html += `</ul></div><p>${email.explanation}</p>`;
+                } else {
+                    html += `<p><strong>Exato!</strong> Este email era seguro. ${email.explanation}</p>`;
+                }
+            } else {
+                html = '<h3>❌ Ups! Não foi desta vez.</h3>';
+                if (email.isPhishing) {
+                    html += '<p><strong>Este era phishing!</strong> Aqui estão os sinais que devias ter visto:</p>';
+                    html += '<div class="red-flag"><strong>🚩 Sinais de Alerta que Perdeste:</strong><ul>';
+                    email.redFlags.forEach(flag => {
+                        html += `<li>${flag}</li>`;
+                    });
+                    html += `</ul></div><p>${email.explanation}</p>`;
+                } else {
+                    html += `<p><strong>Este email era seguro!</strong> ${email.explanation}</p>`;
+                    html += '<p>💡 <strong>Dica:</strong> Nem todos os emails são phishing. Aprende a reconhecer os sinais verdadeiros de perigo!</p>';
+                }
+            }
+            
+            feedback.innerHTML = html;
+        }
+
+        function updateScores() {
+            document.getElementById('correct').textContent = correctAnswers;
+            document.getElementById('total').textContent = currentEmail + 1;
+            document.getElementById('streak').textContent = streak;
+        }
+
+        function showFinalScreen() {
+            document.getElementById('game-area').style.display = 'none';
+            const finalScreen = document.getElementById('final-screen');
+            finalScreen.classList.add('show');
+            
+            document.getElementById('final-correct').textContent = correctAnswers;
+            
+            let badge = '🏆';
+            let message = '';
+            
+            if (correctAnswers === 10) {
+                badge = '🏆';
+                message = 'PERFEITO! És um Expert em Segurança Digital!';
+            } else if (correctAnswers >= 8) {
+                badge = '🥇';
+                message = 'Excelente! Tens muito bom olho para burlas!';
+            } else if (correctAnswers >= 6) {
+                badge = '🥈';
+                message = 'Bom trabalho! Continua atento online!';
+            } else if (correctAnswers >= 4) {
+                badge = '🥉';
+                message = 'Precisas praticar mais. Tenta novamente!';
+            } else {
+                badge = '📚';
+                message = 'Cuidado! Revê as dicas e tenta outra vez.';
+            }
+            
+            document.getElementById('badge').textContent = badge;
+            document.getElementById('final-message').textContent = message;
+            
+            // Resumo de aprendizagem
+            let learningHTML = '';
+            const uniqueFlags = new Set();
+            
+            emails.forEach(email => {
+                if (email.isPhishing) {
+                    email.redFlags.forEach(flag => uniqueFlags.add(flag));
+                }
+            });
+            
+            uniqueFlags.forEach(flag => {
+                learningHTML += `<li>${flag}</li>`;
+            });
+            
+            document.getElementById('learning-points').innerHTML = learningHTML;
+        }
+
+        function restartGame() {
+            document.getElementById('final-screen').classList.remove('show');
+            startGame();
+        }
+    </script>
+</body>
+</html>
