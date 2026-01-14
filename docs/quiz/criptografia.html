@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio Criptografia 🔐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .score-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            color: #1a1a2e;
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            animation: fadeIn 0.3s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #00d9ff;
+        }
+
+        .info-box {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 4px solid #00d9ff;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .challenge-box {
+            background: rgba(0,0,0,0.3);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .cipher-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            color: #ffd700;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 8px;
+            margin: 15px 0;
+            word-break: break-all;
+        }
+
+        .hint {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00d9ff;
+        }
+
+        button.submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            border: none;
+            border-radius: 8px;
+            color: #1a1a2e;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button.submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .feedback.correct {
+            display: block;
+            background: rgba(0, 255, 136, 0.15);
+            border: 2px solid #00ff88;
+        }
+
+        .feedback.incorrect {
+            display: block;
+            background: rgba(255, 100, 100, 0.15);
+            border: 2px solid #ff6464;
+        }
+
+        .feedback h3 {
+            margin-bottom: 10px;
+        }
+
+        .caesar-tool {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .caesar-tool label {
+            color: #94a3b8;
+        }
+
+        .caesar-tool input[type="number"] {
+            width: 80px;
+            text-align: center;
+        }
+
+        .result-display {
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 8px;
+            min-height: 50px;
+            color: #00ff88;
+            letter-spacing: 2px;
+        }
+
+        .alphabet-ref {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .alphabet-ref span {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .level-indicator {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .level-easy { background: #00ff88; color: #1a1a2e; }
+        .level-medium { background: #ffd700; color: #1a1a2e; }
+        .level-hard { background: #ff6464; color: #fff; }
+
+        /* Visual Caesar Tool Styles */
+        .shift-control {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .shift-control label {
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .shift-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff88;
+            background: rgba(0,255,136,0.2);
+            padding: 5px 15px;
+            border-radius: 8px;
+            margin-left: 10px;
+        }
+
+        .shift-control input[type="range"] {
+            width: 100%;
+            max-width: 400px;
+            height: 8px;
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .shift-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .alphabet-visual {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .alphabet-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .row-label {
+            width: 70px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            flex-shrink: 0;
+        }
+
+        .letters-container {
+            display: flex;
+            gap: 4px;
+            flex-wrap: nowrap;
+        }
+
+        .letter-box {
+            width: 28px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .letter-box.original {
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+        }
+
+        .letter-box.shifted {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .letter-box.highlighted {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .letter-box.clickable {
+            cursor: pointer;
+        }
+
+        .letter-box.clickable:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .letter-box.clickable.highlighted:hover {
+            transform: scale(1.2);
+        }
+
+        .arrow-row {
+            display: flex;
+            gap: 4px;
+            margin-left: 80px;
+        }
+
+        .arrow-box {
+            width: 28px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 0.8rem;
+        }
+
+        .letter-demo {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .demo-letters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .demo-letter {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 217, 255, 0.2);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #00d9ff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .demo-letter:hover {
+            background: rgba(0, 217, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .demo-letter.active {
+            border-color: #00d9ff;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+        }
+
+        .transformation-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+        }
+
+        .transform-letter {
+            font-size: 2.5rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #00d9ff;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 217, 255, 0.2);
+            border-radius: 12px;
+        }
+
+        .transform-letter.result {
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.2);
+        }
+
+        .transform-arrow {
+            font-size: 2rem;
+            color: #ffd700;
+        }
+
+        .transform-explanation {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-left: 15px;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+
+        /* Step by Step Styles */
+        .step-by-step-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            min-height: 120px;
+        }
+
+        .step-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            min-width: 80px;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .step-card .original-letter {
+            font-size: 1.8rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #00d9ff;
+        }
+
+        .step-card .step-arrow {
+            color: #ffd700;
+            margin: 8px 0;
+            font-size: 1.2rem;
+        }
+
+        .step-card .result-letter {
+            font-size: 1.8rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .step-card .step-math {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .final-result {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(0,217,255,0.1));
+            border-radius: 12px;
+            border: 2px solid rgba(0,255,136,0.3);
+        }
+
+        .final-result .result-label {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .final-result .result-text {
+            font-size: 1.8rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #00ff88;
+            letter-spacing: 4px;
+        }
+
+        /* Helper Tool in Challenges */
+        .helper-tool-wrapper {
+            margin-top: 30px;
+            border-top: 2px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+
+        .toggle-helper {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 217, 255, 0.15);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 12px;
+            color: #00d9ff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .toggle-helper:hover {
+            background: rgba(0, 217, 255, 0.25);
+            border-color: rgba(0, 217, 255, 0.5);
+        }
+
+        #helperToggleArrow {
+            transition: transform 0.3s;
+        }
+
+        .toggle-helper.active #helperToggleArrow {
+            transform: rotate(180deg);
+        }
+
+        .helper-tool {
+            display: none;
+            margin-top: 15px;
+            padding: 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .helper-tool.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .helper-tool h3 {
+            color: #00d9ff;
+            margin-bottom: 10px;
+        }
+
+        .helper-quick-decode {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .helper-quick-decode label {
+            display: block;
+            margin-bottom: 10px;
+            color: #94a3b8;
+        }
+
+        .direction-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .direction-tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .direction-tab:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .direction-tab.active {
+            background: rgba(0, 217, 255, 0.2);
+            border-color: #00d9ff;
+            color: #00d9ff;
+        }
+
+        .direction-tab.active.decrypt {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+
+        .direction-explanation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .direction-explanation.decrypt {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .direction-icon {
+            font-size: 1.5rem;
+        }
+
+        .helper-example {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .example-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+        }
+
+        .example-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .example-from, .example-to {
+            font-size: 1.8rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .example-from {
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+        }
+
+        .example-from.decrypt {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .example-to {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .example-to.decrypt {
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+        }
+
+        .example-arrow {
+            font-size: 1.5rem;
+            color: #ffd700;
+        }
+
+        .example-math {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .next-btn {
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .next-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .encrypt-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Desafio Criptografia</h1>
+            <p class="subtitle">Descobre os segredos das mensagens cifradas!</p>
+        </header>
+
+        <div class="score-bar">
+            <div class="score-item">
+                <div class="score-value" id="points">0</div>
+                <div class="score-label">Pontos</div>
+            </div>
+            <div class="score-item">
+                <div class="score-value" id="streak">0</div>
+                <div class="score-label">Sequência</div>
+            </div>
+            <div class="score-item">
+                <div class="score-value" id="solved">0/6</div>
+                <div class="score-label">Resolvidos</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('aprende')">📚 Aprende</button>
+            <button class="tab" onclick="showSection('cesar')">🔄 Cifra de César</button>
+            <button class="tab" onclick="showSection('desafios')">🎯 Desafios</button>
+            <button class="tab" onclick="showSection('cria')">✍️ Cria a Tua</button>
+        </div>
+
+        <!-- APRENDE -->
+        <div class="section active" id="aprende">
+            <h2>O que é Criptografia?</h2>
+            
+            <div class="info-box">
+                <p><strong>Criptografia</strong> é a arte de transformar mensagens para que só quem tem a "chave" as consiga ler. É usada todos os dias quando envias mensagens no WhatsApp, fazes compras online ou acedes às redes sociais!</p>
+            </div>
+
+            <div class="challenge-box">
+                <h3>🏛️ A Cifra de César</h3>
+                <p>Inventada pelo imperador romano Júlio César há mais de 2000 anos! Funciona assim:</p>
+                <br>
+                <p>Cada letra é substituída por outra que está um certo número de posições à frente no alfabeto.</p>
+                <br>
+                <p><strong>Exemplo com deslocamento 3:</strong></p>
+                <p>A → D, B → E, C → F, ...</p>
+                <br>
+                <p>A palavra <strong>OLA</strong> torna-se <strong>ROD</strong></p>
+            </div>
+
+            <div class="alphabet-ref">
+                <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span>
+            </div>
+
+            <div class="info-box">
+                <p><strong>💡 Sabias que...</strong> Hoje em dia, a criptografia moderna usa matemática muito mais complexa. O teu telemóvel usa chaves com milhares de dígitos que levariam milhões de anos a descobrir!</p>
+            </div>
+
+            <button class="submit-btn" onclick="showSection('cesar')">Experimenta a Cifra de César →</button>
+        </div>
+
+        <!-- CIFRA DE CÉSAR INTERATIVA -->
+        <div class="section" id="cesar">
+            <h2>🔄 Experimenta a Cifra de César</h2>
+            
+            <div class="info-box">
+                <p>Usa esta ferramenta para cifrar e decifrar mensagens. Experimenta diferentes valores de deslocamento!</p>
+            </div>
+
+            <!-- VISUAL ALPHABET TOOL -->
+            <div class="challenge-box">
+                <h3>🎡 Como Funciona - Visualização</h3>
+                <p style="margin-bottom: 15px;">Arrasta o slider para ver como cada letra se transforma noutra!</p>
+                
+                <div class="shift-control">
+                    <label>Deslocamento: <span id="visualShiftValue" class="shift-value">3</span></label>
+                    <input type="range" id="visualShift" min="0" max="25" value="3" oninput="updateVisualTool()">
+                </div>
+
+                <div class="alphabet-visual">
+                    <div class="alphabet-row">
+                        <span class="row-label">Original:</span>
+                        <div class="letters-container" id="originalAlphabet"></div>
+                    </div>
+                    <div class="arrow-row" id="arrowRow"></div>
+                    <div class="alphabet-row">
+                        <span class="row-label">Cifrado:</span>
+                        <div class="letters-container" id="shiftedAlphabet"></div>
+                    </div>
+                </div>
+
+                <div class="letter-demo">
+                    <p>Clica numa letra para ver a transformação:</p>
+                    <div class="demo-letters" id="demoLetters"></div>
+                    <div class="transformation-display" id="transformDisplay">
+                        <span class="transform-letter" id="fromLetter">A</span>
+                        <span class="transform-arrow">→</span>
+                        <span class="transform-letter result" id="toLetter">D</span>
+                        <span class="transform-explanation" id="transformExplanation">A + 3 = D</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP BY STEP ENCODER -->
+            <div class="challenge-box">
+                <h3>🔢 Cifra Passo a Passo</h3>
+                <p style="margin-bottom: 15px;">Vê como cada letra da tua mensagem é transformada!</p>
+                
+                <input type="text" id="stepInput" placeholder="Escreve uma palavra..." oninput="updateStepByStep()" maxlength="12">
+                
+                <div class="caesar-tool">
+                    <label>Deslocamento:</label>
+                    <input type="number" id="stepShift" value="3" min="1" max="25" onchange="updateStepByStep()">
+                </div>
+
+                <div class="step-by-step-container" id="stepContainer">
+                    <p class="hint">Escreve uma palavra acima para ver a magia acontecer!</p>
+                </div>
+
+                <div class="final-result" id="stepResult" style="display: none;">
+                    <span class="result-label">Resultado:</span>
+                    <span class="result-text" id="stepResultText"></span>
+                </div>
+            </div>
+
+            <!-- ORIGINAL CIPHER/DECIPHER TOOL -->
+            <div class="challenge-box">
+                <h3>⚡ Ferramenta Rápida</h3>
+                <label>Escreve uma mensagem:</label>
+                <input type="text" id="cesarInput" placeholder="Escreve aqui..." oninput="updateCesar()">
+                
+                <div class="caesar-tool">
+                    <label>Deslocamento:</label>
+                    <input type="number" id="cesarShift" value="3" min="1" max="25" onchange="updateCesar()">
+                    <button class="next-btn" onclick="document.getElementById('cesarShift').value = Math.floor(Math.random()*25)+1; updateCesar();">🎲 Aleatório</button>
+                </div>
+
+                <label>Resultado cifrado:</label>
+                <div class="result-display" id="cesarOutput">...</div>
+            </div>
+
+            <div class="encrypt-section">
+                <h3>🔓 Decifrar uma mensagem</h3>
+                <p class="hint">Cola uma mensagem cifrada e descobre o deslocamento correto!</p>
+                
+                <input type="text" id="decipherInput" placeholder="Mensagem cifrada..." oninput="updateDecipher()">
+                
+                <div class="caesar-tool">
+                    <label>Testar deslocamento:</label>
+                    <input type="number" id="decipherShift" value="1" min="1" max="25" onchange="updateDecipher()">
+                    <button class="next-btn" onclick="cycleDecipher()">⏭️ Próximo</button>
+                </div>
+
+                <div class="result-display" id="decipherOutput">...</div>
+            </div>
+        </div>
+
+        <!-- DESAFIOS -->
+        <div class="section" id="desafios">
+            <h2>🎯 Desafios</h2>
+            
+            <div id="challengeContainer"></div>
+
+            <!-- HELPER TOOL -->
+            <div class="helper-tool-wrapper">
+                <button class="toggle-helper" onclick="toggleHelper()">
+                    <span id="helperToggleIcon">🔧</span> Ferramenta de Ajuda
+                    <span id="helperToggleArrow">▼</span>
+                </button>
+                
+                <div class="helper-tool" id="helperTool">
+                    <h3>🎡 Visualização da Cifra de César</h3>
+                    <p style="margin-bottom: 15px; color: #94a3b8;">Vê como funciona cifrar e decifrar!</p>
+                    
+                    <div class="shift-control">
+                        <label>Deslocamento: <span id="helperShiftValue" class="shift-value">3</span></label>
+                        <input type="range" id="helperShift" min="1" max="25" value="3" oninput="updateHelperTool()">
+                    </div>
+
+                    <div class="direction-tabs">
+                        <button class="direction-tab active" onclick="setHelperDirection('encrypt')">🔒 Cifrar</button>
+                        <button class="direction-tab" onclick="setHelperDirection('decrypt')">🔓 Decifrar</button>
+                    </div>
+
+                    <div class="direction-explanation" id="directionExplanation">
+                        <span class="direction-icon">🔒</span>
+                        <span id="directionText">Para <strong>cifrar</strong>: anda <strong>para a frente</strong> no alfabeto</span>
+                    </div>
+
+                    <div class="alphabet-visual">
+                        <div class="alphabet-row">
+                            <span class="row-label" id="helperTopLabel">Original:</span>
+                            <div class="letters-container" id="helperTopAlphabet"></div>
+                        </div>
+                        <div class="arrow-row" id="helperArrowRow"></div>
+                        <div class="alphabet-row">
+                            <span class="row-label" id="helperBottomLabel">Cifrado:</span>
+                            <div class="letters-container" id="helperBottomAlphabet"></div>
+                        </div>
+                    </div>
+
+                    <div class="helper-example" id="helperExample">
+                        <div class="example-card">
+                            <span class="example-label">Exemplo:</span>
+                            <span class="example-from" id="exampleFrom">A</span>
+                            <span class="example-arrow">→</span>
+                            <span class="example-to" id="exampleTo">D</span>
+                            <span class="example-math" id="exampleMath">(0 + 3 = 3)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CRIA A TUA -->
+        <div class="section" id="cria">
+            <h2>✍️ Cria a Tua Mensagem Secreta</h2>
+            
+            <div class="info-box">
+                <p>Cria uma mensagem cifrada para enviar aos teus amigos! Só quem souber o deslocamento conseguirá ler.</p>
+            </div>
+
+            <div class="challenge-box">
+                <label>A tua mensagem secreta:</label>
+                <input type="text" id="createInput" placeholder="Escreve a mensagem..." oninput="updateCreate()">
+                
+                <div class="caesar-tool">
+                    <label>Escolhe o deslocamento:</label>
+                    <input type="number" id="createShift" value="7" min="1" max="25" onchange="updateCreate()">
+                </div>
+
+                <label>📤 Mensagem para enviar:</label>
+                <div class="cipher-text" id="createOutput">...</div>
+                
+                <button class="submit-btn" onclick="copyMessage()">📋 Copiar Mensagem</button>
+                
+                <p class="hint" style="margin-top: 15px; text-align: center;">Diz ao teu amigo: "Usa deslocamento <span id="shiftHint">7</span> para decifrar!"</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estado do jogo
+        let points = 0;
+        let streak = 0;
+        let solved = 0;
+        let currentChallenge = 0;
+
+        const challenges = [
+            {
+                level: 'easy',
+                cipher: 'ROD',
+                shift: 3,
+                answer: 'OLA',
+                hint: 'Uma saudação comum (deslocamento 3)'
+            },
+            {
+                level: 'easy', 
+                cipher: 'VHFUHWR',
+                shift: 3,
+                answer: 'SECRETO',
+                hint: 'Algo que não queres que outros saibam (deslocamento 3)'
+            },
+            {
+                level: 'medium',
+                cipher: 'JVUALY',
+                shift: 7,
+                answer: 'CONTRA',
+                hint: 'O oposto de "a favor" (deslocamento 7)'
+            },
+            {
+                level: 'medium',
+                cipher: 'KPNPAHU',
+                shift: 7,
+                answer: 'DIGITAL',
+                hint: 'Relacionado com tecnologia e computadores (deslocamento 7)'
+            },
+            {
+                level: 'hard',
+                cipher: 'WIFSQOBU',
+                shift: 12,
+                answer: 'SEGURANCA',
+                hint: 'Proteção contra perigos - importante na internet! (deslocamento 12)'
+            },
+            {
+                level: 'hard',
+                cipher: 'UEUFMYMOUZQ',
+                shift: 12,
+                answer: 'CIBERSEGURANCA',
+                hint: 'Segurança no mundo digital (deslocamento 12). Dica: pensa no termo completo em português!'
+            }
+        ];
+
+        function caesarCipher(text, shift, decrypt = false) {
+            if (decrypt) shift = 26 - shift;
+            return text.toUpperCase().split('').map(char => {
+                if (char >= 'A' && char <= 'Z') {
+                    return String.fromCharCode(((char.charCodeAt(0) - 65 + shift) % 26) + 65);
+                }
+                return char;
+            }).join('');
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (sectionId === 'desafios') {
+                loadChallenge();
+            }
+        }
+
+        function updateCesar() {
+            const input = document.getElementById('cesarInput').value;
+            const shift = parseInt(document.getElementById('cesarShift').value) || 0;
+            document.getElementById('cesarOutput').textContent = caesarCipher(input, shift) || '...';
+        }
+
+        function updateDecipher() {
+            const input = document.getElementById('decipherInput').value;
+            const shift = parseInt(document.getElementById('decipherShift').value) || 0;
+            document.getElementById('decipherOutput').textContent = caesarCipher(input, shift, true) || '...';
+        }
+
+        function cycleDecipher() {
+            const shiftInput = document.getElementById('decipherShift');
+            let shift = parseInt(shiftInput.value) || 0;
+            shift = (shift % 25) + 1;
+            shiftInput.value = shift;
+            updateDecipher();
+        }
+
+        function updateCreate() {
+            const input = document.getElementById('createInput').value;
+            const shift = parseInt(document.getElementById('createShift').value) || 0;
+            document.getElementById('createOutput').textContent = caesarCipher(input, shift) || '...';
+            document.getElementById('shiftHint').textContent = shift;
+        }
+
+        function copyMessage() {
+            const text = document.getElementById('createOutput').textContent;
+            if (text && text !== '...') {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Mensagem copiada! 📋');
+                });
+            }
+        }
+
+        function loadChallenge() {
+            if (currentChallenge >= challenges.length) {
+                document.getElementById('challengeContainer').innerHTML = `
+                    <div class="challenge-box" style="text-align: center;">
+                        <h3>🎉 Parabéns!</h3>
+                        <p>Completaste todos os desafios!</p>
+                        <p style="font-size: 2rem; margin: 20px 0;">Pontuação Final: ${points}</p>
+                        <button class="submit-btn" onclick="resetGame()">🔄 Recomeçar</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const c = challenges[currentChallenge];
+            const levelClass = c.level === 'easy' ? 'level-easy' : c.level === 'medium' ? 'level-medium' : 'level-hard';
+            const levelText = c.level === 'easy' ? 'Fácil' : c.level === 'medium' ? 'Médio' : 'Difícil';
+            const pointValue = c.level === 'easy' ? 10 : c.level === 'medium' ? 20 : 30;
+
+            document.getElementById('challengeContainer').innerHTML = `
+                <div class="challenge-box">
+                    <span class="level-indicator ${levelClass}">${levelText} (+${pointValue} pts)</span>
+                    <h3>Desafio ${currentChallenge + 1} de ${challenges.length}</h3>
+                    <p>Decifra esta mensagem:</p>
+                    <div class="cipher-text">${c.cipher}</div>
+                    <p class="hint">💡 ${c.hint}</p>
+                    <input type="text" id="answerInput" placeholder="Escreve a resposta..." onkeypress="if(event.key==='Enter')checkAnswer()">
+                    <button class="submit-btn" onclick="checkAnswer()">Verificar Resposta</button>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+            `;
+        }
+
+        function checkAnswer() {
+            const input = document.getElementById('answerInput').value.toUpperCase().trim();
+            const c = challenges[currentChallenge];
+            const feedback = document.getElementById('feedback');
+            const pointValue = c.level === 'easy' ? 10 : c.level === 'medium' ? 20 : 30;
+
+            if (input === c.answer) {
+                streak++;
+                solved++;
+                const bonus = streak > 1 ? streak * 2 : 0;
+                points += pointValue + bonus;
+                
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `
+                    <h3>✅ Correto!</h3>
+                    <p>A resposta é <strong>${c.answer}</strong></p>
+                    <p>+${pointValue} pontos${bonus > 0 ? ` (+${bonus} bónus de sequência!)` : ''}</p>
+                    <button class="next-btn" onclick="nextChallenge()">Próximo Desafio →</button>
+                `;
+            } else {
+                streak = 0;
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `
+                    <h3>❌ Tenta novamente!</h3>
+                    <p>Essa não é a resposta certa. Usa a ferramenta na secção "Cifra de César" para ajudar!</p>
+                    <p>Lembra-te: o deslocamento está na dica.</p>
+                `;
+            }
+
+            updateScore();
+        }
+
+        function nextChallenge() {
+            currentChallenge++;
+            loadChallenge();
+        }
+
+        function updateScore() {
+            document.getElementById('points').textContent = points;
+            document.getElementById('streak').textContent = streak;
+            document.getElementById('solved').textContent = `${solved}/${challenges.length}`;
+        }
+
+        function resetGame() {
+            points = 0;
+            streak = 0;
+            solved = 0;
+            currentChallenge = 0;
+            updateScore();
+            loadChallenge();
+        }
+
+        // Visual Caesar Tool Functions
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let selectedLetter = 'A';
+
+        function initVisualTool() {
+            // Create original alphabet
+            const originalContainer = document.getElementById('originalAlphabet');
+            const shiftedContainer = document.getElementById('shiftedAlphabet');
+            const arrowRow = document.getElementById('arrowRow');
+            const demoLetters = document.getElementById('demoLetters');
+
+            alphabet.split('').forEach((letter, i) => {
+                // Original letter
+                const origBox = document.createElement('div');
+                origBox.className = 'letter-box original';
+                origBox.textContent = letter;
+                origBox.id = `orig-${letter}`;
+                originalContainer.appendChild(origBox);
+
+                // Arrow
+                const arrowBox = document.createElement('div');
+                arrowBox.className = 'arrow-box';
+                arrowBox.textContent = '↓';
+                arrowRow.appendChild(arrowBox);
+
+                // Shifted letter (will be updated)
+                const shiftBox = document.createElement('div');
+                shiftBox.className = 'letter-box shifted';
+                shiftBox.id = `shift-${i}`;
+                shiftedContainer.appendChild(shiftBox);
+
+                // Demo clickable letters
+                const demoLetter = document.createElement('div');
+                demoLetter.className = 'demo-letter';
+                demoLetter.textContent = letter;
+                demoLetter.onclick = () => selectDemoLetter(letter);
+                if (letter === 'A') demoLetter.classList.add('active');
+                demoLetters.appendChild(demoLetter);
+            });
+
+            updateVisualTool();
+        }
+
+        function updateVisualTool() {
+            const shift = parseInt(document.getElementById('visualShift').value);
+            document.getElementById('visualShiftValue').textContent = shift;
+
+            // Update shifted alphabet display
+            alphabet.split('').forEach((letter, i) => {
+                const shiftedIndex = (i + shift) % 26;
+                const shiftedLetter = alphabet[shiftedIndex];
+                document.getElementById(`shift-${i}`).textContent = shiftedLetter;
+            });
+
+            // Update the transformation display
+            updateTransformDisplay(selectedLetter, shift);
+        }
+
+        function selectDemoLetter(letter) {
+            selectedLetter = letter;
+            
+            // Update active state
+            document.querySelectorAll('.demo-letter').forEach(el => {
+                el.classList.remove('active');
+                if (el.textContent === letter) el.classList.add('active');
+            });
+
+            // Highlight in alphabet rows
+            document.querySelectorAll('.letter-box').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+            
+            const origIndex = alphabet.indexOf(letter);
+            document.getElementById(`orig-${letter}`).classList.add('highlighted');
+            document.getElementById(`shift-${origIndex}`).classList.add('highlighted');
+
+            const shift = parseInt(document.getElementById('visualShift').value);
+            updateTransformDisplay(letter, shift);
+        }
+
+        function updateTransformDisplay(letter, shift) {
+            const origIndex = alphabet.indexOf(letter);
+            const newIndex = (origIndex + shift) % 26;
+            const newLetter = alphabet[newIndex];
+
+            document.getElementById('fromLetter').textContent = letter;
+            document.getElementById('toLetter').textContent = newLetter;
+            
+            // Create explanation showing the wrap-around if applicable
+            let explanation;
+            if (origIndex + shift >= 26) {
+                const overflow = (origIndex + shift) - 26;
+                explanation = `${letter}(${origIndex}) + ${shift} = ${origIndex + shift} → volta ao início → ${newLetter}(${newIndex})`;
+            } else {
+                explanation = `${letter}(${origIndex}) + ${shift} = ${newLetter}(${newIndex})`;
+            }
+            document.getElementById('transformExplanation').textContent = explanation;
+        }
+
+        function updateStepByStep() {
+            const input = document.getElementById('stepInput').value.toUpperCase();
+            const shift = parseInt(document.getElementById('stepShift').value) || 0;
+            const container = document.getElementById('stepContainer');
+            const resultDiv = document.getElementById('stepResult');
+            const resultText = document.getElementById('stepResultText');
+
+            if (!input) {
+                container.innerHTML = '<p class="hint">Escreve uma palavra acima para ver a magia acontecer!</p>';
+                resultDiv.style.display = 'none';
+                return;
+            }
+
+            container.innerHTML = '';
+            let result = '';
+
+            input.split('').forEach((char, index) => {
+                const card = document.createElement('div');
+                card.className = 'step-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                if (char >= 'A' && char <= 'Z') {
+                    const origIndex = alphabet.indexOf(char);
+                    const newIndex = (origIndex + shift) % 26;
+                    const newChar = alphabet[newIndex];
+                    result += newChar;
+
+                    let mathText;
+                    if (origIndex + shift >= 26) {
+                        mathText = `${origIndex} + ${shift} = ${origIndex + shift}<br>→ ${newIndex}`;
+                    } else {
+                        mathText = `${origIndex} + ${shift} = ${newIndex}`;
+                    }
+
+                    card.innerHTML = `
+                        <div class="original-letter">${char}</div>
+                        <div class="step-arrow">↓</div>
+                        <div class="result-letter">${newChar}</div>
+                        <div class="step-math">${mathText}</div>
+                    `;
+                } else {
+                    result += char;
+                    card.innerHTML = `
+                        <div class="original-letter">${char}</div>
+                        <div class="step-arrow">↓</div>
+                        <div class="result-letter">${char}</div>
+                        <div class="step-math">não muda</div>
+                    `;
+                }
+
+                container.appendChild(card);
+            });
+
+            resultDiv.style.display = 'flex';
+            resultText.textContent = result;
+        }
+
+        // Helper Tool Functions (for Challenges section)
+        let helperDirection = 'encrypt';
+        let helperSelectedLetter = 'A';
+
+        function initHelperTool() {
+            const topContainer = document.getElementById('helperTopAlphabet');
+            const bottomContainer = document.getElementById('helperBottomAlphabet');
+            const arrowRow = document.getElementById('helperArrowRow');
+
+            alphabet.split('').forEach((letter, i) => {
+                // Top alphabet
+                const topBox = document.createElement('div');
+                topBox.className = 'letter-box original';
+                topBox.id = `helper-top-${i}`;
+                topBox.onclick = () => selectHelperLetter(i);
+                topContainer.appendChild(topBox);
+
+                // Arrow
+                const arrowBox = document.createElement('div');
+                arrowBox.className = 'arrow-box';
+                arrowBox.textContent = '↓';
+                arrowBox.id = `helper-arrow-${i}`;
+                arrowRow.appendChild(arrowBox);
+
+                // Bottom alphabet
+                const bottomBox = document.createElement('div');
+                bottomBox.className = 'letter-box shifted';
+                bottomBox.id = `helper-bottom-${i}`;
+                bottomBox.onclick = () => selectHelperLetter(i);
+                bottomContainer.appendChild(bottomBox);
+            });
+
+            updateHelperTool();
+        }
+
+        function selectHelperLetter(index) {
+            helperSelectedLetter = alphabet[index];
+            updateHelperTool();
+        }
+
+        function setHelperDirection(direction) {
+            helperDirection = direction;
+            
+            // Update tab states
+            document.querySelectorAll('.direction-tab').forEach(tab => {
+                tab.classList.remove('active', 'decrypt');
+            });
+            
+            const activeTab = document.querySelector(`.direction-tab[onclick*="${direction}"]`);
+            activeTab.classList.add('active');
+            if (direction === 'decrypt') activeTab.classList.add('decrypt');
+
+            // Update explanation
+            const explanation = document.getElementById('directionExplanation');
+            const icon = explanation.querySelector('.direction-icon');
+            const text = document.getElementById('directionText');
+            
+            if (direction === 'encrypt') {
+                explanation.classList.remove('decrypt');
+                icon.textContent = '🔒';
+                text.innerHTML = 'Para <strong>cifrar</strong>: anda <strong>para a frente</strong> no alfabeto';
+            } else {
+                explanation.classList.add('decrypt');
+                icon.textContent = '🔓';
+                text.innerHTML = 'Para <strong>decifrar</strong>: anda <strong>para trás</strong> no alfabeto';
+            }
+
+            updateHelperTool();
+        }
+
+        function updateHelperTool() {
+            const shift = parseInt(document.getElementById('helperShift').value);
+            document.getElementById('helperShiftValue').textContent = shift;
+
+            const topLabel = document.getElementById('helperTopLabel');
+            const bottomLabel = document.getElementById('helperBottomLabel');
+            const selectedIndex = alphabet.indexOf(helperSelectedLetter);
+
+            // Clear all highlights first
+            alphabet.split('').forEach((_, i) => {
+                document.getElementById(`helper-top-${i}`).classList.remove('highlighted');
+                document.getElementById(`helper-bottom-${i}`).classList.remove('highlighted');
+            });
+
+            if (helperDirection === 'encrypt') {
+                topLabel.textContent = 'Original:';
+                bottomLabel.textContent = 'Cifrado:';
+                
+                // Original on top, shifted on bottom
+                alphabet.split('').forEach((letter, i) => {
+                    const topBox = document.getElementById(`helper-top-${i}`);
+                    const bottomBox = document.getElementById(`helper-bottom-${i}`);
+                    
+                    topBox.textContent = letter;
+                    topBox.className = 'letter-box original clickable';
+                    
+                    const shiftedIndex = (i + shift) % 26;
+                    bottomBox.textContent = alphabet[shiftedIndex];
+                    bottomBox.className = 'letter-box shifted clickable';
+                });
+
+                // Highlight selected letter and its result
+                document.getElementById(`helper-top-${selectedIndex}`).classList.add('highlighted');
+                document.getElementById(`helper-bottom-${selectedIndex}`).classList.add('highlighted');
+
+                // Update example
+                const resultIndex = (selectedIndex + shift) % 26;
+                const resultLetter = alphabet[resultIndex];
+                document.getElementById('exampleFrom').textContent = helperSelectedLetter;
+                document.getElementById('exampleFrom').className = 'example-from';
+                document.getElementById('exampleTo').textContent = resultLetter;
+                document.getElementById('exampleTo').className = 'example-to';
+                
+                // Show math with wrap-around if applicable
+                if (selectedIndex + shift >= 26) {
+                    document.getElementById('exampleMath').textContent = `(${selectedIndex} + ${shift} = ${selectedIndex + shift} → ${resultIndex})`;
+                } else {
+                    document.getElementById('exampleMath').textContent = `(${selectedIndex} + ${shift} = ${resultIndex})`;
+                }
+                
+            } else {
+                topLabel.textContent = 'Cifrado:';
+                bottomLabel.textContent = 'Original:';
+                
+                // Shifted on top, original on bottom
+                alphabet.split('').forEach((letter, i) => {
+                    const topBox = document.getElementById(`helper-top-${i}`);
+                    const bottomBox = document.getElementById(`helper-bottom-${i}`);
+                    
+                    const shiftedIndex = (i + shift) % 26;
+                    topBox.textContent = alphabet[shiftedIndex];
+                    topBox.className = 'letter-box shifted clickable';
+                    
+                    bottomBox.textContent = letter;
+                    bottomBox.className = 'letter-box original clickable';
+                });
+
+                // Highlight selected letter and its result
+                document.getElementById(`helper-top-${selectedIndex}`).classList.add('highlighted');
+                document.getElementById(`helper-bottom-${selectedIndex}`).classList.add('highlighted');
+
+                // For decrypt: the selected letter is the cipher letter
+                // We need to show what it decrypts to
+                const cipherLetter = alphabet[(selectedIndex + shift) % 26];
+                const originalLetter = helperSelectedLetter;
+                
+                document.getElementById('exampleFrom').textContent = cipherLetter;
+                document.getElementById('exampleFrom').className = 'example-from decrypt';
+                document.getElementById('exampleTo').textContent = originalLetter;
+                document.getElementById('exampleTo').className = 'example-to decrypt';
+                
+                const cipherIndex = (selectedIndex + shift) % 26;
+                if (cipherIndex - shift < 0) {
+                    document.getElementById('exampleMath').textContent = `(${cipherIndex} - ${shift} = ${cipherIndex - shift} → ${selectedIndex})`;
+                } else {
+                    document.getElementById('exampleMath').textContent = `(${cipherIndex} - ${shift} = ${selectedIndex})`;
+                }
+            }
+        }
+
+        function toggleHelper() {
+            const tool = document.getElementById('helperTool');
+            const btn = document.querySelector('.toggle-helper');
+            tool.classList.toggle('visible');
+            btn.classList.toggle('active');
+        }
+
+        // Inicialização
+        updateScore();
+        initVisualTool();
+        initHelperTool();
+    </script>
+</body>
+</html>
