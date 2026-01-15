@@ -760,6 +760,37 @@
             background: rgba(255,255,255,0.3);
         }
 
+        .answer-feedback {
+            margin-top: 15px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .answer-feedback.correct {
+            background: rgba(0, 255, 136, 0.15);
+            color: #00ff88;
+        }
+
+        .answer-feedback.incorrect {
+            background: rgba(255, 100, 100, 0.15);
+            color: #ff6464;
+        }
+
+        .answer-feedback.partial {
+            color: #94a3b8;
+        }
+
+        .answer-feedback .next-btn {
+            margin: 0;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
         .encrypt-section {
             margin-top: 30px;
             padding-top: 30px;
@@ -1031,7 +1062,7 @@
             },
             {
                 level: 'medium',
-                cipher: 'JVUALY',
+                cipher: 'JVUAYH',
                 shift: 7,
                 answer: 'CONTRA',
                 hint: 'O oposto de "a favor" (deslocamento 7)'
@@ -1141,9 +1172,8 @@
                     <p>Decifra esta mensagem:</p>
                     <div class="cipher-text">${c.cipher}</div>
                     <p class="hint">💡 ${c.hint}</p>
-                    <input type="text" id="answerInput" placeholder="Escreve a resposta..." onkeypress="if(event.key==='Enter')checkAnswer()">
-                    <button class="submit-btn" onclick="checkAnswer()">Verificar Resposta</button>
-                    <div class="feedback" id="feedback"></div>
+                    <input type="text" id="answerInput" placeholder="Escreve a resposta..." oninput="checkAnswer()" autocomplete="off">
+                    <div class="answer-feedback" id="answerFeedback"></div>
                 </div>
             `;
         }
@@ -1151,8 +1181,14 @@
         function checkAnswer() {
             const input = document.getElementById('answerInput').value.toUpperCase().trim();
             const c = challenges[currentChallenge];
-            const feedback = document.getElementById('feedback');
+            const feedback = document.getElementById('answerFeedback');
             const pointValue = c.level === 'easy' ? 10 : c.level === 'medium' ? 20 : 30;
+
+            if (!input) {
+                feedback.textContent = '';
+                feedback.className = 'answer-feedback';
+                return;
+            }
 
             if (input === c.answer) {
                 streak++;
@@ -1160,24 +1196,19 @@
                 const bonus = streak > 1 ? streak * 2 : 0;
                 points += pointValue + bonus;
                 
-                feedback.className = 'feedback correct';
-                feedback.innerHTML = `
-                    <h3>✅ Correto!</h3>
-                    <p>A resposta é <strong>${c.answer}</strong></p>
-                    <p>+${pointValue} pontos${bonus > 0 ? ` (+${bonus} bónus de sequência!)` : ''}</p>
-                    <button class="next-btn" onclick="nextChallenge()">Próximo Desafio →</button>
-                `;
+                feedback.className = 'answer-feedback correct';
+                feedback.innerHTML = `Correto! +${pointValue} pontos${bonus > 0 ? ` (+${bonus} bónus)` : ''} <button class="next-btn" onclick="nextChallenge()">Próximo →</button>`;
+                
+                updateScore();
+            } else if (c.answer.startsWith(input)) {
+                feedback.textContent = 'Continua...';
+                feedback.className = 'answer-feedback partial';
             } else {
                 streak = 0;
-                feedback.className = 'feedback incorrect';
-                feedback.innerHTML = `
-                    <h3>❌ Tenta novamente!</h3>
-                    <p>Essa não é a resposta certa. Usa a ferramenta na secção "Cifra de César" para ajudar!</p>
-                    <p>Lembra-te: o deslocamento está na dica.</p>
-                `;
+                feedback.textContent = 'Não está correto, tenta novamente.';
+                feedback.className = 'answer-feedback incorrect';
+                updateScore();
             }
-
-            updateScore();
         }
 
         function nextChallenge() {
