@@ -736,6 +736,29 @@
         let score = 0;
         let answered = false;
 
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Shuffle options and update correct answer index
+        function shuffleQuestion(question) {
+            const originalCorrect = question.options[question.correct];
+            const shuffledOptions = shuffleArray(question.options);
+            const newCorrectIndex = shuffledOptions.indexOf(originalCorrect);
+            
+            return {
+                ...question,
+                options: shuffledOptions,
+                correct: newCorrectIndex
+            };
+        }
+
         function startQuiz(unit) {
             currentUnit = unit;
             currentQuestionIndex = 0;
@@ -743,23 +766,30 @@
             answered = false;
 
             // Select questions based on unit
+            let selectedQuestions;
             switch(unit) {
                 case 'network':
-                    currentQuestions = [...networkQuestions];
+                    selectedQuestions = [...networkQuestions];
                     document.getElementById('unitBadge').textContent = 'Network Heroes';
                     document.getElementById('unitBadge').className = 'unit-badge green';
                     break;
                 case 'interceptors':
-                    currentQuestions = [...interceptorsQuestions];
+                    selectedQuestions = [...interceptorsQuestions];
                     document.getElementById('unitBadge').textContent = 'The Interceptors';
                     document.getElementById('unitBadge').className = 'unit-badge blue';
                     break;
                 case 'cloud':
-                    currentQuestions = [...cloudQuestions];
+                    selectedQuestions = [...cloudQuestions];
                     document.getElementById('unitBadge').textContent = 'Cloud Champions';
                     document.getElementById('unitBadge').className = 'unit-badge orange';
                     break;
             }
+
+            // Shuffle the order of questions
+            currentQuestions = shuffleArray(selectedQuestions);
+            
+            // Shuffle the options within each question
+            currentQuestions = currentQuestions.map(q => shuffleQuestion(q));
 
             // Show quiz screen
             document.getElementById('startScreen').style.display = 'none';
