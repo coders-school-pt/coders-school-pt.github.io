@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 1 — Os Primeiros Passos em Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #1f2937;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 3rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid #e5e7eb;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.4rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2563eb;
+        }
+
+        /* Section headers */
+        .section-title {
+            font-size: 1.8rem;
+            color: #7c3aed;
+            margin: 2.5rem 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        /* Topic explanations */
+        .topic {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .topic h3 {
+            font-size: 1.3rem;
+            color: #059669;
+            margin-bottom: 1rem;
+        }
+
+        .topic p {
+            margin-bottom: 1rem;
+        }
+
+        /* Code blocks */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            margin: 1rem 0;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: #f1f5f9;
+            color: #0f172a;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        /* Tips and hints */
+        .hint {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .hint strong {
+            color: #b45309;
+        }
+
+        .warning {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning strong {
+            color: #dc2626;
+        }
+
+        /* Exercises */
+        .exercise {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #dbeafe;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        .exercise h3 {
+            font-size: 1.2rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercise h3 .topic-tag {
+            font-size: 0.85rem;
+            font-weight: normal;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .exercise p {
+            margin-bottom: 0.75rem;
+        }
+
+        .exercise ul {
+            margin: 0.75rem 0 0.75rem 1.5rem;
+        }
+
+        .exercise li {
+            margin-bottom: 0.3rem;
+        }
+
+        .challenge-extra {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .challenge-extra strong {
+            color: #059669;
+        }
+
+        .think-question {
+            background: #faf5ff;
+            border-left: 4px solid #8b5cf6;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .think-question strong {
+            color: #7c3aed;
+        }
+
+        /* Reflection section */
+        .reflection {
+            background: linear-gradient(135deg, #faf5ff 0%, #fdf4ff 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .reflection h2 {
+            color: #7c3aed;
+            margin-bottom: 1rem;
+        }
+
+        .reflection ol {
+            margin-left: 1.5rem;
+        }
+
+        .reflection li {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e5e7eb;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            pre {
+                font-size: 0.85rem;
+                padding: 0.75rem;
+            }
+            
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            pre {
+                background: #f5f5f5;
+                color: #333;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🐍 Challenge 1</h1>
+            <p class="subtitle">Os Primeiros Passos em Python</p>
+        </header>
+
+        <div class="intro">
+            <p>Bem-vindo ao teu primeiro desafio de programação! Vais aprender a guardar informação, fazer comparações e tomar decisões — tudo o que um programa precisa para ser útil. Preparado?</p>
+        </div>
+
+        <h2 class="section-title">📚 Mini Explicações</h2>
+
+        <!-- Topic 1: Variables -->
+        <div class="topic">
+            <h3>1. Variáveis — As Caixas com Etiqueta 📦</h3>
+            <p>Imagina que tens uma caixa onde podes guardar qualquer coisa. Para a encontrares mais tarde, colas-lhe uma etiqueta com um nome. Em programação, essa caixa chama-se <strong>variável</strong>.</p>
+            <pre><code>nome = "Maria"
+idade = 25</code></pre>
+            <p>Aqui, <code>nome</code> é a etiqueta da caixa que guarda <code>"Maria"</code>. Sempre que precisares desse valor, basta usar a etiqueta!</p>
+        </div>
+
+        <!-- Topic 2: Data Types -->
+        <div class="topic">
+            <h3>2. Tipos de Dados — O Que Cabe na Caixa? 🎁</h3>
+            <p>As caixas podem guardar diferentes tipos de coisas. Em Python, os tipos básicos são:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>O que é</th>
+                        <th>Exemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>int</code></td>
+                        <td>Número inteiro</td>
+                        <td><code>42</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>float</code></td>
+                        <td>Número com decimais</td>
+                        <td><code>3.14</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>str</code></td>
+                        <td>Texto (sempre com aspas)</td>
+                        <td><code>"Olá"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>bool</code></td>
+                        <td>Verdadeiro ou Falso</td>
+                        <td><code>True</code>, <code>False</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="hint">
+                <strong>💡 Pista:</strong> Texto tem sempre aspas. Números não.
+            </div>
+        </div>
+
+        <!-- Topic 3: Operators -->
+        <div class="topic">
+            <h3>3. Operadores de Comparação e Lógicos — Fazer Perguntas 🤔</h3>
+            <p>Às vezes precisamos de perguntar coisas ao Python. Ele responde sempre com <code>True</code> (sim) ou <code>False</code> (não).</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Significado</th>
+                        <th>Exemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>==</code></td>
+                        <td>É igual a?</td>
+                        <td><code>5 == 5</code> → <code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>!=</code></td>
+                        <td>É diferente de?</td>
+                        <td><code>5 != 3</code> → <code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;</code></td>
+                        <td>É maior que?</td>
+                        <td><code>10 > 5</code> → <code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;</code></td>
+                        <td>É menor que?</td>
+                        <td><code>3 < 7</code> → <code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;=</code></td>
+                        <td>É maior ou igual?</td>
+                        <td><code>5 >= 5</code> → <code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;=</code></td>
+                        <td>É menor ou igual?</td>
+                        <td><code>4 <= 6</code> → <code>True</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>E para combinar perguntas, usamos operadores lógicos:</p>
+            <pre><code>and  →  As DUAS condições têm de ser verdadeiras
+or   →  Basta UMA ser verdadeira  
+not  →  Inverte: True vira False, False vira True</code></pre>
+        </div>
+
+        <!-- Topic 4: Logical Conditions -->
+        <div class="topic">
+            <h3>4. Condições Lógicas — A Resposta É Sempre Sim ou Não ⚖️</h3>
+            <p>Uma condição lógica é uma pergunta que só pode ter duas respostas: verdadeiro ou falso. É como perguntar: "Está a chover?" — não há "talvez".</p>
+            <pre><code>temperatura = 30
+esta_quente = temperatura > 25    # Resultado: True</code></pre>
+            <p>A variável <code>esta_quente</code> guarda a resposta à pergunta "30 é maior que 25?"</p>
+        </div>
+
+        <!-- Topic 5: if/else -->
+        <div class="topic">
+            <h3>5. if e else — O Porteiro que Decide 🚪</h3>
+            <p>O <code>if</code> é como um porteiro: verifica uma condição e decide o que fazer.</p>
+            <pre><code># Só if (se a condição for falsa, não faz nada)
+if idade >= 18:
+    print("Podes entrar")
+
+# if com else (sempre faz alguma coisa)
+if idade >= 18:
+    print("Podes entrar")
+else:
+    print("Volta mais tarde")</code></pre>
+            <div class="warning">
+                <strong>⚠️ Atenção:</strong> O código dentro do <code>if</code> tem de estar <strong>indentado</strong> (com 4 espaços ou Tab). É assim que o Python sabe o que pertence à condição.
+            </div>
+        </div>
+
+        <h2 class="section-title">✏️ Exercícios</h2>
+
+        <!-- Exercise 1 -->
+        <div class="exercise">
+            <h3>🧩 Exercício 1 — A Caixa Misteriosa <span class="topic-tag">(variáveis)</span></h3>
+            <p>Cria uma variável chamada <code>nome</code> com o teu nome e uma variável chamada <code>idade</code> com a tua idade.</p>
+            <p>Depois imprime esta frase:</p>
+            <pre><code>"O meu nome é ___ e tenho ___ anos."</code></pre>
+            <div class="hint">
+                <strong>💡 Dica:</strong> Lembra-te que texto é <code>str</code> (precisa de aspas).
+            </div>
+        </div>
+
+        <!-- Exercise 2 -->
+        <div class="exercise">
+            <h3>🧩 Exercício 2 — Verdadeiro ou Falso? <span class="topic-tag">(bool)</span></h3>
+            <p>Cria uma variável chamada <code>esta_a_chover</code> e atribui-lhe <code>True</code> ou <code>False</code>.</p>
+            <p>Depois imprime:</p>
+            <ul>
+                <li><code>"Leva guarda-chuva"</code> se estiver a chover</li>
+                <li><code>"Não precisas de guarda-chuva"</code> caso contrário</li>
+            </ul>
+            <div class="challenge-extra">
+                <strong>👉 Desafio extra:</strong> Consegues fazer isto usando <strong>apenas if</strong>, sem <code>else</code>? (Sim, dá!)
+            </div>
+        </div>
+
+        <!-- Exercise 3 -->
+        <div class="exercise">
+            <h3>🧩 Exercício 3 — Matemática Honesta <span class="topic-tag">(operadores)</span></h3>
+            <p>Cria duas variáveis:</p>
+            <pre><code>a = 10
+b = 3</code></pre>
+            <p>Guarda numa variável chamada <code>resultado</code> o valor de:</p>
+            <pre><code>a * b + 5</code></pre>
+            <p>Depois imprime o resultado.</p>
+            <div class="think-question">
+                <strong>❓ Pergunta para pensar:</strong> O Python faz primeiro a multiplicação ou a soma? Porque é que achas isso?
+            </div>
+        </div>
+
+        <!-- Exercise 4 -->
+        <div class="exercise">
+            <h3>🧩 Exercício 4 — Controlo de Acesso <span class="topic-tag">(condição lógica + if/else)</span></h3>
+            <p>Cria uma variável <code>idade</code> com um número à tua escolha.</p>
+            <p>Se a idade for 18 ou mais, imprime:</p>
+            <pre><code>"Acesso permitido"</code></pre>
+            <p>Se for menor que 18, imprime:</p>
+            <pre><code>"Acesso negado"</code></pre>
+            <div class="hint">
+                <strong>👉</strong> Aqui tens mesmo de usar <code>if</code> e <code>else</code>.
+            </div>
+        </div>
+
+        <!-- Exercise 5 -->
+        <div class="exercise">
+            <h3>🧩 Exercício 5 — O Segurança Desconfiado <span class="topic-tag">(lógica combinada)</span></h3>
+            <p>Cria duas variáveis:</p>
+            <pre><code>tem_cartao = True
+nome_na_lista = False</code></pre>
+            <p>A pessoa só pode entrar se:</p>
+            <ul>
+                <li>Tiver cartão <strong>E</strong> estiver na lista (as duas ao mesmo tempo!)</li>
+            </ul>
+            <p>Se puder entrar, imprime:</p>
+            <pre><code>"Bem-vindo!"</code></pre>
+            <p>Caso contrário:</p>
+            <pre><code>"Acesso recusado"</code></pre>
+            <div class="hint">
+                <strong>💡 Dica:</strong> Vais precisar do <code>and</code> para juntar as duas condições.
+            </div>
+        </div>
+
+        <!-- Reflection -->
+        <div class="reflection">
+            <h2>🧠 Para Refletir</h2>
+            <p>Antes de avançares, pensa nestas questões:</p>
+            <ol>
+                <li><strong>Qual é a diferença entre <code>=</code> e <code>==</code>?</strong> Quando usas cada um?</li>
+                <li><strong>Se <code>x = 5</code>, qual é o resultado de <code>not (x > 10)</code>?</strong> Porquê?</li>
+                <li><strong>Porque é que a indentação (os espaços no início da linha) é tão importante em Python?</strong></li>
+            </ol>
+        </div>
+
+        <footer class="footer">
+            <p>Bom trabalho! 🎉 Quando terminares, mostra o teu código ao instrutor.</p>
+        </footer>
+    </div>
+</body>
+</html>
