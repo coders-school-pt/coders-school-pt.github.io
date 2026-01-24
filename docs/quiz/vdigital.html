@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ Protege a Tua Vida Digital - Guia Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0c0c14; --bg-card: #14141f; --accent-cyan: #00d4aa;
+            --accent-pink: #ff3366; --accent-purple: #7c3aed; --accent-blue: #3b82f6;
+            --accent-yellow: #fbbf24; --text-primary: #f1f1f4; --text-secondary: #9898a6;
+            --correct: #10b981; --wrong: #ef4444; --border: rgba(255,255,255,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; position: relative; z-index: 1; }
+        .header { text-align: center; margin-bottom: 40px; padding: 30px 0; }
+        .header h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .header p { color: var(--text-secondary); font-size: 1.1rem; }
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-tab { background: var(--bg-card); border: 1px solid var(--border); padding: 12px 24px; border-radius: 12px; cursor: pointer; font-family: inherit; font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); transition: all 0.3s; }
+        .nav-tab:hover { border-color: var(--accent-purple); color: var(--text-primary); }
+        .nav-tab.active { background: var(--accent-purple); color: white; }
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .module-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; cursor: pointer; transition: all 0.3s; }
+        .module-card:hover { transform: translateY(-5px); border-color: var(--accent-purple); box-shadow: 0 20px 40px rgba(124,58,237,0.15); }
+        .module-icon { font-size: 3rem; margin-bottom: 15px; }
+        .module-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .module-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 15px; }
+        .module-stats { display: flex; gap: 15px; font-size: 0.85rem; color: var(--accent-cyan); }
+        .learning-section { margin-bottom: 40px; }
+        .concept-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 25px; margin-bottom: 20px; }
+        .concept-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .concept-number { background: var(--accent-cyan); color: var(--bg-dark); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .concept-title { font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); }
+        .concept-box p { color: var(--text-secondary); margin-bottom: 12px; }
+        .concept-box > ul { list-style: none; margin: 10px 0; }
+        .concept-box > ul > li { padding: 8px 0 8px 25px; position: relative; color: var(--text-secondary); }
+        .concept-box > ul > li::before { content: '→'; position: absolute; left: 0; color: var(--accent-cyan); }
+        .info-box ul { list-style: none; margin: 10px 0; padding-left: 0; }
+        .info-box ul li { padding: 8px 0 8px 25px; position: relative; color: var(--text-secondary); }
+        .info-box ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent-cyan); }
+        .info-box { border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .info-box.warning { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .info-box.tip { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); }
+        .info-box.success { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); }
+        .info-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-weight: 600; }
+        .info-box.warning .info-header { color: var(--wrong); }
+        .info-box.tip .info-header { color: var(--accent-yellow); }
+        .info-box.success .info-header { color: var(--correct); }
+        .example-box { background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .example-box .label { color: var(--accent-purple); font-weight: 600; margin-bottom: 10px; }
+        .example-box .scenario { color: var(--text-secondary); font-style: italic; padding-left: 15px; border-left: 3px solid var(--accent-purple); margin-bottom: 10px; }
+        .example-box .analysis { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; }
+        .example-box .analysis strong { color: var(--accent-cyan); }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+        .comparison-card { border-radius: 12px; padding: 20px; }
+        .comparison-card.bad { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); }
+        .comparison-card.good { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); }
+        .comparison-card h5 { margin-bottom: 10px; }
+        .comparison-card.bad h5 { color: var(--wrong); }
+        .comparison-card.good h5 { color: var(--correct); }
+        .comparison-card ul { list-style: none; }
+        .comparison-card li { padding: 5px 0; color: var(--text-secondary); font-size: 0.9rem; }
+        .permission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 15px 0; }
+        .permission-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 15px; text-align: center; }
+        .permission-item.danger { border-color: rgba(239,68,68,0.3); }
+        .permission-item.caution { border-color: rgba(251,191,36,0.3); }
+        .permission-item.safe { border-color: rgba(16,185,129,0.3); }
+        .permission-icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .permission-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 5px; }
+        .permission-risk { font-size: 0.7rem; padding: 3px 8px; border-radius: 10px; }
+        .permission-item.danger .permission-risk { background: rgba(239,68,68,0.2); color: var(--wrong); }
+        .permission-item.caution .permission-risk { background: rgba(251,191,36,0.2); color: var(--accent-yellow); }
+        .permission-item.safe .permission-risk { background: rgba(16,185,129,0.2); color: var(--correct); }
+        .start-quiz-btn { text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(0,212,170,0.1)); border-radius: 20px; }
+        .start-quiz-btn h3 { margin-bottom: 10px; }
+        .start-quiz-btn p { color: var(--text-secondary); margin-bottom: 20px; }
+        .btn { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); color: white; border: none; padding: 14px 32px; border-radius: 12px; font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(124,58,237,0.3); }
+        .btn-secondary { background: transparent; border: 2px solid var(--accent-purple); }
+        .btn-secondary:hover { background: var(--accent-purple); }
+        .quiz-container { display: none; }
+        .quiz-container.active { display: block; }
+        .back-btn { color: var(--text-secondary); cursor: pointer; margin-bottom: 20px; transition: color 0.2s; }
+        .back-btn:hover { color: var(--accent-cyan); }
+        .progress-bar-container { background: var(--bg-card); border-radius: 12px; padding: 15px 20px; margin-bottom: 20px; }
+        .progress-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); transition: width 0.4s; }
+        .question-card { background: var(--bg-card); border-radius: 20px; padding: 30px; border: 1px solid var(--border); }
+        .question-type { background: rgba(124,58,237,0.2); color: var(--accent-purple); padding: 4px 12px; border-radius: 8px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; }
+        .question-scenario { background: rgba(0,212,170,0.08); border-left: 4px solid var(--accent-cyan); padding: 15px; border-radius: 0 12px 12px 0; margin-bottom: 20px; color: var(--text-secondary); }
+        .question-scenario strong { color: var(--accent-cyan); }
+        .question-text { font-size: 1.25rem; font-weight: 600; margin-bottom: 25px; }
+        .options-container { display: flex; flex-direction: column; gap: 10px; }
+        .option { background: rgba(255,255,255,0.02); border: 2px solid var(--border); border-radius: 12px; padding: 15px 18px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+        .option:hover { border-color: var(--accent-cyan); transform: translateX(5px); }
+        .option.correct { border-color: var(--correct); background: rgba(16,185,129,0.15); }
+        .option.wrong { border-color: var(--wrong); background: rgba(239,68,68,0.15); }
+        .option.disabled { pointer-events: none; opacity: 0.6; }
+        .option-letter { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+        .option:hover .option-letter { background: var(--accent-cyan); color: var(--bg-dark); }
+        .option.correct .option-letter { background: var(--correct); color: white; }
+        .option.wrong .option-letter { background: var(--wrong); color: white; }
+        .feedback { margin-top: 20px; padding: 20px; border-radius: 12px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.wrong { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 600; font-size: 1.05rem; }
+        .feedback.correct .feedback-header { color: var(--correct); }
+        .feedback.wrong .feedback-header { color: var(--wrong); }
+        .feedback-text { color: var(--text-secondary); margin-bottom: 12px; }
+        .feedback-tip { background: rgba(251,191,36,0.1); border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+        .feedback-tip strong { color: var(--accent-yellow); }
+        .feedback-concept { background: rgba(59,130,246,0.1); border-radius: 8px; padding: 12px; font-size: 0.9rem; }
+        .feedback-concept strong { color: var(--accent-blue); }
+        .next-btn { margin-top: 20px; }
+        .results-container { display: none; }
+        .results-container.active { display: block; }
+        .results-card { background: var(--bg-card); border-radius: 24px; padding: 40px; text-align: center; }
+        .results-icon { font-size: 4rem; margin-bottom: 15px; }
+        .results-title { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+        .results-score { font-family: 'JetBrains Mono', monospace; font-size: 3.5rem; font-weight: 700; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 15px 0; }
+        .results-message { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 25px; }
+        .results-stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 25px; }
+        .stat-value { font-size: 2rem; font-weight: 700; }
+        .stat-value.correct-stat { color: var(--correct); }
+        .stat-value.wrong-stat { color: var(--wrong); }
+        .stat-label { color: var(--text-secondary); font-size: 0.9rem; }
+        .key-takeaways { background: rgba(124,58,237,0.08); border-radius: 16px; padding: 25px; text-align: left; margin-bottom: 25px; }
+        .key-takeaways h4 { color: var(--accent-purple); margin-bottom: 15px; text-align: center; }
+        .takeaway-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .takeaway-item:last-child { border-bottom: none; }
+        .takeaway-icon { font-size: 1.3rem; }
+        .takeaway-text { color: var(--text-secondary); }
+        .takeaway-text strong { color: var(--text-primary); }
+        .results-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        @media (max-width: 768px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+            .question-card { padding: 20px; }
+            .results-stats { gap: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🛡️ Protege a Tua Vida Digital</h1>
+            <p>Aprende os conceitos essenciais, depois testa os teus conhecimentos!</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('home')">🏠 Início</button>
+            <button class="nav-tab" onclick="showSection('identity')">👤 Identidade Digital</button>
+            <button class="nav-tab" onclick="showSection('privacy')">📱 Privacidade em Apps</button>
+        </nav>
+
+        <!-- HOME -->
+        <section class="section active" id="home-section">
+            <div class="module-grid">
+                <div class="module-card" onclick="showSection('identity')">
+                    <div class="module-icon">👤</div>
+                    <h3>Identidade Digital</h3>
+                    <p>A tua pegada digital é permanente. Aprende a gerir o que partilhas e como te apresentas online.</p>
+                    <div class="module-stats"><span>📖 5 conceitos</span><span>❓ 10 questões</span></div>
+                </div>
+                <div class="module-card" onclick="showSection('privacy')">
+                    <div class="module-icon">📱</div>
+                    <h3>Privacidade em Apps</h3>
+                    <p>Descobre o que as apps sabem sobre ti e como controlar as permissões nos teus dispositivos.</p>
+                    <div class="module-stats"><span>📖 5 conceitos</span><span>❓ 10 questões</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IDENTITY SECTION -->
+        <section class="section" id="identity-section">
+            <div class="learning-section" id="identity-learning">
+                <div class="back-btn" onclick="showSection('home')">← Voltar</div>
+                
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">1</span><span class="concept-title">Pegada Digital</span></div>
+                    <p>A <strong>pegada digital</strong> é tudo o que deixas para trás quando usas a internet: posts, fotos, likes, pesquisas. É como pegadas na areia, mas que nunca desaparecem.</p>
+                    <p><strong>Tipos de pegada:</strong></p>
+                    <ul>
+                        <li><strong>Ativa:</strong> O que publicas conscientemente (posts, fotos, comentários)</li>
+                        <li><strong>Passiva:</strong> O que é recolhido sem perceberes (localização, histórico, cookies)</li>
+                    </ul>
+                    <div class="info-box warning">
+                        <div class="info-header">⚠️ Porque importa?</div>
+                        <ul>
+                            <li>Qualquer pessoa pode pesquisar o teu nome e encontrar o que publicaste</li>
+                            <li>Screenshots existem - mesmo que apagues, outros podem ter guardado</li>
+                            <li>O que publicas hoje pode ser visto por pessoas que ainda não conheces</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <div class="label">💭 Cenário Real</div>
+                        <div class="scenario">"O Rui publicou um vídeo a gozar com um colega. Apagou no dia seguinte, mas alguém já tinha feito screenshot. Meses depois, o vídeo apareceu num grupo de WhatsApp da escola inteira."</div>
+                        <div class="analysis"><strong>Lição:</strong> Se publicaste, assume que ficou na internet para sempre. Alguém pode sempre guardar antes de apagares.</div>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">2</span><span class="concept-title">Usernames e Informação Pessoal</span></div>
+                    <p>Cada pedaço de informação é uma peça de puzzle. Sozinhas parecem inofensivas, juntas revelam muito.</p>
+                    <div class="comparison-grid">
+                        <div class="comparison-card bad">
+                            <h5>❌ Usernames Arriscados</h5>
+                            <ul><li>maria.silva.2009</li><li>joao_porto_fcporto</li><li>ana_escola_santamaria</li></ul>
+                            <p style="margin-top:10px;font-size:0.8rem;color:var(--text-muted)">Revelam nome, idade, localização</p>
+                        </div>
+                        <div class="comparison-card good">
+                            <h5>✅ Usernames Seguros</h5>
+                            <ul><li>cosmic_dancer_42</li><li>pixel_ninja_x</li><li>thunder_wolf_99</li></ul>
+                            <p style="margin-top:10px;font-size:0.8rem;color:var(--text-muted)">Criativos, sem dados pessoais</p>
+                        </div>
+                    </div>
+                    <div class="info-box tip">
+                        <div class="info-header">💡 Dica</div>
+                        <p>Combina palavras aleatórias: adjetivo + animal + número. Evita nome, idade, escola ou cidade.</p>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">3</span><span class="concept-title">Verificação de Identidade</span></div>
+                    <p><strong>Catfishing</strong> é quando alguém cria identidade falsa para enganar. Usa fotos roubadas e parece genuíno.</p>
+                    <div class="info-box warning">
+                        <div class="info-header">🚩 Red Flags</div>
+                        <ul>
+                            <li>Perfil criado recentemente</li>
+                            <li>Poucas fotos ou muito profissionais</li>
+                            <li>Sem amigos em comum</li>
+                            <li>Evita videochamadas</li>
+                            <li>Pede informações rapidamente</li>
+                        </ul>
+                    </div>
+                    <div class="info-box success">
+                        <div class="info-header">✅ Como Verificar</div>
+                        <ul>
+                            <li>Pesquisa reversa de imagem no Google</li>
+                            <li>Confirma pessoalmente ou com amigos reais</li>
+                            <li>Verifica consistência da história</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">4</span><span class="concept-title">Fotos e Metadados</span></div>
+                    <p>Fotos contêm <strong>metadados</strong>: localização GPS, data/hora, modelo do telemóvel. O fundo também revela muito!</p>
+                    <div class="info-box tip">
+                        <div class="info-header">📸 Antes de Publicar</div>
+                        <ul>
+                            <li>Faz o "scan do fundo": olha para todos os cantos</li>
+                            <li>Verifica: uniformes, mochilas, cartas, ruas</li>
+                            <li>Pergunta: "Ficava bem se os meus pais vissem?"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">5</span><span class="concept-title">Gerir a Presença Digital</span></div>
+                    <p>Não precisas apagar tudo - precisas <strong>gerir</strong>. Sê o curador da tua imagem online.</p>
+                    <ul>
+                        <li><strong>Ego Search:</strong> Pesquisa o teu nome no Google regularmente</li>
+                        <li><strong>Separa identidades:</strong> Conta oficial vs casual</li>
+                        <li><strong>Emails diferentes:</strong> Um para coisas importantes</li>
+                        <li><strong>RGPD:</strong> Na Europa podes pedir que apaguem os teus dados!</li>
+                    </ul>
+                </div>
+
+                <div class="start-quiz-btn">
+                    <h3>🎯 Pronto para testar?</h3>
+                    <p>Aplica o que aprendeste em cenários reais!</p>
+                    <button class="btn" onclick="startQuiz('identity')">Iniciar Quiz →</button>
+                </div>
+            </div>
+
+            <div class="quiz-container" id="identity-quiz">
+                <div class="back-btn" onclick="backToLearning('identity')">← Voltar ao conteúdo</div>
+                <div class="progress-bar-container">
+                    <div class="progress-info">
+                        <span id="identity-progress">Questão 1 de 10</span>
+                        <span>⭐ <span id="identity-score">0</span> pts</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="identity-fill" style="width:10%"></div></div>
+                </div>
+                <div class="question-card">
+                    <span class="question-type" id="identity-type">Cenário</span>
+                    <div class="question-scenario" id="identity-scenario"></div>
+                    <p class="question-text" id="identity-question"></p>
+                    <div class="options-container" id="identity-options"></div>
+                    <div class="feedback" id="identity-feedback">
+                        <div class="feedback-header"><span id="identity-fb-icon"></span><span id="identity-fb-title"></span></div>
+                        <p class="feedback-text" id="identity-fb-text"></p>
+                        <div class="feedback-tip" id="identity-fb-tip"></div>
+                        <div class="feedback-concept" id="identity-fb-concept"></div>
+                    </div>
+                    <button class="btn next-btn" id="identity-next" onclick="nextQuestion('identity')" style="display:none">Próxima →</button>
+                </div>
+            </div>
+
+            <div class="results-container" id="identity-results">
+                <div class="results-card">
+                    <div class="results-icon" id="identity-res-icon">🏆</div>
+                    <h2 class="results-title" id="identity-res-title">Parabéns!</h2>
+                    <div class="results-score" id="identity-res-score">80%</div>
+                    <p class="results-message" id="identity-res-msg"></p>
+                    <div class="results-stats">
+                        <div><div class="stat-value correct-stat" id="identity-correct">8</div><div class="stat-label">Corretas</div></div>
+                        <div><div class="stat-value wrong-stat" id="identity-wrong">2</div><div class="stat-label">Erradas</div></div>
+                    </div>
+                    <div class="key-takeaways">
+                        <h4>🔑 Pontos-Chave</h4>
+                        <div class="takeaway-item"><span class="takeaway-icon">👣</span><div class="takeaway-text"><strong>Pegada permanente:</strong> Se publicaste, assume que ficou.</div></div>
+                        <div class="takeaway-item"><span class="takeaway-icon">🧩</span><div class="takeaway-text"><strong>Puzzle:</strong> Pequenos dados juntos revelam muito.</div></div>
+                        <div class="takeaway-item"><span class="takeaway-icon">🔍</span><div class="takeaway-text"><strong>Verifica:</strong> Confirma identidades offline.</div></div>
+                        <div class="takeaway-item"><span class="takeaway-icon">📸</span><div class="takeaway-text"><strong>Scan do fundo:</strong> Verifica o que aparece nas fotos.</div></div>
+                    </div>
+                    <div class="results-buttons">
+                        <button class="btn" onclick="restartQuiz('identity')">🔄 Repetir</button>
+                        <button class="btn btn-secondary" onclick="showSection('home')">← Menu</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIVACY SECTION -->
+        <section class="section" id="privacy-section">
+            <div class="learning-section" id="privacy-learning">
+                <div class="back-btn" onclick="showSection('home')">← Voltar</div>
+                
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">1</span><span class="concept-title">Permissões de Apps</span></div>
+                    <p>Cada permissão é uma <strong>porta para os teus dados</strong>. Algumas são necessárias, outras são recolha disfarçada.</p>
+                    <div class="permission-grid">
+                        <div class="permission-item danger"><div class="permission-icon">📍</div><div class="permission-name">Localização</div><div class="permission-risk">Alto risco</div></div>
+                        <div class="permission-item danger"><div class="permission-icon">🎤</div><div class="permission-name">Microfone</div><div class="permission-risk">Alto risco</div></div>
+                        <div class="permission-item danger"><div class="permission-icon">📁</div><div class="permission-name">Ficheiros</div><div class="permission-risk">Alto risco</div></div>
+                        <div class="permission-item caution"><div class="permission-icon">📷</div><div class="permission-name">Câmara</div><div class="permission-risk">Médio</div></div>
+                        <div class="permission-item caution"><div class="permission-icon">👥</div><div class="permission-name">Contactos</div><div class="permission-risk">Médio</div></div>
+                        <div class="permission-item safe"><div class="permission-icon">🔔</div><div class="permission-name">Notificações</div><div class="permission-risk">Baixo</div></div>
+                    </div>
+                    <div class="info-box warning">
+                        <div class="info-header">🚨 Regra de Ouro</div>
+                        <p><strong>Se pede mais do que precisa, é red flag!</strong> Lanterna não precisa de contactos. Calculadora não precisa de microfone.</p>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">2</span><span class="concept-title">Se é Grátis, Tu és o Produto</span></div>
+                    <p>Apps gratuitas têm equipas enormes e servidores caros. Como pagam? <strong>Vendem os teus dados!</strong></p>
+                    <p><strong>O que recolhem:</strong></p>
+                    <ul>
+                        <li>Quanto tempo olhas para cada post</li>
+                        <li>O que pesquisas (mesmo sem clicar)</li>
+                        <li>Onde estás e com quem</li>
+                        <li>Hábitos de sono (quando usas o telemóvel)</li>
+                    </ul>
+                    <div class="example-box">
+                        <div class="label">💭 Já te aconteceu?</div>
+                        <div class="scenario">"Falei de ténis com um amigo. Não pesquisei nada. No dia seguinte: anúncios de ténis em todo o lado!"</div>
+                        <div class="analysis"><strong>Explicação:</strong> Os algoritmos não precisam de ouvir. Sabem que estiveste perto do teu amigo, conhecem os interesses dele, e conseguem prever o que queres!</div>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">3</span><span class="concept-title">Localização: Difícil de Esconder</span></div>
+                    <p>Mesmo com GPS desligado, as apps sabem onde estás através de:</p>
+                    <ul>
+                        <li><strong>Wi-Fi:</strong> A rede tem localização conhecida</li>
+                        <li><strong>Endereço IP:</strong> Revela a tua cidade</li>
+                        <li><strong>Bluetooth:</strong> Beacons em lojas</li>
+                        <li><strong>Padrões:</strong> Onde estás de manhã vs à noite</li>
+                    </ul>
+                    <div class="info-box tip">
+                        <div class="info-header">💡 Níveis de Permissão</div>
+                        <ul>
+                            <li><strong>Sempre:</strong> Sabe 24/7 (evita!)</li>
+                            <li><strong>Quando a usar:</strong> Só com app aberta</li>
+                            <li><strong>Uma vez:</strong> Só agora (ideal)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">4</span><span class="concept-title">Dados Biométricos</span></div>
+                    <p>A tua cara é uma <strong>password que não podes mudar</strong>.</p>
+                    <div class="comparison-grid">
+                        <div class="comparison-card bad">
+                            <h5>Se roubarem password</h5>
+                            <ul><li>Mudas a password ✓</li><li>Problema resolvido</li></ul>
+                        </div>
+                        <div class="comparison-card bad">
+                            <h5>Se roubarem dados faciais</h5>
+                            <ul><li>Não mudas de cara ✗</li><li>Usados para sempre</li></ul>
+                        </div>
+                    </div>
+                    <div class="info-box warning">
+                        <div class="info-header">😱 Apps de Filtros</div>
+                        <p>Recolhem mapa 3D da tua cara. Podem ser vendidos ou hackeados!</p>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <div class="concept-header"><span class="concept-number">5</span><span class="concept-title">Falsas Seguranças</span></div>
+                    <p><strong>🔓 Modo Incógnito:</strong> Só impede que o navegador guarde histórico, pesquisas e alguns cookies no teu dispositivo. <strong>Não te torna invisível</strong>: operador de internet, escola e sites continuam a ver o que estás a fazer.</p>
+                    <p>É útil apenas para que outras pessoas que usam o mesmo computador/telemóvel não vejam o que fizeste, mas <strong>não esconde a tua navegação</strong> de professores, administradores de rede ou empresas.</p>
+                    <p><strong>📶 Wi-Fi Público:</strong> Outros podem ver tráfego não encriptado. Redes falsas imitam as verdadeiras.</p>
+                    <div class="info-box success">
+                        <div class="info-header">✅ Em Wi-Fi Público</div>
+                        <ul>
+                            <li>Só sites HTTPS (cadeado)</li>
+                            <li>Evita login em contas importantes</li>
+                            <li>Nunca banco online</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="start-quiz-btn">
+                    <h3>🎯 Pronto para testar?</h3>
+                    <p>Identifica os riscos em cenários reais!</p>
+                    <button class="btn" onclick="startQuiz('privacy')">Iniciar Quiz →</button>
+                </div>
+            </div>
+
+            <div class="quiz-container" id="privacy-quiz">
+                <div class="back-btn" onclick="backToLearning('privacy')">← Voltar ao conteúdo</div>
+                <div class="progress-bar-container">
+                    <div class="progress-info">
+                        <span id="privacy-progress">Questão 1 de 10</span>
+                        <span>⭐ <span id="privacy-score">0</span> pts</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="privacy-fill" style="width:10%"></div></div>
+                </div>
+                <div class="question-card">
+                    <span class="question-type" id="privacy-type">Cenário</span>
+                    <div class="question-scenario" id="privacy-scenario"></div>
+                    <p class="question-text" id="privacy-question"></p>
+                    <div class="options-container" id="privacy-options"></div>
+                    <div class="feedback" id="privacy-feedback">
+                        <div class="feedback-header"><span id="privacy-fb-icon"></span><span id="privacy-fb-title"></span></div>
+                        <p class="feedback-text" id="privacy-fb-text"></p>
+                        <div class="feedback-tip" id="privacy-fb-tip"></div>
+                        <div class="feedback-concept" id="privacy-fb-concept"></div>
+                    </div>
+                    <button class="btn next-btn" id="privacy-next" onclick="nextQuestion('privacy')" style="display:none">Próxima →</button>
+                </div>
+            </div>
+
+            <div class="results-container" id="privacy-results">
+                <div class="results-card">
+                    <div class="results-icon" id="privacy-res-icon">🏆</div>
+                    <h2 class="results-title" id="privacy-res-title">Parabéns!</h2>
+                    <div class="results-score" id="privacy-res-score">80%</div>
+                    <p class="results-message" id="privacy-res-msg"></p>
+                    <div class="results-stats">
+                        <div><div class="stat-value correct-stat" id="privacy-correct">8</div><div class="stat-label">Corretas</div></div>
+                        <div><div class="stat-value wrong-stat" id="privacy-wrong">2</div><div class="stat-label">Erradas</div></div>
+                    </div>
+                    <div class="key-takeaways">
+                        <h4>🔑 Pontos-Chave</h4>
+                        <div class="takeaway-item"><span class="takeaway-icon">⚙️</span><div class="takeaway-text"><strong>Permissões mínimas:</strong> Só dá o necessário.</div></div>
+                        <div class="takeaway-item"><span class="takeaway-icon">💰</span><div class="takeaway-text"><strong>Tu és o produto:</strong> Apps gratuitas vendem dados.</div></div>
+                        <div class="takeaway-item"><span class="takeaway-icon">📍</span><div class="takeaway-text"><strong>Localização:</strong> GPS desligado não basta.</div></div>
+                        <div class="takeaway-item"><span class="takeaway-icon">😊</span><div class="takeaway-text"><strong>Biométricos:</strong> Protege como password permanente.</div></div>
+                    </div>
+                    <div class="results-buttons">
+                        <button class="btn" onclick="restartQuiz('privacy')">🔄 Repetir</button>
+                        <button class="btn btn-secondary" onclick="showSection('home')">← Menu</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const quizData = {
+            identity: {
+                questions: [
+                    { type: "Cenário", scenario: "A <strong>Maria</strong> quer criar conta no TikTok.", question: "Qual username é MAIS seguro?", options: ["cosmic_dancer_42", "maria.silva.2009", "mariazinha_porto", "maria_escola_saojoao"], correct: 0, feedback: "'cosmic_dancer_42' não revela nome, idade, escola ou localização.", tip: "Usa usernames criativos sem dados pessoais!", concept: "Conceito 2: Cada dado é uma peça do puzzle." },
+                    { type: "V/F", scenario: "O <strong>Pedro</strong> apagou foto embaraçosa do Instagram.", question: "A foto desapareceu completamente da internet?", options: ["Verdadeiro - desapareceu", "Depende das definições", "Desaparece após 30 dias", "Falso - pode ter sido copiada"], correct: 3, feedback: "FALSO! Qualquer pessoa pode ter feito screenshot.", tip: "Se publicaste, assume que é permanente.", concept: "Conceito 1: Pegada digital é permanente." },
+                    { type: "Escolha", scenario: "A <strong>Sofia</strong> recebeu pedido de amizade de 'colega'.", question: "Como verificar se é real?", options: ["Aceitar e ver posts", "Confirmar pessoalmente", "Perguntar por mensagem", "Ver seguidores"], correct: 1, feedback: "A única forma segura é confirmar offline.", tip: "Catfishing usa fotos roubadas.", concept: "Conceito 3: Verifica identidades offline." },
+                    { type: "Cenário", scenario: "O <strong>Tomás</strong> preenche perfil do Discord.", question: "O que fazer com cidade e data de nascimento?", options: ["Preencher verdade", "Só o país", "Deixar em branco", "Depende do servidor"], correct: 2, feedback: "Nunca dês informação real em perfis de jogos.", tip: "Data + cidade = suficiente para te encontrar!", concept: "Conceito 2: Protege informação pessoal." },
+                    { type: "Cenário", scenario: "Selfie da <strong>Inês</strong> mostra mochila com nome da escola.", question: "O que fazer antes de publicar?", options: ["Tapar elementos", "Publicar normal", "Só para amigos", "Usar filtro"], correct: 0, feedback: "Detalhes no fundo revelam onde estudas.", tip: "Faz o scan do fundo!", concept: "Conceito 4: Fotos revelam muito." },
+                    { type: "Escolha", scenario: "O <strong>André</strong> quer saber o que aparece sobre ele online.", question: "Qual é a MELHOR forma de descobrir?", options: ["Criar LinkedIn", "Tornar tudo privado", "Ego Search", "Apagar redes"], correct: 2, feedback: "Primeiro passo: saber o que existe sobre ti online.", tip: "Faz ego search regularmente!", concept: "Conceito 5: Gere a tua presença." },
+                    { type: "Cenário", scenario: "A <strong>Carolina</strong> ganhou concurso, pedem foto do BI.", question: "O que fazer?", options: ["Enviar", "Enviar com dados tapados", "Só a frente", "Recusar/desistir"], correct: 3, feedback: "NUNCA envies documentos online!", tip: "Concursos legítimos não pedem isto.", concept: "Conceito 5: Protege documentos." },
+                    { type: "Cenário", scenario: "O <strong>Miguel</strong> usa o mesmo email para jogos, redes sociais e escola.", question: "É uma boa prática de segurança?", options: ["Sim, é mais fácil lembrar", "Não, deveria usar emails separados", "Não faz diferença", "Sim, se a password for forte"], correct: 1, feedback: "Se um serviço for hackeado, ficam a saber todas as tuas contas.", tip: "Usa 2 emails: oficial e casual.", concept: "Conceito 5: Separa identidades." },
+                    { type: "Cenário", scenario: "A <strong>Beatriz</strong> fala com alguém no jogo há 2 semanas. Quer videochamada.", question: "Abordagem MAIS segura?", options: ["Recusar", "Aceitar", "Aceitar sem mostrar quarto", "Se outra pessoa ligar câmara"], correct: 0, feedback: "2 semanas de chat não = conhecer alguém.", tip: "Amigos de jogos ficam no jogo.", concept: "Conceito 3: Verifica offline." },
+                    { type: "Escolha", scenario: "O <strong>Diogo</strong> quer perfis separados.", question: "Maior erro ao criar identidades separadas?", options: ["Mesma foto", "Seguir mesmas pessoas", "Mesmo telefone", "Mesmos assuntos"], correct: 2, feedback: "Telefone liga contas anónimas à identidade real.", tip: "Emails e números diferentes.", concept: "Conceito 5: Separa identificadores." }
+                ]
+            },
+            privacy: {
+                questions: [
+                    { type: "Cenário", scenario: "App de lanterna pede: Câmara, Microfone, Contactos, Localização.", question: "O que fazer?", options: ["Recusar e procurar outra", "Aceitar só câmara", "Aceitar e desligar depois", "Aceitar tudo"], correct: 0, feedback: "Lanterna só precisa do flash!", tip: "Se pede mais do que precisa = red flag!", concept: "Conceito 1: Permissões excessivas." },
+                    { type: "Escolha", scenario: "A <strong>Leonor</strong> usa app de edição gratuita.", question: "Como apps gratuitas ganham dinheiro?", options: ["Compras in-app", "Governos", "Vendem dados", "Não ganham"], correct: 2, feedback: "Se não pagas, TU és o produto.", tip: "Lê políticas de privacidade!", concept: "Conceito 2: Modelo de negócio." },
+                    { type: "Cenário", scenario: "O <strong>Gonçalo</strong> falou de ténis, agora vê anúncios.", question: "O que acontece?", options: ["Coincidência", "Algoritmos analisam padrões", "Amigo pesquisou", "Telemóvel ouve"], correct: 1, feedback: "Algoritmos sabem tanto que parecem ler mentes!", tip: "Sabem localização, pesquisas, com quem estás.", concept: "Conceito 2: Poder dos algoritmos." },
+                    { type: "Cenário", scenario: "A <strong>Matilde</strong> desligou a localização nas definições.", question: "As apps ainda conseguem saber onde ela está?", options: ["Só se ligar o GPS", "Não, está protegida", "Depende do sistema", "Sim, através de Wi-Fi e IP"], correct: 3, feedback: "SIM! Wi-Fi, IP e padrões de uso revelam localização.", tip: "Desligar GPS não é suficiente.", concept: "Conceito 3: Localização persistente." },
+                    { type: "Cenário", scenario: "O <strong>Tiago</strong> usa app de filtros faciais.", question: "Maior risco de privacidade?", options: ["Guardam dados biométricos", "Bateria", "Parecer diferente", "Precisam de internet"], correct: 0, feedback: "Recolhem mapa 3D da tua cara!", tip: "Cara = password permanente.", concept: "Conceito 4: Dados biométricos." },
+                    { type: "Escolha", scenario: "Jogo pede 'Acesso a Todos os Ficheiros'.", question: "O que significa?", options: ["Só ficheiros do jogo", "Normal para jogos", "Pode ler TUDO no telemóvel", "Para gráficos"], correct: 2, feedback: "Pode ler fotos, PDFs, tudo! Jogos não precisam.", tip: "Permissão muito perigosa.", concept: "Conceito 1: Permissões perigosas." },
+                    { type: "Cenário", scenario: "O <strong>Francisco</strong> usa modo incógnito.", question: "O que protege realmente?", options: ["Sites não identificam", "Só esconde de quem usar depois", "De hackers", "Totalmente anónimo"], correct: 1, feedback: "Operador, escola e sites ainda veem tudo!", tip: "Só não guarda no dispositivo.", concept: "Conceito 5: Falsas seguranças." },
+                    { type: "Cenário", scenario: "A <strong>Mariana</strong> apagou uma app do telemóvel.", question: "Os dados que a app recolheu sobre ela foram apagados?", options: ["Sim, tudo apagado", "Depende da conta", "Apagam após 30 dias", "Não, ficam nos servidores"], correct: 3, feedback: "NÃO! Dados já enviados ficam nos servidores da empresa.", tip: "Pede eliminação de conta (RGPD).", concept: "Conceito 2: Dados persistem." },
+                    { type: "Cenário", scenario: "O <strong>Dinis</strong> usa Wi-Fi do café.", question: "Maior risco?", options: ["Podem interceptar dados", "Internet lenta", "Dados móveis melhores", "Gasta bateria"], correct: 0, feedback: "Outros na rede podem ver tráfego não encriptado.", tip: "Só HTTPS, evita login importante.", concept: "Conceito 5: Wi-Fi público." },
+                    { type: "Escolha", scenario: "A <strong>Lara</strong> quer ver permissões das apps.", question: "Onde encontrar?", options: ["Só quando app pede", "Perguntar a cada app", "Definições > Privacidade", "Não é possível"], correct: 2, feedback: "Definições > Privacidade mostra tudo!", tip: "Faz auditoria regular!", concept: "Conceito 1: Audita permissões." }
+                ]
+            }
+        };
+
+        let state = { identity: { q: 0, score: 0, answered: false }, privacy: { q: 0, score: 0, answered: false } };
+
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(id + '-section').classList.add('active');
+            document.querySelector(`.nav-tab[onclick="showSection('${id}')"]`)?.classList.add('active');
+            if (id === 'identity' || id === 'privacy') {
+                document.getElementById(id + '-learning').style.display = 'block';
+                document.getElementById(id + '-quiz').classList.remove('active');
+                document.getElementById(id + '-results').classList.remove('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startQuiz(mod) {
+            state[mod] = { q: 0, score: 0, answered: false };
+            document.getElementById(mod + '-learning').style.display = 'none';
+            document.getElementById(mod + '-quiz').classList.add('active');
+            document.getElementById(mod + '-results').classList.remove('active');
+            loadQuestion(mod);
+        }
+
+        function backToLearning(mod) {
+            document.getElementById(mod + '-quiz').classList.remove('active');
+            document.getElementById(mod + '-learning').style.display = 'block';
+        }
+
+        function loadQuestion(mod) {
+            const qs = quizData[mod].questions;
+            const s = state[mod];
+            const q = qs[s.q];
+            document.getElementById(mod + '-progress').textContent = `Questão ${s.q + 1} de ${qs.length}`;
+            document.getElementById(mod + '-score').textContent = s.score;
+            document.getElementById(mod + '-fill').style.width = ((s.q + 1) / qs.length * 100) + '%';
+            document.getElementById(mod + '-type').textContent = q.type;
+            const scenarioEl = document.getElementById(mod + '-scenario');
+            if (q.scenario) { scenarioEl.innerHTML = q.scenario; scenarioEl.style.display = 'block'; }
+            else { scenarioEl.style.display = 'none'; }
+            document.getElementById(mod + '-question').textContent = q.question;
+            const container = document.getElementById(mod + '-options');
+            container.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
+                div.onclick = () => selectOption(mod, i);
+                container.appendChild(div);
+            });
+            document.getElementById(mod + '-feedback').classList.remove('show', 'correct', 'wrong');
+            document.getElementById(mod + '-next').style.display = 'none';
+            state[mod].answered = false;
+        }
+
+        function selectOption(mod, idx) {
+            if (state[mod].answered) return;
+            state[mod].answered = true;
+            const qs = quizData[mod].questions;
+            const q = qs[state[mod].q];
+            const opts = document.querySelectorAll('#' + mod + '-options .option');
+            const isCorrect = idx === q.correct;
+            opts.forEach((o, i) => {
+                o.classList.add('disabled');
+                if (i === q.correct) o.classList.add('correct');
+                else if (i === idx && !isCorrect) o.classList.add('wrong');
+            });
+            if (isCorrect) { state[mod].score += 10; document.getElementById(mod + '-score').textContent = state[mod].score; }
+            const fb = document.getElementById(mod + '-feedback');
+            fb.classList.add('show', isCorrect ? 'correct' : 'wrong');
+            document.getElementById(mod + '-fb-icon').textContent = isCorrect ? '✅' : '❌';
+            document.getElementById(mod + '-fb-title').textContent = isCorrect ? 'Correto!' : 'Não foi desta...';
+            document.getElementById(mod + '-fb-text').textContent = q.feedback;
+            document.getElementById(mod + '-fb-tip').innerHTML = '<strong>💡 Dica:</strong> ' + q.tip;
+            document.getElementById(mod + '-fb-concept').innerHTML = '<strong>📚 </strong>' + q.concept;
+            const btn = document.getElementById(mod + '-next');
+            btn.style.display = 'inline-flex';
+            btn.textContent = state[mod].q < qs.length - 1 ? 'Próxima →' : 'Ver Resultados 🏆';
+        }
+
+        function nextQuestion(mod) {
+            const qs = quizData[mod].questions;
+            if (state[mod].q < qs.length - 1) { state[mod].q++; loadQuestion(mod); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            else { showResults(mod); }
+        }
+
+        function showResults(mod) {
+            const qs = quizData[mod].questions;
+            const s = state[mod];
+            const pct = Math.round(s.score / (qs.length * 10) * 100);
+            const correct = s.score / 10;
+            const wrong = qs.length - correct;
+            document.getElementById(mod + '-quiz').classList.remove('active');
+            document.getElementById(mod + '-results').classList.add('active');
+            document.getElementById(mod + '-res-score').textContent = pct + '%';
+            document.getElementById(mod + '-correct').textContent = correct;
+            document.getElementById(mod + '-wrong').textContent = wrong;
+            let icon, title, msg;
+            if (pct >= 90) { icon = '🏆'; title = 'Excelente!'; msg = 'És especialista! Aplica estes conhecimentos.'; }
+            else if (pct >= 70) { icon = '🌟'; title = 'Muito Bom!'; msg = 'Bons conhecimentos! Revê as que erraste.'; }
+            else if (pct >= 50) { icon = '💪'; title = 'Bom Esforço!'; msg = 'Estás no caminho! Relê os conceitos.'; }
+            else { icon = '📚'; title = 'Continua!'; msg = 'Tema importante. Revê e tenta novamente!'; }
+            document.getElementById(mod + '-res-icon').textContent = icon;
+            document.getElementById(mod + '-res-title').textContent = title;
+            document.getElementById(mod + '-res-msg').textContent = msg;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function restartQuiz(mod) { startQuiz(mod); }
+    </script>
+</body>
+</html>
